@@ -34,4 +34,26 @@ public class JsonDraftFileManager {
     public JsonDraftFileManager(){
         
     }
+    
+    public void loadPitchers() throws IOException{
+        JsonObject json = loadJSONFile("./data/Pitchers.json");
+        JsonArray jsonPitcherArray = json.getJsonArray("Pitchers");
+        for(int i = 0; i< jsonPitcherArray.size(); i++){
+            JsonObject jso = jsonPitcherArray.getJsonObject(i);
+            String a = jso.getString("TEAM");
+            System.out.println(a);
+        }
+    }
+    
+    
+    
+     // LOADS A JSON FILE AS A SINGLE OBJECT AND RETURNS IT
+    private JsonObject loadJSONFile(String jsonFilePath) throws IOException {
+        InputStream is = new FileInputStream(jsonFilePath);
+        JsonReader jsonReader = Json.createReader(is);
+        JsonObject json = jsonReader.readObject();
+        jsonReader.close();
+        is.close();
+        return json;
+    }
 }

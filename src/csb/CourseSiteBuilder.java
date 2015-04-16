@@ -1,5 +1,6 @@
 package csb;
 
+import FantasyBaseball.JsonDraftFileManager;
 import static csb.CSB_StartupConstants.*;
 import static csb.CSB_PropertyType.*;
 import csb.data.CourseDataManager;
@@ -35,7 +36,8 @@ public class CourseSiteBuilder extends Application {
      * @param primaryStage This application's window.
      */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
+        
         // LET'S START BY GIVING THE PRIMARY STAGE TO OUR ERROR HANDLER
         ErrorHandler eH = ErrorHandler.getErrorHandler();
         eH.initMessageDialog(primaryStage);
@@ -75,6 +77,17 @@ public class CourseSiteBuilder extends Application {
                 eH.handlePropertiesFileError();
             }
         }
+        
+        
+        
+        /////////////////////////////////////////////////
+        
+        JsonDraftFileManager jm = new JsonDraftFileManager();
+        jm.loadPitchers();
+        
+        /////////////////////////////////////////////////
+        
+        
     }
     
     /**
