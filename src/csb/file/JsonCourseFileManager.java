@@ -148,6 +148,7 @@ public class JsonCourseFileManager implements CourseFileManager {
         courseToLoad.setYear(json.getInt(JSON_YEAR));
         courseToLoad.setTitle(json.getString(JSON_TITLE));
         
+        
         // GET THE PAGES TO INCLUDE 
         courseToLoad.clearPages();
         JsonArray jsonPagesArray = json.getJsonArray(JSON_PAGES);
