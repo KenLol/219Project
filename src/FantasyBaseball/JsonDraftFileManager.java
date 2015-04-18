@@ -25,13 +25,15 @@ import javax.json.JsonWriter;
 import javax.json.JsonValue;
 
 /**
- *
+ * This class grabs the information about the players out of the json file. 
  * @author Kenneth
  */
 public class JsonDraftFileManager {
     
     ArrayList<Pitcher> arrP = new ArrayList<Pitcher>();
     ArrayList<Hitter> arrH = new ArrayList<Hitter>();
+    
+    
     
     
     public JsonDraftFileManager(){
@@ -129,6 +131,7 @@ public class JsonDraftFileManager {
             z.setNation(n);
             z.setBa(baDouble);
             
+            z.fixPostion(); // adds the extra positions
             arrH.add(z);
         }
         
@@ -137,7 +140,7 @@ public class JsonDraftFileManager {
                 
                 
                 
-        //arrH.get(1).toSTRING();
+       // arrH.get(1).toSTRING();
     }
     
     
