@@ -84,8 +84,10 @@ public class CourseSiteBuilder extends Application {
         
         JsonDraftFileManager jm = new JsonDraftFileManager();
         jm.loadALL();
-        jm.load1B();
-        jm.displayArr();
+        jm.loadA();
+        //jm.displayArr();
+        jm.startWith("J");
+        jm.displayAll();
         
         /////////////////////////////////////////////////
         
