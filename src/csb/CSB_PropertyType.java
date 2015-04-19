@@ -25,6 +25,14 @@ public enum CSB_PropertyType {
         MINUS_ICON,
         MOVE_UP_ICON,
         MOVE_DOWN_ICON,
+        FANTASY_TEAM_ICON,
+        AVAILABLE_PLAYERS_ICON,
+        FANTASY_STANDINGS_ICON,
+        DRAFT_SUMMARY_ICON,
+        MLB_TEAMS_ICON,
+        
+        
+        
         
         // APPLICATION TOOLTIPS FOR BUTTONS
         NEW_COURSE_TOOLTIP,
@@ -42,6 +50,13 @@ public enum CSB_PropertyType {
         MOVE_DOWN_LECTURE_TOOLTIP,
         ADD_HW_TOOLTIP,
         REMOVE_HW_TOOLTIP,        
+        FANTASY_TEAM_TOOLTIP,
+        AVAILABLE_PLAYERS_TOOLTIP,
+        FANTASY_STANDINGS_TOOLTIP,
+        DRAFT_SUMMARY_TOOLTIP,
+        MLB_TEAMS_TOOLTIP,
+        
+        
 
         // FOR COURSE EDIT WORKSPACE
         COURSE_HEADING_LABEL,

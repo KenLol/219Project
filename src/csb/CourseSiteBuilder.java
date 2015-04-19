@@ -92,7 +92,7 @@ public class CourseSiteBuilder extends Application {
         jm.loadA();
         //jm.displayArr();
         jm.startWith("J");
-        jm.displayAll();
+        //jm.displayAll();
         
         /////////////////////////////////////////////////
         

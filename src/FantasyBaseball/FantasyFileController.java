@@ -108,4 +108,22 @@ public class FantasyFileController {
         }
     }
     
+    public void handleFantasyTeamRequest(FantasyGUI GUI){
+        GUI.FantasyTeam();
+    }
+    
+    public void handleAvailablePlayersRequest(FantasyGUI GUI){
+        GUI.AvailablePlayers();
+    }
+    
+    public void handleFantasyStandingsRequest(FantasyGUI GUI){
+        GUI.FantasyStandings();
+    }
+    
+    public void handleDraftSummaryRequest(FantasyGUI GUI){
+        GUI.DraftSummary();
+    }
+    public void handleMLBTeamsRequest(FantasyGUI GUI){
+        GUI.MLBTeams();
+    }
 }

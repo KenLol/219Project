@@ -20,6 +20,11 @@
         <property name="MINUS_ICON"         value="Minus.png"></property>
         <property name="MOVE_UP_ICON"       value="MoveUp.png"></property>
         <property name="MOVE_DOWN_ICON"     value="MoveDown.png"></property>
+		<property name="FANTASY_TEAM_ICON"     value="FantasyTeam.png"></property>
+		<property name="AVAILABLE_PLAYERS_ICON"     value="AvailablePlayers.png"></property>
+		<property name="FANTASY_STANDINGS_ICON"     value="FantasyStandings.png"></property>
+		<property name="DRAFT_SUMMARY_ICON"     value="DraftSummary.png"></property>
+		<property name="MLB_TEAMS_ICON"     value="MLBTeams.png"></property>
         
         <!-- TOOLTIPS FOR BUTTONS -->
         <property name="NEW_COURSE_TOOLTIP"         value="Create a New Draft"></property>
@@ -37,13 +42,18 @@
         <property name="MOVE_DOWN_LECTURE_TOOLTIP"  value="Move Down"></property>
         <property name="ADD_HW_TOOLTIP"             value="Add Assignment"></property>
         <property name="REMOVE_HW_TOOLTIP"          value="Remove Assignment"></property>
+		<property name="FANTASY_TEAM_TOOLTIP"          value="Fantasy Team"></property>
+		<property name="AVAILABLE_PLAYERS_TOOLTIP"          value="Available Players"></property>
+		<property name="FANTASY_STANDINGS_TOOLTIP"          value="Fantasy Standings"></property>
+		<property name="DRAFT_SUMMARY_TOOLTIP"          value="Draft Summary"></property>
+		<property name="MLB_TEAMS_TOOLTIP"          value="MLB Teams"></property>
         
         <!-- GUI LABELS -->
-        <property name="COURSE_HEADING_LABEL"           value="Course Site Details"></property>
-        <property name="COURSE_INFO_LABEL"              value="Course Information"></property>
-        <property name="COURSE_SUBJECT_LABEL"           value="Subject:"></property>
-        <property name="COURSE_NUMBER_LABEL"            value="Number:"></property>
-        <property name="COURSE_SEMESTER_LABEL"          value="Semester:"></property>
+        <property name="COURSE_HEADING_LABEL"           value="Fantasy Teams"></property>
+        <property name="COURSE_INFO_LABEL"              value="Available Players"></property>
+        <property name="COURSE_SUBJECT_LABEL"           value="Fantasy Standings"></property>
+        <property name="COURSE_NUMBER_LABEL"            value="Draft Summary"></property>
+        <property name="COURSE_SEMESTER_LABEL"          value="MLB Teams"></property>
         <property name="COURSE_YEAR_LABEL"              value="Year:"></property>
         <property name="COURSE_TITLE_LABEL"             value="Title:"></property>
         <property name="INSTRUCTOR_NAME_LABEL"          value="Instrctor Name:"></property>

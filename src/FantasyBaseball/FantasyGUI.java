@@ -71,11 +71,23 @@ public class FantasyGUI {
     
     private BorderPane csbPane;
     SplitPane topWorkspaceSplitPane;
+    private ScrollPane myPane;
     private Pane topWorkspacePane;
     private Pane botWorkSpacePane;
     private Label courseHeadingLabel;
     private ScrollPane workspaceScrollPane;
+    private ScrollPane Pane1;
+    private ScrollPane Pane2;
+    private ScrollPane Pane3;
+    private ScrollPane Pane4;
+    private ScrollPane Pane5;
     private FantasyFileController FantasyFileController;
+    private Button FantasyTeamButton;
+    private Button AvailablePlayersButton;
+    private Button FantasyStandingsButton;
+    private Button DraftSummaryButton;
+    private Button MLBTeamsButton;
+    private Label courseInfoLabel;
     
     /**
      * Constructor for making this GUI, note that it does not initialize the UI
@@ -143,31 +155,40 @@ public class FantasyGUI {
 
         topWorkspacePane = new VBox();
         topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
 
         // HERE'S THE LABEL
         courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_HEADING_LABEL, CLASS_HEADING_LABEL);
 
-        // AND NOW ADD THE SPLIT PANE
+        ///////////////////////////////////////////////////////////////////////////////
         //topWorkspacePane.getChildren().add(topWorkspaceSplitPane);
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
         // THIS IS FOR MANAGING SCHEDULE EDITING
         //initScheduleItemsControls();
 
         // THIS HOLDS ALL OUR WORKSPACE COMPONENTS, SO NOW WE MUST
         // ADD THE COMPONENTS WE'VE JUST INITIALIZED
         workspacePane = new BorderPane();
-        workspacePane.setTop(topWorkspacePane);
+        //workspacePane.setTop(topWorkspacePane); //cant break it
+        workspacePane.setCenter(topWorkspacePane);
         workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
         
         
         botToolbarPane = new FlowPane();
         
-        //newCourseButton = initChildButton(botToolbarPane, CSB_PropertyType.NEW_COURSE_ICON, CSB_PropertyType.NEW_COURSE_TOOLTIP, false);
-        loadCourseButton = initChildButton(botToolbarPane, CSB_PropertyType.LOAD_COURSE_ICON, CSB_PropertyType.LOAD_COURSE_TOOLTIP, false);
-        //saveCourseButton = initChildButton(botToolbarPane, CSB_PropertyType.SAVE_COURSE_ICON, CSB_PropertyType.SAVE_COURSE_TOOLTIP, false);
-        //exportSiteButton = initChildButton(botToolbarPane, CSB_PropertyType.EXPORT_PAGE_ICON, CSB_PropertyType.EXPORT_PAGE_TOOLTIP, false);
-        //exitButton = initChildButton(botToolbarPane, CSB_PropertyType.EXIT_ICON, CSB_PropertyType.EXIT_TOOLTIP, false);
+        FantasyTeamButton = initChildButton(botToolbarPane, CSB_PropertyType.FANTASY_TEAM_ICON, CSB_PropertyType.FANTASY_TEAM_TOOLTIP, false);
+        AvailablePlayersButton = initChildButton(botToolbarPane, CSB_PropertyType.AVAILABLE_PLAYERS_ICON, CSB_PropertyType.AVAILABLE_PLAYERS_TOOLTIP, false);
+        FantasyStandingsButton = initChildButton(botToolbarPane, CSB_PropertyType.FANTASY_STANDINGS_ICON, CSB_PropertyType.FANTASY_STANDINGS_TOOLTIP, false);
+        DraftSummaryButton = initChildButton(botToolbarPane, CSB_PropertyType.DRAFT_SUMMARY_ICON, CSB_PropertyType.DRAFT_SUMMARY_TOOLTIP, false);
+        MLBTeamsButton = initChildButton(botToolbarPane, CSB_PropertyType.MLB_TEAMS_ICON, CSB_PropertyType.MLB_TEAMS_TOOLTIP, false);
         
+        myPane = new ScrollPane();
+        myPane.setFitToHeight(true);
+        myPane.setFitToWidth(true);
+       
+        
+        topWorkspacePane.getChildren().add(myPane);
         
         topWorkspacePane.getChildren().add(botToolbarPane);
         
@@ -279,8 +300,8 @@ public class FantasyGUI {
     
     
     private void initEventHandlers() throws IOException {
+        FantasyFileController = new FantasyFileController(messageDialog, yesNoCancelDialog, progressDialog);
         newCourseButton.setOnAction(e -> {
-            FantasyFileController = new FantasyFileController(messageDialog, yesNoCancelDialog, progressDialog);
             FantasyFileController.handleNewCourseRequest(this);
         });
         
@@ -288,6 +309,29 @@ public class FantasyGUI {
             //FantasyFileController.handleExitRequest(this);
             System.exit(0);
         });
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        FantasyTeamButton.setOnAction(e -> {
+            FantasyFileController.handleFantasyTeamRequest(this);
+        });
+        
+        AvailablePlayersButton.setOnAction(e -> {
+            FantasyFileController.handleAvailablePlayersRequest(this);
+        
+        });
+        
+        FantasyStandingsButton.setOnAction(e -> {
+           FantasyFileController.handleFantasyStandingsRequest(this);
+        });
+        
+        DraftSummaryButton.setOnAction(e -> {
+           FantasyFileController.handleDraftSummaryRequest(this);
+        });
+        
+        MLBTeamsButton.setOnAction(e -> {
+           FantasyFileController.handleMLBTeamsRequest(this);
+        });
+        
         
     }
     
@@ -328,4 +372,182 @@ public class FantasyGUI {
             activateWorkspace();
         }
     }
+    
+    public void FantasyTeam(){
+        topWorkspacePane = new VBox();
+        topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+
+        // HERE'S THE LABEL
+        courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_HEADING_LABEL, CLASS_HEADING_LABEL);
+
+        workspacePane = new BorderPane();
+        workspacePane.setCenter(topWorkspacePane);
+        workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        myPane = new ScrollPane();
+        myPane.setFitToHeight(true);
+        myPane.setFitToWidth(true);
+       
+        
+        topWorkspacePane.getChildren().add(myPane);
+        topWorkspacePane.getChildren().add(botToolbarPane);
+        
+        
+        // AND NOW PUT IT IN THE WORKSPACE
+        Pane1 = new ScrollPane();
+        Pane1.setContent(workspacePane);
+        Pane1.setFitToWidth(true);
+        Pane1.setFitToHeight(true);
+
+        workspaceActivated = false;
+        
+        csbPane.setCenter(Pane1); 
+    }
+    
+    public void AvailablePlayers(){
+        System.out.println("Hi");
+        
+        topWorkspacePane = new VBox();
+        topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+
+        // HERE'S THE LABEL
+        courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_INFO_LABEL, CLASS_HEADING_LABEL);
+
+        ///////////////////////////////////////////////////////////////////////////////
+        //topWorkspacePane.getChildren().add(topWorkspaceSplitPane);
+///////////////////////////////////////////////////////////////////////////////////////////////////
+        // THIS IS FOR MANAGING SCHEDULE EDITING
+        //initScheduleItemsControls();
+
+        // THIS HOLDS ALL OUR WORKSPACE COMPONENTS, SO NOW WE MUST
+        // ADD THE COMPONENTS WE'VE JUST INITIALIZED
+        workspacePane = new BorderPane();
+        //workspacePane.setTop(topWorkspacePane); //cant break it
+        workspacePane.setCenter(topWorkspacePane);
+        workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        
+        
+        myPane = new ScrollPane();
+        myPane.setFitToHeight(true);
+        myPane.setFitToWidth(true);
+       
+        
+        topWorkspacePane.getChildren().add(myPane);
+        
+        topWorkspacePane.getChildren().add(botToolbarPane);
+        
+        
+        // AND NOW PUT IT IN THE WORKSPACE
+        Pane2 = new ScrollPane();
+        //workspaceScrollPane.getStyleClass().add(CLASS_BORDERED_PANE);
+        Pane2.setContent(workspacePane);
+        Pane2.setFitToWidth(true);
+        Pane2.setFitToHeight(true);
+        
+        
+        csbPane.setCenter(Pane2);
+        
+        
+    }
+    
+    public void FantasyStandings(){
+        topWorkspacePane = new VBox();
+        topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+
+        // HERE'S THE LABEL
+        courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_SUBJECT_LABEL, CLASS_HEADING_LABEL);
+
+        workspacePane = new BorderPane();
+        workspacePane.setCenter(topWorkspacePane);
+        workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        myPane = new ScrollPane();
+        myPane.setFitToHeight(true);
+        myPane.setFitToWidth(true);
+       
+        
+        topWorkspacePane.getChildren().add(myPane);
+        topWorkspacePane.getChildren().add(botToolbarPane);
+        
+        
+        // AND NOW PUT IT IN THE WORKSPACE
+        Pane3 = new ScrollPane();
+        Pane3.setContent(workspacePane);
+        Pane3.setFitToWidth(true);
+        Pane3.setFitToHeight(true);
+
+        workspaceActivated = false;
+        
+        csbPane.setCenter(Pane3); 
+    }
+    
+    public void DraftSummary(){
+        topWorkspacePane = new VBox();
+        topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+
+        // HERE'S THE LABEL
+        courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_NUMBER_LABEL, CLASS_HEADING_LABEL);
+
+        workspacePane = new BorderPane();
+        workspacePane.setCenter(topWorkspacePane);
+        workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        myPane = new ScrollPane();
+        myPane.setFitToHeight(true);
+        myPane.setFitToWidth(true);
+       
+        
+        topWorkspacePane.getChildren().add(myPane);
+        topWorkspacePane.getChildren().add(botToolbarPane);
+        
+        
+        // AND NOW PUT IT IN THE WORKSPACE
+        Pane4 = new ScrollPane();
+        Pane4.setContent(workspacePane);
+        Pane4.setFitToWidth(true);
+        Pane4.setFitToHeight(true);
+
+        workspaceActivated = false;
+        
+        csbPane.setCenter(Pane4); 
+    }
+    
+    public void MLBTeams(){
+        topWorkspacePane = new VBox();
+        topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+
+        // HERE'S THE LABEL
+        courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_SEMESTER_LABEL, CLASS_HEADING_LABEL);
+
+        workspacePane = new BorderPane();
+        workspacePane.setCenter(topWorkspacePane);
+        workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        myPane = new ScrollPane();
+        myPane.setFitToHeight(true);
+        myPane.setFitToWidth(true);
+       
+        
+        topWorkspacePane.getChildren().add(myPane);
+        topWorkspacePane.getChildren().add(botToolbarPane);
+        
+        
+        // AND NOW PUT IT IN THE WORKSPACE
+        Pane5 = new ScrollPane();
+        Pane5.setContent(workspacePane);
+        Pane5.setFitToWidth(true);
+        Pane5.setFitToHeight(true);
+
+        workspaceActivated = false;
+        
+        csbPane.setCenter(Pane5); 
+    }
+    
+    
 }
