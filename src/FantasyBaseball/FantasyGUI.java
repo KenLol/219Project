@@ -14,19 +14,26 @@ import csb.gui.ProgressDialog;
 import csb.gui.YesNoCancelDialog;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -50,16 +57,59 @@ public class FantasyGUI {
     
     JsonDraftFileManager jcfm = new JsonDraftFileManager();
     
-    Stage primaryStage;
-    Scene primaryScene;
     
-    FlowPane fileToolbarPane;
-    FlowPane botToolbarPane;
-    Button newCourseButton;
-    Button loadCourseButton;
-    Button saveCourseButton;
-    Button exportSiteButton;
-    Button exitButton;
+    private Stage primaryStage;
+    private Scene primaryScene;
+    
+    private FlowPane fileToolbarPane;
+    private FlowPane botToolbarPane;
+    private Button newCourseButton;
+    private Button loadCourseButton;
+    private Button saveCourseButton;
+    private Button exportSiteButton;
+    private Button exitButton;
+    
+    
+    private HBox hbox;
+    private VBox vbox;
+    private Label searchLabel;
+    private Button addButton;
+    private Button removeButton;
+    private TextField searchField;
+    
+    private ToggleGroup group = new ToggleGroup();
+    private RadioButton rb1 = new RadioButton("ALL");
+    private RadioButton rb2 = new RadioButton("C");
+    private RadioButton rb3 = new RadioButton("1B");
+    private RadioButton rb4 = new RadioButton("CI");
+    private RadioButton rb5 = new RadioButton("3B");
+    private RadioButton rb6 = new RadioButton("2B");
+    private RadioButton rb7 = new RadioButton("MI");
+    private RadioButton rb8 = new RadioButton("SS");
+    private RadioButton rb9 = new RadioButton("OF");
+    private RadioButton rb10 = new RadioButton("U");
+    private RadioButton rb11 = new RadioButton("P");
+    
+    
+    
+    
+    
+    
+    
+    
+    TableView<Player> playerTable;
+    TableColumn firstColumn;
+    TableColumn lastColumn;
+    TableColumn proTeamColumn;
+    TableColumn positionsColumn;
+    TableColumn yearOfBirthColumn;
+    TableColumn rwColumn;
+    TableColumn hrsvColumn;
+    TableColumn rbikColumn;
+    TableColumn sberaColumn;
+    TableColumn bawhipColumn;
+    TableColumn estimatedValueColumn;
+    TableColumn notesColumn;
     
     BorderPane workspacePane;
     boolean workspaceActivated;
@@ -70,7 +120,7 @@ public class FantasyGUI {
     ProgressDialog progressDialog;
     
     private BorderPane csbPane;
-    SplitPane topWorkspaceSplitPane;
+    private SplitPane topWorkspaceSplitPane;
     private ScrollPane myPane;
     private Pane topWorkspacePane;
     private Pane botWorkSpacePane;
@@ -88,6 +138,9 @@ public class FantasyGUI {
     private Button DraftSummaryButton;
     private Button MLBTeamsButton;
     private Label courseInfoLabel;
+    
+    private GridPane letsgo;
+    private HBox hbox2;
     
     /**
      * Constructor for making this GUI, note that it does not initialize the UI
@@ -127,6 +180,7 @@ public class FantasyGUI {
     public void initGUI(String windowTitle) throws IOException {
         // INIT THE DIALOGS
         initDialogs();
+        
         
         // INIT THE TOOLBAR
         initFileToolbar();
@@ -433,11 +487,64 @@ public class FantasyGUI {
         myPane = new ScrollPane();
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
+        
+        letsgo = new GridPane();
+        
+        /*
+        addButton = initChildButton(letsgo, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_ITEM_TOOLTIP, true);
+        letsgo.add(addButton, 0, 0, 1, 1);
+        removeButton = initChildButton(letsgo, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_ITEM_TOOLTIP, true);
+        letsgo.add(removeButton, 1, 0, 1, 1);
+        searchField = initGridTextField(letsgo, SMALL_TEXT_FIELD_LENGTH, EMPTY_TEXT, true, 2, 0, 1, 1);
+        
+        myPane.setContent(letsgo);
+        
+        */
+        vbox = new VBox();
+        hbox = new HBox();
+        //hbox.getStyleClass().add(CLASS_SUBJECT_PANE);
+        hbox2 = new HBox();
+        searchField = new TextField();
+        
+        addButton = initChildButton(hbox, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_ITEM_TOOLTIP, true);
+        removeButton = initChildButton(hbox, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_ITEM_TOOLTIP, true);
+        searchLabel = initLabel(CSB_PropertyType.HWS_HEADING_LABEL, CLASS_SUBHEADING_LABEL);
+        
+        
+        
+        firstColumn = new TableColumn("First");
+        lastColumn = new TableColumn("Last");
+        
+        
+        firstColumn.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
+        lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        
+        playerTable = new TableView();
+        playerTable.getColumns().add(firstColumn);
+        playerTable.getColumns().add(lastColumn);
+        Player pla = new Pitcher("last", "first");
+        jcfm.addobp(pla);
+        playerTable.setItems(jcfm.getobp());
        
         
-        topWorkspacePane.getChildren().add(myPane);
+        playerTable = new TableView();
+        hbox.getChildren().add(searchLabel);
+        hbox.getChildren().add(searchField);
+        vbox.getChildren().add(hbox);
+        vbox.getChildren().add(hbox2);
+        vbox.getChildren().add(playerTable);
+        //hbox.getStyleClass().add(CLASS_BORDERED_PANE);
+        vbox.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        
+        
+        
+        topWorkspacePane.getChildren().add(hbox);
+        //topWorkspacePane.getChildren().add(letsgo);
         
         topWorkspacePane.getChildren().add(botToolbarPane);
+        
+        //FantasyTeamButton = initChildButton(botToolbarPane, CSB_PropertyType.FANTASY_TEAM_ICON, CSB_PropertyType.FANTASY_TEAM_TOOLTIP, false);
         
         
         // AND NOW PUT IT IN THE WORKSPACE

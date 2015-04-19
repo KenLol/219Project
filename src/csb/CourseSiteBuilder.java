@@ -25,7 +25,8 @@ import xml_utilities.InvalidXMLFileFormatException;
  * 
  * @author Richard McKenna
  */
-public class CourseSiteBuilder extends Application {
+public class CourseSiteBuilder {
+    
     // THIS IS THE FULL USER INTERFACE, WHICH WILL BE INITIALIZED
     // AFTER THE PROPERTIES FILE IS LOADED
    CSB_GUI gui;
@@ -37,7 +38,7 @@ public class CourseSiteBuilder extends Application {
      * 
      * @param primaryStage This application's window.
      */
-    @Override
+    
     public void start(Stage primaryStage) throws IOException {
         
         // LET'S START BY GIVING THE PRIMARY STAGE TO OUR ERROR HANDLER
@@ -87,11 +88,12 @@ public class CourseSiteBuilder extends Application {
         
         GUI = new FantasyGUI(primaryStage);
         GUI.initGUI("FantasyBaseball");
-        JsonDraftFileManager jm = new JsonDraftFileManager();
-        jm.loadALL();
-        jm.loadA();
+        
+        //JsonDraftFileManager jm = new JsonDraftFileManager();
+        //jm.loadALL();
+        //jm.loadA();
         //jm.displayArr();
-        jm.startWith("J");
+        //jm.startWith("J");
         //jm.displayAll();
         
         /////////////////////////////////////////////////
@@ -126,8 +128,10 @@ public class CourseSiteBuilder extends Application {
      * sending the properly initialized Stage (i.e. window) to our start
      * method in this class.
      */
-    public static void main(String[] args) {
-        Locale.setDefault(Locale.US);
-        launch(args);
-    }
+    //public static void main(String[] args) {
+     //   Locale.setDefault(Locale.US);
+     //   launch(args);
+    //}
+    
+    
 }

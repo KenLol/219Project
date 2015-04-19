@@ -15,6 +15,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -36,7 +37,7 @@ public class JsonDraftFileManager {
     ArrayList<Player> arr = new ArrayList<Player>();
     ArrayList<Player> all = new ArrayList<Player>();
     
-    
+    ObservableList<Player> obp = FXCollections.observableArrayList();
     
     
     public JsonDraftFileManager(){
@@ -296,4 +297,19 @@ public class JsonDraftFileManager {
     }
     
     
+    public void clearobp(){
+        obp.clear();
+    }
+    
+    public void addobp(Player p){
+        obp.add(p);
+    }
+    
+    public ObservableList<Player> getobp(){
+        return obp;
+    }
+    
+    public void removeobpplayer(Player p){
+        obp.remove(p);
+    }
 }
