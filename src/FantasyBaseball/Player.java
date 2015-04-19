@@ -5,6 +5,9 @@
  */
 package FantasyBaseball;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * Superclass of pitchers and hitters.
  * @author Kenneth
@@ -12,8 +15,18 @@ package FantasyBaseball;
 public class Player {
     protected String first; //FIRST_NAME
     protected String last; //LAST_NAME
+    final StringProperty FIRST;
+    final StringProperty LAST;
+    public static final String default_name = "default_name";
+    
+    
+    public Player(){
+        FIRST = new SimpleStringProperty(default_name);
+        LAST = new SimpleStringProperty(default_name);
+    }
 
     void toSTRING() {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -15,6 +15,7 @@ import csb.gui.YesNoCancelDialog;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -460,7 +461,7 @@ public class FantasyGUI {
     }
     
     public void AvailablePlayers(){
-        System.out.println("Hi");
+       // System.out.println("Hi");
         
         topWorkspacePane = new VBox();
         topWorkspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
@@ -511,7 +512,34 @@ public class FantasyGUI {
         searchLabel = initLabel(CSB_PropertyType.HWS_HEADING_LABEL, CLASS_SUBHEADING_LABEL);
         
         
+        rb1.setToggleGroup(group);
+        rb1.setSelected(true);
+        rb2.setToggleGroup(group);
+        rb3.setToggleGroup(group);
+        rb4.setToggleGroup(group);
+        rb5.setToggleGroup(group);
+        rb6.setToggleGroup(group);
+        rb7.setToggleGroup(group);
+        rb8.setToggleGroup(group);
+        rb9.setToggleGroup(group);
+        rb10.setToggleGroup(group);
+        rb11.setToggleGroup(group);
         
+        hbox2.getChildren().add(rb1);
+        hbox2.getChildren().add(rb2);
+        hbox2.getChildren().add(rb3);
+        hbox2.getChildren().add(rb4);
+        hbox2.getChildren().add(rb5);
+        hbox2.getChildren().add(rb6);
+        hbox2.getChildren().add(rb7);
+        hbox2.getChildren().add(rb8);
+        hbox2.getChildren().add(rb9);
+        hbox2.getChildren().add(rb10);
+        hbox2.getChildren().add(rb11);
+        hbox2.setSpacing(10);
+        
+        
+       
         firstColumn = new TableColumn("First");
         lastColumn = new TableColumn("Last");
         
@@ -530,6 +558,9 @@ public class FantasyGUI {
         playerTable = new TableView();
         hbox.getChildren().add(searchLabel);
         hbox.getChildren().add(searchField);
+        
+        
+       
         vbox.getChildren().add(hbox);
         vbox.getChildren().add(hbox2);
         vbox.getChildren().add(playerTable);
@@ -539,7 +570,7 @@ public class FantasyGUI {
         
         
         
-        topWorkspacePane.getChildren().add(hbox);
+        topWorkspacePane.getChildren().add(vbox);
         //topWorkspacePane.getChildren().add(letsgo);
         
         topWorkspacePane.getChildren().add(botToolbarPane);

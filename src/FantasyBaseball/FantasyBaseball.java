@@ -38,6 +38,19 @@ public class FantasyBaseball extends Application{
         
         GUI = new FantasyGUI(primaryStage);
         GUI.initGUI("FantasyBaseball");
+        
+        //JsonDraftFileManager jm = new JsonDraftFileManager();
+        //jm.loadALL(); // loads the hitters and pitchers
+        
+        //jm.loadA();  // choose ALL radio button
+        //jm.loadC();  // choose C radio button
+        
+        //jm.displayArr(); display
+        
+        //jm.startWith("J"); choose what is in searchbox
+        //jm.displayAll();  display
+        
+        
     }
     
     /**

@@ -235,7 +235,7 @@ public class Hitter extends Player{
                 "\nNOTES: " + note +
                 "\nYEAR_OF_BIRTH: " + year +
                 "\nNATION_OF_BIRTH: " + nation +
-                "\nBA: " + ba);
+                "\nBA: " + ba +"\n");
                 
     }
     
