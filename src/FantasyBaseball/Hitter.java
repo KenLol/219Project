@@ -9,10 +9,9 @@ package FantasyBaseball;
  *
  * @author Kenneth
  */
-public class Hitter {
+public class Hitter extends Player{
     
-    private String first;           //FIRST_NAME
-    private String last;            //LAST_NAME
+    
     private String proteam;         //TEAM
     private String position;        //QP
     private String year;            //YEAR_OF_BIRTH
@@ -21,10 +20,11 @@ public class Hitter {
     private String rbi;             //RBI
     private String sb;              //SB
     private String note;            //NOTES
-    private String ba;              //H/AB
+    private Double ba;              //H/AB
     
     private String ab;              //AB
     private String h;               //H
+    private String nation;          //NATION_OF_BIRTH
     
     public Hitter(String first, String last){
         this.first = first;
@@ -45,12 +45,6 @@ public class Hitter {
         this.first = first;
     }
 
-    /**
-     * @return the last
-     */
-    public String getLast() {
-        return last;
-    }
 
     /**
      * @param last the last to set
@@ -174,14 +168,14 @@ public class Hitter {
     /**
      * @return the ba
      */
-    public String getBa() {
+    public Double getBa() {
         return ba;
     }
 
     /**
      * @param ba the ba to set
      */
-    public void setBa(String ba) {
+    public void setBa(Double ba) {
         this.ba = ba;
     }
 
@@ -212,6 +206,50 @@ public class Hitter {
     public void setH(String h) {
         this.h = h;
     }
+
+    /**
+     * @return the nation
+     */
+    public String getNation() {
+        return nation;
+    }
+
+    /**
+     * @param nation the nation to set
+     */
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
+    
+    public void toSTRING(){
+        System.out.println("Team: " + proteam +
+                "\nLAST_NAME: " + last +
+                "\nFIRST_NAME: " + first +
+                "\nQP: " + position +
+                "\nAB: " + ab +
+                "\nR: " + r +
+                "\nH: " + h +
+                "\nHR: " + hr +
+                "\nRBI: " + rbi +
+                "\nSB: " + sb +
+                "\nNOTES: " + note +
+                "\nYEAR_OF_BIRTH: " + year +
+                "\nNATION_OF_BIRTH: " + nation +
+                "\nBA: " + ba);
+                
+    }
     
     
+    // adds CI MI U tags 
+    public void fixPostion(){
+        if(position.contains("1B") || position.contains("3B")){
+            position = position + "_CI";
+        }
+        
+        if(position.contains("2B") || position.contains("SS")){
+            position = position + "_MI";
+        }
+        
+        position = position + "_U";
+    }
 }

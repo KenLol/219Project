@@ -22,19 +22,19 @@
         <property name="MOVE_DOWN_ICON"     value="MoveDown.png"></property>
         
         <!-- TOOLTIPS FOR BUTTONS -->
-        <property name="NEW_COURSE_TOOLTIP"         value="Create a New Course"></property>
-        <property name="LOAD_COURSE_TOOLTIP"        value="Load and Existing Course"></property>
-        <property name="SAVE_COURSE_TOOLTIP"        value="Save this Course"></property>
+        <property name="NEW_COURSE_TOOLTIP"         value="Create a New Draft"></property>
+        <property name="LOAD_COURSE_TOOLTIP"        value="Load an Existing Draft"></property>
+        <property name="SAVE_COURSE_TOOLTIP"        value="Save this Draft"></property>
         <property name="VIEW_SCHEDULE_TOOLTIP"      value="View the Schedule Page"></property>
-        <property name="EXPORT_PAGE_TOOLTIP"        value="Export the Schedule Page"></property>
-        <property name="DELETE_TOOLTIP"             value="Delete this Course"></property>
+        <property name="EXPORT_PAGE_TOOLTIP"        value="Export the Draft"></property>
+        <property name="DELETE_TOOLTIP"             value="Delete"></property>
         <property name="EXIT_TOOLTIP"               value="Exit the Application"></property>
-        <property name="ADD_ITEM_TOOLTIP"           value="Add Schedule Item"></property>
-        <property name="REMOVE_ITEM_TOOLTIP"        value="Remove Schedule Item"></property>
+        <property name="ADD_ITEM_TOOLTIP"           value="Add Player"></property>
+        <property name="REMOVE_ITEM_TOOLTIP"        value="Remove Player"></property>
         <property name="ADD_LECTURE_TOOLTIP"        value="Add Lecture"></property>
         <property name="REMOVE_LECTURE_TOOLTIP"     value="Remove Lecture"></property>
-        <property name="MOVE_UP_LECTURE_TOOLTIP"    value="Move Up Lecture"></property>
-        <property name="MOVE_DOWN_LECTURE_TOOLTIP"  value="Move Down Lecture"></property>
+        <property name="MOVE_UP_LECTURE_TOOLTIP"    value="Move Up"></property>
+        <property name="MOVE_DOWN_LECTURE_TOOLTIP"  value="Move Down"></property>
         <property name="ADD_HW_TOOLTIP"             value="Add Assignment"></property>
         <property name="REMOVE_HW_TOOLTIP"          value="Remove Assignment"></property>
         
@@ -65,10 +65,10 @@
         <property name="CLOSE_BUTTON_TEXT"                          value="Close"></property>
 
         <!-- VERIFICATION MESSAGES -->
-        <property name="NEW_COURSE_CREATED_MESSAGE"     value="New Course Created but not yet Saved"></property>
-        <property name="COURSE_LOADED_MESSAGE"          value="The Course has been Loaded"></property>
-        <property name="COURSE_SAVED_MESSAGE"           value="The Course has been Saved"></property>
-        <property name="SITE_EXPORTED_MESSAGE"          value="The Course Site has been Exported"></property>
+        <property name="NEW_COURSE_CREATED_MESSAGE"     value="New Draft Created but not yet Saved"></property>
+        <property name="COURSE_LOADED_MESSAGE"          value="The Draft has been Loaded"></property>
+        <property name="COURSE_SAVED_MESSAGE"           value="The Draft has been Saved"></property>
+        <property name="SITE_EXPORTED_MESSAGE"          value="The Draft been Exported"></property>
         <property name="SAVE_UNSAVED_WORK_MESSAGE"      value="Do you want to save your unsaved work first?"></property>
         <property name="REMOVE_ITEM_MESSAGE"            value="Are you sure you wish to remove the item?"></property>
     </property_list>

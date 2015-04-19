@@ -1,5 +1,6 @@
 package csb;
 
+import FantasyBaseball.FantasyGUI;
 import FantasyBaseball.JsonDraftFileManager;
 import static csb.CSB_StartupConstants.*;
 import static csb.CSB_PropertyType.*;
@@ -28,6 +29,7 @@ public class CourseSiteBuilder extends Application {
     // THIS IS THE FULL USER INTERFACE, WHICH WILL BE INITIALIZED
     // AFTER THE PROPERTIES FILE IS LOADED
    CSB_GUI gui;
+   FantasyGUI GUI;
 
     /**
      * This is where our Application begins its initialization, it will
@@ -44,6 +46,7 @@ public class CourseSiteBuilder extends Application {
         
         // LOAD APP SETTINGS INTO THE GUI AND START IT UP
         boolean success = loadProperties();
+        /*
         if (success) {
             PropertiesManager props = PropertiesManager.getPropertiesManager();
             String appTitle = props.getProperty(PROP_APP_TITLE);
@@ -78,10 +81,12 @@ public class CourseSiteBuilder extends Application {
             }
         }
         
-        
+        */
         
         /////////////////////////////////////////////////
         
+        GUI = new FantasyGUI(primaryStage);
+        GUI.initGUI("FantasyBaseball");
         JsonDraftFileManager jm = new JsonDraftFileManager();
         jm.loadALL();
         jm.loadA();

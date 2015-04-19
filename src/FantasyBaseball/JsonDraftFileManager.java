@@ -33,6 +33,9 @@ public class JsonDraftFileManager {
     ArrayList<Pitcher> arrP = new ArrayList<Pitcher>();
     ArrayList<Hitter> arrH = new ArrayList<Hitter>();
     
+    ArrayList<Player> arr = new ArrayList<Player>();
+    ArrayList<Player> all = new ArrayList<Player>();
+    
     
     
     
@@ -154,4 +157,143 @@ public class JsonDraftFileManager {
         is.close();
         return json;
     }
+    
+    
+    
+    
+    
+    
+    
+    // reloads the hitters and pitchers from the json files.
+    public void loadALL() throws IOException{
+        this.loadHitters();
+        this.loadPitchers();
+    }
+    
+    public void loadC(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("C") && !h.getPosition().contains("CI")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void load1B(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("1B")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void loadCI(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("CI")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void load3B(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("3B")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void load2B(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("2B")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void loadMI(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("MI")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void loadSS(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("SS")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void loadOF(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("OF")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void loadU(){
+        for(Hitter h : arrH){
+            if(h.getPosition().contains("U")){
+                arr.add(h);
+            }
+        }
+    }
+    
+    public void loadA(){
+        for(Hitter h: arrH){
+            arr.add(h);
+        }
+        for(Pitcher p : arrP){
+            arr.add(p);
+        }
+    }
+    
+    public void loadP(){
+        for(Pitcher p : arrP){
+            arr.add(p);
+        }
+    }
+    
+    public void emptyArr(){
+        arr.clear();
+    }
+    public void emptyAll(){
+        all.clear();
+    }
+    
+    public void displayArr(){
+        for(Player h : arr){
+            h.toSTRING();
+        }
+        this.emptyArr(); // empty after use
+    }
+    
+    //display search algo reults
+    public void displayAll(){
+        for(Player p : all){
+            p.toSTRING();
+        }
+        this.emptyAll();
+    }
+    
+    public void startWith(String a){
+        a = a.toLowerCase();
+        for(Player h : arr){
+            String f = h.getFirst();
+            String l = h.getLast();
+            f = f.toLowerCase();
+            l = l.toLowerCase();
+            
+            
+            if(f.startsWith(a) || l.startsWith(a)){
+                all.add(h);
+            }
+            
+        }
+    }
+    
+    
 }

@@ -9,10 +9,8 @@ package FantasyBaseball;
  *
  * @author Kenneth
  */
-public class Pitcher {
+public class Pitcher extends Player{
     
-    private String first;           //FIRST_NAME
-    private String last;            //LAST_NAME
     private String proteam;         //TEAM
     private String positions = "P"; 
     private String year;            //YEAR_OF_BIRTH
@@ -20,15 +18,16 @@ public class Pitcher {
     private String sv;              //SV
     private String k;               //K
     private Double era;             //ER * 9 / IP
-    private String whip;            //BB+H / IP
+    private Double whip;            //BB+H / IP
     private String note;            //NOTES
-    private String nation;          //NATION_OF_BIRTHS
+    private String nation;          //NATION_OF_BIRTH
     
     
     private String ip;//inningspitch//IP
-    private String er;//earnedruns
+    private String er;//earnedruns  //ER
     
     private String bb;//walks       //BB
+    private String h;               //H
     
     //constructor for a Pitcher
     public Pitcher(String last, String first){
@@ -36,19 +35,6 @@ public class Pitcher {
         this.first = first;
     }
 
-    /**
-     * @return the first
-     */
-    public String getFirst() {
-        return first;
-    }
-
-    /**
-     * @param first the first to set
-     */
-    public void setFirst(String first) {
-        this.first = first;
-    }
 
     /**
      * @return the last
@@ -57,12 +43,6 @@ public class Pitcher {
         return last;
     }
 
-    /**
-     * @param last the last to set
-     */
-    public void setLast(String last) {
-        this.last = last;
-    }
 
     /**
      * @return the proteam
@@ -165,14 +145,14 @@ public class Pitcher {
     /**
      * @return the whip
      */
-    public String getWhip() {
+    public Double getWhip() {
         return whip;
     }
 
     /**
      * @param whip the whip to set
      */
-    public void setWhip(String whip) {
+    public void setWhip(Double whip) {
         this.whip = whip;
     }
 
@@ -245,5 +225,42 @@ public class Pitcher {
     public void setBb(String bb) {
         this.bb = bb;
     }
+
+    /**
+     * @return the h
+     */
+    public String getH() {
+        return h;
+    }
+
+    /**
+     * @param h the h to set
+     */
+    public void setH(String h) {
+        this.h = h;
+    }
     
+    
+    public void toSTRING(){
+        System.out.println("Team: " + proteam +
+                "\nLAST_NAME: " + last +
+                "\nFIRST_NAME: " + first +
+                "\nIP: " + ip +
+                "\nER: " + er +
+                "\nW: " + w +
+                "\nSV: " + sv +
+                "\nH: " + h +
+                "\nBB: " + bb +
+                "\nK: " + k +
+                "\nNOTES: " + note +
+                "\nYEAR_OF_BIRTH: " + year +
+                "\nNATION_OF_BIRTH: " + nation +
+                "\nERA: " + era +
+                "\nWHIP: " + whip +
+                "\nPOSITION" + positions);
+        
+                
+    }
+    
+ 
 }
