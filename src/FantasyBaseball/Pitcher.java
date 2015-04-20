@@ -257,7 +257,7 @@ public class Pitcher extends Player{
                 "\nNATION_OF_BIRTH: " + nation +
                 "\nERA: " + era +
                 "\nWHIP: " + whip +
-                "\nPOSITION" + positions + "\n");
+                "\nPOSITION: " + positions + "\n");
         
                 
     }

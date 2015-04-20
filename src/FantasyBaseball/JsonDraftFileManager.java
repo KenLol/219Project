@@ -40,7 +40,7 @@ public class JsonDraftFileManager {
     ObservableList<Player> obp = FXCollections.observableArrayList();
     
     
-    public JsonDraftFileManager(){
+    public JsonDraftFileManager() {
         
     }
     
@@ -173,7 +173,7 @@ public class JsonDraftFileManager {
     
     public void loadC(){
         for(Hitter h : arrH){
-            if(h.getPosition().contains("C") && !h.getPosition().contains("CI")){
+            if(h.getPosition().contains("C_")){
                 arr.add(h);
             }
         }

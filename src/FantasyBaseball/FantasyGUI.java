@@ -59,6 +59,7 @@ public class FantasyGUI {
     static final int LARGE_TEXT_FIELD_LENGTH = 20;
     static final int SMALL_TEXT_FIELD_LENGTH = 5;
     static final String Line = "################################################################################################################################################################";
+    private String b;
     
     JsonDraftFileManager jcfm = new JsonDraftFileManager();
     
@@ -409,10 +410,14 @@ public class FantasyGUI {
                    //System.out.println(z);
                     
                     int a = Integer.parseInt(z);
+                    
+                    
+                    if(b == null || b == ""){
                     if(a == 1){
                        // System.out.println("hi");
                         jcfm.emptyAll();
                         jcfm.emptyArr();
+                        
                         jcfm.loadA();
                         jcfm.displayArr();
                         System.out.println(Line);
@@ -498,6 +503,111 @@ public class FantasyGUI {
                         System.out.println(Line);
                         
                     }
+                    }else{
+                        if(a == 1){
+                       // System.out.println("hi");
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadA();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 2){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadC();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 3){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load1B();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 4){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadCI();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 5){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load3B();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 6){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load2B();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 7){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadMI();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 8){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadSS();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 9){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadOF();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 10){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadU();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 11){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadP();
+                        jcfm.startWith(b);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    }
+                    
+                    
+                    //System.out.print(b);
                 }
             }
         });
@@ -519,6 +629,7 @@ public class FantasyGUI {
                                 }catch (NullPointerException e){
                         
                     }
+             b = newValue;
              int a = Integer.parseInt(z);
                     if(a == 1){
                        // System.out.println("hi");
