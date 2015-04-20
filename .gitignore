@@ -1,2 +1,8 @@
 /build/
 /dist/
+/XMLUtilities/build/
+/XMLUtilities/dist/
+/XMLUtilities/nbproject/private/
+/PropertiesManager/build/
+/PropertiesManager/dist/
+/PropertiesManager/nbproject/private/
