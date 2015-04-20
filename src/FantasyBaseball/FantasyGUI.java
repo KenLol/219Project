@@ -14,6 +14,8 @@ import csb.gui.ProgressDialog;
 import csb.gui.YesNoCancelDialog;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -26,6 +28,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -55,6 +58,7 @@ public class FantasyGUI {
     static final String EMPTY_TEXT = "";
     static final int LARGE_TEXT_FIELD_LENGTH = 20;
     static final int SMALL_TEXT_FIELD_LENGTH = 5;
+    static final String Line = "################################################################################################################################################################";
     
     JsonDraftFileManager jcfm = new JsonDraftFileManager();
     
@@ -278,7 +282,7 @@ public class FantasyGUI {
     // INITIALIZE THE WINDOW (i.e. STAGE) PUTTING ALL THE CONTROLS
     // THERE EXCEPT THE WORKSPACE, WHICH WILL BE ADDED THE FIRST
     // TIME A NEW Course IS CREATED OR LOADED
-    private void initWindow(String windowTitle) {
+    private void initWindow(String windowTitle) throws IOException {
         // SET THE WINDOW TITLE
         primaryStage.setTitle(windowTitle);
 
@@ -304,6 +308,7 @@ public class FantasyGUI {
         primaryScene.getStylesheets().add(PRIMARY_STYLE_SHEET);
         primaryStage.setScene(primaryScene);
         primaryStage.show();
+        jcfm.loadALL();
     }
     
      // INIT A BUTTON AND ADD IT TO A CONTAINER IN A TOOLBAR
@@ -387,12 +392,244 @@ public class FantasyGUI {
            FantasyFileController.handleMLBTeamsRequest(this);
         });
         
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov,
+                Toggle old_toggle, Toggle new_toggle){
+                if (group.getSelectedToggle() != null){
+                    String z = "1";
+                    try{
+                        z = group.getSelectedToggle().getUserData().toString();
+                                }catch (NullPointerException e){
+                        
+                    }
+                        
+                    
+                   
+                   //System.out.println(z);
+                    
+                    int a = Integer.parseInt(z);
+                    if(a == 1){
+                       // System.out.println("hi");
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadA();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 2){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadC();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 3){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load1B();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 4){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadCI();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 5){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load3B();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 6){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load2B();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 7){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadMI();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 8){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadSS();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 9){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadOF();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 10){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadU();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 11){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadP();
+                        jcfm.displayArr();
+                        System.out.println(Line);
+                        
+                    }
+                }
+            }
+        });
         
+       // registerTextFieldController(searchField);
+        
+        
+    }
+    
+    private void initsearchfield(){
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+             public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+             //System.out.println(newValue);
+             
+             String z = "1";
+             try{
+                        z = group.getSelectedToggle().getUserData().toString();
+                                }catch (NullPointerException e){
+                        
+                    }
+             int a = Integer.parseInt(z);
+                    if(a == 1){
+                       // System.out.println("hi");
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadA();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 2){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadC();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 3){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load1B();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 4){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadCI();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 5){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load3B();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 6){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.load2B();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 7){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadMI();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 8){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadSS();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 9){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadOF();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 10){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadU();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+                    if(a == 11){
+                        jcfm.emptyAll();
+                        jcfm.emptyArr();
+                        jcfm.loadP();
+                        jcfm.startWith(newValue);
+                        jcfm.displayAll();
+                        System.out.println(Line);
+                        
+                    }
+    }
+});
     }
     
     // REGISTER THE EVENT LISTENER FOR A TEXT FIELD
     private void registerTextFieldController(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(oldValue != newValue){
+                //System.out.println("SUP");
+            }
            // courseController.handleCourseChangeRequest(this);
         });
     }
@@ -514,16 +751,27 @@ public class FantasyGUI {
         
         rb1.setToggleGroup(group);
         rb1.setSelected(true);
+        rb1.setUserData(1);
         rb2.setToggleGroup(group);
+        rb2.setUserData(2);
         rb3.setToggleGroup(group);
+        rb3.setUserData(3);
         rb4.setToggleGroup(group);
+        rb4.setUserData(4);
         rb5.setToggleGroup(group);
+        rb5.setUserData(5);
         rb6.setToggleGroup(group);
+        rb6.setUserData(6);
         rb7.setToggleGroup(group);
+        rb7.setUserData(7);
         rb8.setToggleGroup(group);
+        rb8.setUserData(8);
         rb9.setToggleGroup(group);
+        rb9.setUserData(9);
         rb10.setToggleGroup(group);
+        rb10.setUserData(10);
         rb11.setToggleGroup(group);
+        rb11.setUserData(11);
         
         hbox2.getChildren().add(rb1);
         hbox2.getChildren().add(rb2);
@@ -538,7 +786,7 @@ public class FantasyGUI {
         hbox2.getChildren().add(rb11);
         hbox2.setSpacing(10);
         
-        
+        initsearchfield();
        
         firstColumn = new TableColumn("First");
         lastColumn = new TableColumn("Last");
@@ -568,7 +816,7 @@ public class FantasyGUI {
         vbox.getChildren().add(hbox2);
         vbox.getChildren().add(playerTable);
         //hbox.getStyleClass().add(CLASS_BORDERED_PANE);
-        vbox.getStyleClass().add(CLASS_BORDERED_PANE);
+        //vbox.getStyleClass().add(CLASS_BORDERED_PANE);
         
         
         
