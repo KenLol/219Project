@@ -550,9 +550,12 @@ public class FantasyGUI {
         playerTable = new TableView();
         playerTable.getColumns().add(firstColumn);
         playerTable.getColumns().add(lastColumn);
-        Player pla = new Pitcher("last", "first");
-        jcfm.addobp(pla);
-        playerTable.setItems(jcfm.getobp());
+        //Player pla = new Pitcher("last", "first");
+        //jcfm.addobp(pla);
+        
+        //playerTable.setItems(jcfm.getobp());
+        
+        
        
         
         playerTable = new TableView();
