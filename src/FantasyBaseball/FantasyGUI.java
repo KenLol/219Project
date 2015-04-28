@@ -413,105 +413,94 @@ public class FantasyGUI {
                     
                     
                     if(b == null || b == ""){
+                    //    System.out.println(b);
                     if(a == 1){
-                       // System.out.println("hi");
+                        
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         
                         jcfm.loadA();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 2){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadC();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 3){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.load1B();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 4){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadCI();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 5){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.load3B();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 6){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.load2B();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                       display();
                         
                     }
                     if(a == 7){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadMI();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 8){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadSS();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 9){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadOF();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                       display();
                         
                     }
                     if(a == 10){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadU();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     if(a == 11){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadP();
-                        jcfm.displayArr();
-                        System.out.println(Line);
+                        display();
                         
                     }
                     }else{
+                     //   System.out.println(b);
                         if(a == 1){
-                       // System.out.println("hi");
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadA();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 2){
@@ -519,8 +508,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadC();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 3){
@@ -528,8 +516,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.load1B();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 4){
@@ -537,8 +524,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadCI();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 5){
@@ -546,8 +532,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.load3B();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 6){
@@ -555,8 +540,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.load2B();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 7){
@@ -564,8 +548,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadMI();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 8){
@@ -573,8 +556,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadSS();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 9){
@@ -582,8 +564,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadOF();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 10){
@@ -591,8 +572,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadU();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 11){
@@ -600,8 +580,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadP();
                         jcfm.startWith(b);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     }
@@ -631,14 +610,14 @@ public class FantasyGUI {
                     }
              b = newValue;
              int a = Integer.parseInt(z);
+             //System.out.println(newValue);
                     if(a == 1){
-                       // System.out.println("hi");
+                        
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadA();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 2){
@@ -646,8 +625,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadC();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 3){
@@ -655,8 +633,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.load1B();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 4){
@@ -664,8 +641,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadCI();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 5){
@@ -673,8 +649,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.load3B();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 6){
@@ -682,8 +657,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.load2B();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 7){
@@ -691,17 +665,14 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadMI();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
-                        
+                        displayz();
                     }
                     if(a == 8){
                         jcfm.emptyAll();
                         jcfm.emptyArr();
                         jcfm.loadSS();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 9){
@@ -709,8 +680,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadOF();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 10){
@@ -718,8 +688,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadU();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
+                        displayz();
                         
                     }
                     if(a == 11){
@@ -727,9 +696,7 @@ public class FantasyGUI {
                         jcfm.emptyArr();
                         jcfm.loadP();
                         jcfm.startWith(newValue);
-                        jcfm.displayAll();
-                        System.out.println(Line);
-                        
+                        displayz();
                     }
     }
 });
@@ -861,7 +828,7 @@ public class FantasyGUI {
         
         
         rb1.setToggleGroup(group);
-        rb1.setSelected(true);
+        //rb1.setSelected(true);
         rb1.setUserData(1);
         rb2.setToggleGroup(group);
         rb2.setUserData(2);
@@ -904,13 +871,28 @@ public class FantasyGUI {
         proteamColumn = new TableColumn("Pro Team");
         positionsColumn = new TableColumn("Positions");
         yearOfBirthColumn = new TableColumn("Year of Birth");
+        rwColumn = new TableColumn("R/W");
+        hrsvColumn = new TableColumn("HR/SV");
+        rbikColumn = new TableColumn("RBI/K");
+        sberaColumn = new TableColumn("SB/ERA");
+        bawhipColumn = new TableColumn("BA/WHIP");
+        estimatedValueColumn = new TableColumn("Estimated Value");
+        notesColumn = new TableColumn("Notes");
         
         
         firstColumn.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
-        lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("lAST"));
         proteamColumn.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
         positionsColumn.setCellValueFactory(new PropertyValueFactory<String, String>("position"));
         yearOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("year"));
+        rwColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("rw"));
+        hrsvColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("hrsv"));
+        rbikColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("rbik"));
+        sberaColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("sbera"));
+        bawhipColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("bawhip"));
+        estimatedValueColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedvalue"));
+        notesColumn.setCellValueFactory(new PropertyValueFactory<String, String>("note"));
+        
         
         playerTable = new TableView();
         playerTable.getColumns().add(firstColumn);
@@ -918,6 +900,13 @@ public class FantasyGUI {
         playerTable.getColumns().add(proteamColumn);
         playerTable.getColumns().add(positionsColumn);
         playerTable.getColumns().add(yearOfBirthColumn);
+        playerTable.getColumns().add(rwColumn);
+        playerTable.getColumns().add(hrsvColumn);
+        playerTable.getColumns().add(rbikColumn);
+        playerTable.getColumns().add(sberaColumn);
+        playerTable.getColumns().add(bawhipColumn);
+        playerTable.getColumns().add(estimatedValueColumn);
+        playerTable.getColumns().add(notesColumn);
         
         //Player pla = new Pitcher("last", "first");
         //jcfm.addobp(pla);
@@ -933,6 +922,12 @@ public class FantasyGUI {
             a.setProteam(p.getProteam());
             a.setPosition(p.getPosition());
             a.setYear(p.getYear());
+            a.setRw(p.getRW());
+            a.setHrsv(p.getHRSV());
+            a.setRbik(p.getRBIK());
+            a.setSbera(p.getSBERA());
+            a.setBawhip(p.getBAWHIP());
+            a.setNote(p.getNote());
             jcfm.addobp(a);
         
         }
@@ -1077,5 +1072,49 @@ public class FantasyGUI {
         csbPane.setCenter(Pane5); 
     }
     
+    
+    public void display(){
+        jcfm.clearobp();
+        for(Player p : jcfm.arr){
+            Superplayer a = new Superplayer();
+            a.setFIRST(p.getFirst());
+            a.setLAST(p.getLast());
+            a.setProteam(p.getProteam());
+            a.setPosition(p.getPosition());
+            a.setYear(p.getYear());
+            a.setRw(p.getRW());
+            a.setHrsv(p.getHRSV());
+            a.setRbik(p.getRBIK());
+            a.setSbera(p.getSBERA());
+            a.setBawhip(p.getBAWHIP());
+            a.setNote(p.getNote());
+            jcfm.addobp(a);
+            
+            playerTable.setItems(jcfm.getobp());
+        
+        }
+    }
+    
+    public void displayz(){
+        jcfm.clearobp();
+        for(Player p : jcfm.all){
+            Superplayer a = new Superplayer();
+            a.setFIRST(p.getFirst());
+            a.setLAST(p.getLast());
+            a.setProteam(p.getProteam());
+            a.setPosition(p.getPosition());
+            a.setYear(p.getYear());
+            a.setRw(p.getRW());
+            a.setHrsv(p.getHRSV());
+            a.setRbik(p.getRBIK());
+            a.setSbera(p.getSBERA());
+            a.setBawhip(p.getBAWHIP());
+            a.setNote(p.getNote());
+            jcfm.addobp(a);
+            
+            playerTable.setItems(jcfm.getobp());
+        
+        }
+    }
     
 }

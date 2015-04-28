@@ -5,7 +5,9 @@
  */
 package FantasyBaseball;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,13 +22,26 @@ public class Superplayer {
     final StringProperty FIRST;
     final StringProperty LAST;
     final StringProperty position;
+    final StringProperty note;
     public static final String default_first = "<First_Name>";
     public static final String default_last = "<Last_Name>";
     public static final String Defaultproteam = "<Default_Team>";
     public static final String Defaultposition = "<Default_Position>";
+    public static final String Defaultnote = "<Default_Note>";
     
     final IntegerProperty year;
+    final IntegerProperty rw;
+    final IntegerProperty hrsv;
+    final IntegerProperty rbik;
     public static final int Defaultyear = 0;
+    public static final int Defaultrw = 0;
+    public static final int Defaulthrsv = 0;
+    public static final int Defaultrbik = 0;
+    
+    final DoubleProperty sbera;
+    final DoubleProperty bawhip;
+    public static final double Defaultsbera = 0.0;
+    public static final double Defaultbawhip = 0.0;
     
     public Superplayer(){
         PROTEAM = new SimpleStringProperty(Defaultproteam);
@@ -34,6 +49,12 @@ public class Superplayer {
         LAST = new SimpleStringProperty(default_last);
         position = new SimpleStringProperty(Defaultposition);
         year = new SimpleIntegerProperty(Defaultyear);
+        rw = new SimpleIntegerProperty(Defaultrw);
+        hrsv = new SimpleIntegerProperty(Defaulthrsv);
+        rbik = new SimpleIntegerProperty(Defaultrbik);
+        sbera = new SimpleDoubleProperty(Defaultsbera);
+        bawhip = new SimpleDoubleProperty(Defaultbawhip);
+        note = new SimpleStringProperty(Defaultnote);
     }
     
     public void reset(){
@@ -90,4 +111,63 @@ public class Superplayer {
         return year;
     }
     
+    public int getRw(){
+        return rw.get();
+    }
+    public void setRw(int initRw){
+        rw.set(initRw);
+    }
+    public IntegerProperty rwProperty(){
+        return rw;
+    }
+    
+    public int getHrsv(){
+        return hrsv.get();
+    }
+    public void setHrsv(int initHrsv){
+        hrsv.set(initHrsv);
+    }
+    public IntegerProperty hrsvProperty(){
+        return hrsv;
+    }
+    
+    public int getRbik(){
+        return rbik.get();
+    }
+    public void setRbik(int initRbik){
+        rbik.set(initRbik);
+    }
+    public IntegerProperty rbikProperty(){
+        return rbik;
+    }
+    
+    public double getSbera(){
+        return sbera.get();
+    }
+    public void setSbera(double initSbera){
+        sbera.set(initSbera);
+    }
+    public DoubleProperty sberaProperty(){
+        return sbera;
+    }
+    
+    public double getBawhip(){
+        return bawhip.get();
+    }
+    public void setBawhip(double initBawhip){
+        bawhip.set(initBawhip);
+    }
+    public DoubleProperty bawhipProperty(){
+        return bawhip;
+    }
+    
+    public String getNote(){
+        return note.get();
+    }
+    public void setNote(String initNote){
+        note.set(initNote);
+    }
+    public StringProperty noteProperty(){
+        return note;
+    }
 }

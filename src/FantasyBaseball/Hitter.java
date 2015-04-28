@@ -16,12 +16,12 @@ public class Hitter extends Player{
     private String proteam;         //TEAM
     private String position;        //QP
     private int year;            //YEAR_OF_BIRTH
-    private String r;               //R
-    private String hr;              //HR
-    private String rbi;             //RBI
-    private String sb;              //SB
+    private int r_w;               //R
+    private int hr_sw;              //HR
+    private int rbi_k;             //RBI
+    private double sb_era;              //SB
     private String note;            //NOTES
-    private Double ba;              //H/AB
+    private double ba_whip;              //H/AB
     
     private String ab;              //AB
     private String h;               //H
@@ -98,57 +98,57 @@ public class Hitter extends Player{
     /**
      * @return the r
      */
-    public String getR() {
-        return r;
+    public int getRW() {
+        return r_w;
     }
 
     /**
      * @param r the r to set
      */
-    public void setR(String r) {
-        this.r = r;
+    public void setRW(int r) {
+        this.r_w = r;
     }
 
     /**
      * @return the hr
      */
-    public String getHr() {
-        return hr;
+    public int getHRSV() {
+        return hr_sw;
     }
 
     /**
      * @param hr the hr to set
      */
-    public void setHr(String hr) {
-        this.hr = hr;
+    public void setHRSV(int hr) {
+        this.hr_sw = hr;
     }
 
     /**
      * @return the rbi
      */
-    public String getRbi() {
-        return rbi;
+    public int getRBIK() {
+        return rbi_k;
     }
 
     /**
      * @param rbi the rbi to set
      */
-    public void setRbi(String rbi) {
-        this.rbi = rbi;
+    public void setRBIK(int rbi) {
+        this.rbi_k = rbi;
     }
 
     /**
      * @return the sb
      */
-    public String getSb() {
-        return sb;
+    public double getSBERA() {
+        return sb_era;
     }
 
     /**
      * @param sb the sb to set
      */
-    public void setSb(String sb) {
-        this.sb = sb;
+    public void setSBERA(double sb) {
+        this.sb_era = sb;
     }
 
     /**
@@ -168,15 +168,15 @@ public class Hitter extends Player{
     /**
      * @return the ba
      */
-    public Double getBa() {
-        return ba;
+    public double getBAWHIP() {
+        return ba_whip;
     }
 
     /**
      * @param ba the ba to set
      */
-    public void setBa(Double ba) {
-        this.ba = ba;
+    public void setBAWHIP(double ba) {
+        this.ba_whip = ba;
     }
 
     /**
@@ -227,15 +227,15 @@ public class Hitter extends Player{
                 "\nFIRST_NAME: " + first +
                 "\nQP: " + getPosition() +
                 "\nAB: " + ab +
-                "\nR: " + r +
+                "\nR: " + r_w +
                 "\nH: " + h +
-                "\nHR: " + hr +
-                "\nRBI: " + rbi +
-                "\nSB: " + sb +
+                "\nHR: " + hr_sw +
+                "\nRBI: " + rbi_k +
+                "\nSB: " + sb_era +
                 "\nNOTES: " + note +
                 "\nYEAR_OF_BIRTH: " + year +
                 "\nNATION_OF_BIRTH: " + nation +
-                "\nBA: " + ba +"\n");
+                "\nBA: " + ba_whip +"\n");
                 
     }
     

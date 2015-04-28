@@ -16,11 +16,11 @@ public class Pitcher extends Player{
     private String proteam;         //TEAM
     private String position; 
     private int year;            //YEAR_OF_BIRTH
-    private String w; //wins        //W
-    private String sv;              //SV
-    private String k;               //K
-    private Double era;             //ER * 9 / IP
-    private Double whip;            //BB+H / IP
+    private int r_w; //wins        //W
+    private int hr_sv;              //SV
+    private int rbi_k;               //K
+    private double sb_era;             //ER * 9 / IP
+    private double ba_whip;            //BB+H / IP
     private String note;            //NOTES
     private String nation;          //NATION_OF_BIRTH
     
@@ -90,71 +90,71 @@ public class Pitcher extends Player{
     /**
      * @return the w
      */
-    public String getW() {
-        return w;
+    public int getRW() {
+        return r_w;
     }
 
     /**
      * @param w the w to set
      */
-    public void setW(String w) {
-        this.w = w;
+    public void setRW(int w) {
+        this.r_w = w;
     }
 
     /**
      * @return the sv
      */
-    public String getSv() {
-        return sv;
+    public int getHRSV() {
+        return hr_sv;
     }
 
     /**
      * @param sv the sv to set
      */
-    public void setSv(String sv) {
-        this.sv = sv;
+    public void setHRSV(int sv) {
+        this.hr_sv = sv;
     }
 
     /**
      * @return the k
      */
-    public String getK() {
-        return k;
+    public int getRBIK() {
+        return rbi_k;
     }
 
     /**
      * @param k the k to set
      */
-    public void setK(String k) {
-        this.k = k;
+    public void setRBIK(int k) {
+        this.rbi_k = k;
     }
 
     /**
      * @return the era
      */
-    public Double getEra() {
-        return era;
+    public double getSBERA() {
+        return sb_era;
     }
 
     /**
      * @param era the era to set
      */
-    public void setEra(Double era) {
-        this.era = era;
+    public void setSBERA(Double era) {
+        this.sb_era = era;
     }
 
     /**
      * @return the whip
      */
-    public Double getWhip() {
-        return whip;
+    public double getBAWHIP() {
+        return ba_whip;
     }
 
     /**
      * @param whip the whip to set
      */
-    public void setWhip(Double whip) {
-        this.whip = whip;
+    public void setBAWHIP(double whip) {
+        this.ba_whip = whip;
     }
 
     /**
@@ -248,16 +248,16 @@ public class Pitcher extends Player{
                 "\nFIRST_NAME: " + getFirst() +
                 "\nIP: " + ip +
                 "\nER: " + er +
-                "\nW: " + w +
-                "\nSV: " + sv +
+                "\nW: " + r_w +
+                "\nSV: " + hr_sv +
                 "\nH: " + h +
                 "\nBB: " + bb +
-                "\nK: " + k +
+                "\nK: " + rbi_k +
                 "\nNOTES: " + note +
                 "\nYEAR_OF_BIRTH: " + year +
                 "\nNATION_OF_BIRTH: " + nation +
-                "\nERA: " + era +
-                "\nWHIP: " + whip +
+                "\nERA: " + sb_era +
+                "\nWHIP: " + ba_whip +
                 "\nPOSITION: " + position + "\n");
         
                 

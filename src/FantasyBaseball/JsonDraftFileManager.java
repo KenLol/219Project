@@ -68,9 +68,9 @@ public class JsonDraftFileManager {
             p.setLast(b);
             p.setProteam(c);
             p.setYear(Integer.parseInt(d));
-            p.setW(e);
-            p.setSv(f);
-            p.setK(g);
+            p.setRW(Integer.parseInt(e));
+            p.setHRSV(Integer.parseInt(f));
+            p.setRBIK(Integer.parseInt(g));
             p.setNote(h);
             p.setIp(k);
             p.setEr(l);
@@ -81,13 +81,21 @@ public class JsonDraftFileManager {
             
             Double erDouble = Double.parseDouble(l);
             Double ipDouble = Double.parseDouble(k);
+            
             Double eraDouble = erDouble * 9 / ipDouble;
-            p.setEra(eraDouble);
+            
+            if(!eraDouble.isNaN()){
+            eraDouble = Math.round(eraDouble*1000)/1000.0d;
+            }
+            p.setSBERA(eraDouble);
             
             Double bbDouble = Double.parseDouble(n);
             Double hDouble = Double.parseDouble(m);
             Double whipDouble = (bbDouble + hDouble) / ipDouble;
-            p.setWhip(whipDouble);
+            if(!whipDouble.isNaN()){
+            whipDouble = Math.round(whipDouble*1000)/1000.0d;
+            }
+            p.setBAWHIP(whipDouble);
             
             arrP.add(p);
         }
@@ -129,14 +137,19 @@ public class JsonDraftFileManager {
             z.setYear(Integer.parseInt(d));
             z.setPosition(e);
             z.setAb(f);
-            z.setR(g);
+            z.setRW(Integer.parseInt(g));
             z.setH(h);
-            z.setHr(j);
-            z.setRbi(k);
-            z.setSb(l);
+            z.setHRSV(Integer.parseInt(j));
+            z.setRBIK(Integer.parseInt(k));
+            
+            z.setSBERA(Double.parseDouble(l));
             z.setNote(m);
             z.setNation(n);
-            z.setBa(baDouble);
+            
+            if(!baDouble.isNaN()){
+            baDouble = Math.round(baDouble*1000)/1000.0d;
+            }
+            z.setBAWHIP(baDouble);
             
             z.fixPostion(); // adds the extra positions
             arrH.add(z);

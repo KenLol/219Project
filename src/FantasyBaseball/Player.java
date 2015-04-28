@@ -48,4 +48,27 @@ public class Player {
         return 0;
     }
     
+    public int getRW(){
+        return 0;
+    }
+    
+    public int getHRSV(){
+        return 0;
+    }
+    
+    public int getRBIK(){
+        return 0;
+    }
+    
+    public double getSBERA(){
+        return 0.0;
+    }
+    
+    public double getBAWHIP(){
+        return 0.0;
+    }
+    
+    public String getNote(){
+        return "error";
+    }
 }
