@@ -880,6 +880,7 @@ public class FantasyGUI {
         notesColumn = new TableColumn("Notes");
         
         
+        
         firstColumn.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
         lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("lAST"));
         proteamColumn.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
@@ -1074,6 +1075,36 @@ public class FantasyGUI {
     
     
     public void display(){
+        String z = "1";
+             try{
+                        z = group.getSelectedToggle().getUserData().toString();
+                                }catch (NullPointerException e){
+                        
+                    }
+        if(z.equals("1")){
+        rwColumn.setText("R/W");
+        hrsvColumn.setText("HR/SV");
+        rbikColumn.setText("RBI/K");
+        sberaColumn.setText("SB/ERA");
+        bawhipColumn.setText("BA/WHIP");
+        }
+        
+        if(z.equals("11")){
+        rwColumn.setText("W");
+        hrsvColumn.setText("SV");
+        rbikColumn.setText("K");
+        sberaColumn.setText("ERA");
+        bawhipColumn.setText("WHIP");
+        }
+        
+        if(!z.equals("1") && !z.equals("11")){
+        rwColumn.setText("R");
+        hrsvColumn.setText("HR");
+        rbikColumn.setText("RBI");
+        sberaColumn.setText("SB");
+        bawhipColumn.setText("BA");
+        }
+        
         jcfm.clearobp();
         for(Player p : jcfm.arr){
             Superplayer a = new Superplayer();
@@ -1096,6 +1127,37 @@ public class FantasyGUI {
     }
     
     public void displayz(){
+        String z = "1";
+             try{
+                        z = group.getSelectedToggle().getUserData().toString();
+                                }catch (NullPointerException e){
+                        
+                    }
+        
+        if(z.equals("1")){
+        rwColumn.setText("R/W");
+        hrsvColumn.setText("HR/SV");
+        rbikColumn.setText("RBI/K");
+        sberaColumn.setText("SB/ERA");
+        bawhipColumn.setText("BA/WHIP");
+        }
+        
+        if(z.equals("11")){
+        rwColumn.setText("W");
+        hrsvColumn.setText("SV");
+        rbikColumn.setText("K");
+        sberaColumn.setText("ERA");
+        bawhipColumn.setText("WHIP");
+        }
+        
+        if(!z.equals("1") && !z.equals("11")){
+        rwColumn.setText("R");
+        hrsvColumn.setText("HR");
+        rbikColumn.setText("RBI");
+        sberaColumn.setText("SB");
+        bawhipColumn.setText("BA");
+        }     
+             
         jcfm.clearobp();
         for(Player p : jcfm.all){
             Superplayer a = new Superplayer();
