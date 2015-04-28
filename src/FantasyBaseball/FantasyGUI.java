@@ -103,10 +103,10 @@ public class FantasyGUI {
     
     
     
-    TableView<Player> playerTable;
+    TableView<Superplayer> playerTable;
     TableColumn firstColumn;
     TableColumn lastColumn;
-    TableColumn proTeamColumn;
+    TableColumn proteamColumn;
     TableColumn positionsColumn;
     TableColumn yearOfBirthColumn;
     TableColumn rwColumn;
@@ -898,26 +898,54 @@ public class FantasyGUI {
         hbox2.setSpacing(10);
         
         initsearchfield();
-       
+       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         firstColumn = new TableColumn("First");
         lastColumn = new TableColumn("Last");
+        proteamColumn = new TableColumn("Pro Team");
+        positionsColumn = new TableColumn("Positions");
+        yearOfBirthColumn = new TableColumn("Year of Birth");
         
         
         firstColumn.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
         lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        proteamColumn.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
+        positionsColumn.setCellValueFactory(new PropertyValueFactory<String, String>("position"));
+        yearOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("year"));
         
         playerTable = new TableView();
         playerTable.getColumns().add(firstColumn);
         playerTable.getColumns().add(lastColumn);
+        playerTable.getColumns().add(proteamColumn);
+        playerTable.getColumns().add(positionsColumn);
+        playerTable.getColumns().add(yearOfBirthColumn);
+        
         //Player pla = new Pitcher("last", "first");
         //jcfm.addobp(pla);
         
-        //playerTable.setItems(jcfm.getobp());
+        jcfm.emptyAll();
+        jcfm.emptyArr();
+        jcfm.loadA();
+        
+        for(Player p : jcfm.arr){
+            Superplayer a = new Superplayer();
+            a.setFIRST(p.getFirst());
+            a.setLAST(p.getLast());
+            a.setProteam(p.getProteam());
+            a.setPosition(p.getPosition());
+            a.setYear(p.getYear());
+            jcfm.addobp(a);
+        
+        }
+        
+        
+       
+        playerTable.setItems(jcfm.getobp());
+        //playerTable.
         
         
        
         
-        playerTable = new TableView();
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         hbox.getChildren().add(searchLabel);
         hbox.getChildren().add(searchField);
         

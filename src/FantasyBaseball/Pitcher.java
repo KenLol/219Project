@@ -11,9 +11,11 @@ package FantasyBaseball;
  */
 public class Pitcher extends Player{
     
+    private String first;
+    private String last;
     private String proteam;         //TEAM
-    private String positions = "P"; 
-    private String year;            //YEAR_OF_BIRTH
+    private String position; 
+    private int year;            //YEAR_OF_BIRTH
     private String w; //wins        //W
     private String sv;              //SV
     private String k;               //K
@@ -30,9 +32,8 @@ public class Pitcher extends Player{
     private String h;               //H
     
     //constructor for a Pitcher
-    public Pitcher(String last, String first){
-        this.last = last;
-        this.first = first;
+    public Pitcher(){
+        
     }
 
 
@@ -61,28 +62,28 @@ public class Pitcher extends Player{
     /**
      * @return the positions
      */
-    public String getPositions() {
-        return positions;
+    public String getPosition() {
+        return position;
     }
 
     /**
      * @param positions the positions to set
      */
-    public void setPositions(String positions) {
-        this.positions = positions;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     /**
      * @return the year
      */
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
     /**
      * @param year the year to set
      */
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -244,7 +245,7 @@ public class Pitcher extends Player{
     public void toSTRING(){
         System.out.println("Team: " + proteam +
                 "\nLAST_NAME: " + last +
-                "\nFIRST_NAME: " + first +
+                "\nFIRST_NAME: " + getFirst() +
                 "\nIP: " + ip +
                 "\nER: " + er +
                 "\nW: " + w +
@@ -257,9 +258,30 @@ public class Pitcher extends Player{
                 "\nNATION_OF_BIRTH: " + nation +
                 "\nERA: " + era +
                 "\nWHIP: " + whip +
-                "\nPOSITION: " + positions + "\n");
+                "\nPOSITION: " + position + "\n");
         
                 
+    }
+
+    /**
+     * @return the first
+     */
+    public String getFirst() {
+        return first;
+    }
+
+    /**
+     * @param first the first to set
+     */
+    public void setFirst(String first) {
+        this.first = first;
+    }
+
+    /**
+     * @param last the last to set
+     */
+    public void setLast(String last) {
+        this.last = last;
     }
     
  

@@ -11,10 +11,11 @@ package FantasyBaseball;
  */
 public class Hitter extends Player{
     
-    
+    private String first;
+    private String last;
     private String proteam;         //TEAM
     private String position;        //QP
-    private String year;            //YEAR_OF_BIRTH
+    private int year;            //YEAR_OF_BIRTH
     private String r;               //R
     private String hr;              //HR
     private String rbi;             //RBI
@@ -26,9 +27,8 @@ public class Hitter extends Player{
     private String h;               //H
     private String nation;          //NATION_OF_BIRTH
     
-    public Hitter(String first, String last){
-        this.first = first;
-        this.last = last;
+    public Hitter(){
+        
     }
 
     /**
@@ -84,14 +84,14 @@ public class Hitter extends Player{
     /**
      * @return the year
      */
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
     /**
      * @param year the year to set
      */
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -223,9 +223,9 @@ public class Hitter extends Player{
     
     public void toSTRING(){
         System.out.println("Team: " + proteam +
-                "\nLAST_NAME: " + last +
+                "\nLAST_NAME: " + getLast() +
                 "\nFIRST_NAME: " + first +
-                "\nQP: " + position +
+                "\nQP: " + getPosition() +
                 "\nAB: " + ab +
                 "\nR: " + r +
                 "\nH: " + h +
@@ -242,14 +242,21 @@ public class Hitter extends Player{
     
     // adds CI MI U tags 
     public void fixPostion(){
-        if(position.contains("1B") || position.contains("3B")){
-            position = position + "_CI";
+        if(getPosition().contains("1B") || getPosition().contains("3B")){
+            setPosition(getPosition() + "_CI");
         }
         
-        if(position.contains("2B") || position.contains("SS")){
-            position = position + "_MI";
+        if(getPosition().contains("2B") || getPosition().contains("SS")){
+            setPosition(getPosition() + "_MI");
         }
         
-        position = position + "_U";
+        setPosition(getPosition() + "_U");
+    }
+
+    /**
+     * @return the last
+     */
+    public String getLast() {
+        return last;
     }
 }

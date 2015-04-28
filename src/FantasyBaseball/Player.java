@@ -13,49 +13,39 @@ import javafx.beans.property.StringProperty;
  * @author Kenneth
  */
 public class Player {
-    protected String first; //FIRST_NAME
-    protected String last; //LAST_NAME
-    final StringProperty FIRST;
-    final StringProperty LAST;
-    public static final String default_name = "default_name";
-    
+    //protected String first; //FIRST_NAME
+    //protected String last; //LAST_NAME
     
     public Player(){
-        FIRST = new SimpleStringProperty(default_name);
-        LAST = new SimpleStringProperty(default_name);
+       
     }
 
     void toSTRING() {
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Something has gone super wrong"); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * @return the first
-     */
-    public String getFirst() {
-        return first;
+    
+    
+    //overwritten methods should never be called.
+    public String getFirst(){
+        return "error";
     }
-
-    /**
-     * @param first the first to set
-     */
-    public void setFirst(String first) {
-        this.first = first;
+    
+    public String getLast(){
+        return "error";
     }
-
-    /**
-     * @param last the last to set
-     */
-    public void setLast(String last) {
-        this.last = last;
+    
+    public String getProteam(){
+        return "error";
     }
-
-    /**
-     * @return the last
-     */
-    public String getLast() {
-        return last;
+    
+    public String getPosition(){
+        return "error";
+    }
+    
+    public int getYear(){
+        return 0;
     }
     
 }

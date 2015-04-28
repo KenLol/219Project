@@ -37,7 +37,7 @@ public class JsonDraftFileManager {
     ArrayList<Player> arr = new ArrayList<Player>();
     ArrayList<Player> all = new ArrayList<Player>();
     
-    ObservableList<Player> obp = FXCollections.observableArrayList();
+    ObservableList<Superplayer> obp = FXCollections.observableArrayList();
     
     
     public JsonDraftFileManager() {
@@ -63,9 +63,11 @@ public class JsonDraftFileManager {
             String m = jso.getString("H");
             String n = jso.getString("BB");
             
-            Pitcher p = new Pitcher(a,b);
+            Pitcher p = new Pitcher();
+            p.setFirst(a);
+            p.setLast(b);
             p.setProteam(c);
-            p.setYear(d);
+            p.setYear(Integer.parseInt(d));
             p.setW(e);
             p.setSv(f);
             p.setK(g);
@@ -75,6 +77,7 @@ public class JsonDraftFileManager {
             p.setH(m);
             p.setBb(n);
             p.setNation(j);
+            p.setPosition("P");
             
             Double erDouble = Double.parseDouble(l);
             Double ipDouble = Double.parseDouble(k);
@@ -119,11 +122,11 @@ public class JsonDraftFileManager {
             Double abDouble = Double.parseDouble(f);
             Double baDouble = hDouble/abDouble;
             
-            Hitter z = new Hitter(a, b);
+            Hitter z = new Hitter();
             z.setLast(a);
             z.setFirst(b);
             z.setProteam(c);
-            z.setYear(d);
+            z.setYear(Integer.parseInt(d));
             z.setPosition(e);
             z.setAb(f);
             z.setR(g);
@@ -301,15 +304,15 @@ public class JsonDraftFileManager {
         obp.clear();
     }
     
-    public void addobp(Player p){
+    public void addobp(Superplayer p){
         obp.add(p);
     }
     
-    public ObservableList<Player> getobp(){
+    public ObservableList<Superplayer> getobp(){
         return obp;
     }
     
-    public void removeobpplayer(Player p){
+    public void removeobpplayer(Superplayer p){
         obp.remove(p);
     }
 }
