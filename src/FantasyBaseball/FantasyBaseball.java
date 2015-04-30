@@ -51,8 +51,8 @@ public class FantasyBaseball extends Application{
         //jm.startWith("J"); choose what is in searchbox
         //jm.displayAll();  display
         
-        JsonDraftFileManager jcfm = GUI.getjcfm();
-        jcfm.saveDraft("hello");
+       // JsonDraftFileManager jcfm = GUI.getjcfm();
+        //jcfm.saveDraft("hello");
         
         
     }

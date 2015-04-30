@@ -47,6 +47,7 @@ public class JsonDraftFileManager {
     }
     
     public void loadPitchers() throws IOException{
+        arrP.clear();
         JsonObject json = loadJSONFile("./data/Pitchers.json");
         JsonArray jsonPitcherArray = json.getJsonArray("Pitchers");
         for(int i = 0; i< jsonPitcherArray.size(); i++){
@@ -109,6 +110,7 @@ public class JsonDraftFileManager {
     }
     
     public void loadHitters() throws IOException{
+        arrH.clear();
         JsonObject json = loadJSONFile("./data/Hitters.json");
         JsonArray jsonHitterArray = json.getJsonArray("Hitters");
         for(int i = 0; i< jsonHitterArray.size(); i++){
@@ -355,8 +357,128 @@ public class JsonDraftFileManager {
         jsonWriter.writeObject(draftJsonObject);
     }
     
-    public void loadDraft(String a){
-        draftName = a;
+    public void loadDraft(String aaa) throws IOException{
+        emptyAll();
+        emptyArr();
+        arrP.clear();
+        arrH.clear();
+        
+        draftName = aaa;
+        draftName = "./data/drafts/" + draftName;
+        
+        JsonObject json = loadJSONFile(draftName);
+        JsonArray jsonPitcherArray = json.getJsonArray("Pitchers");
+        for(int i = 0; i< jsonPitcherArray.size(); i++){
+            JsonObject jso = jsonPitcherArray.getJsonObject(i);
+            String a = jso.getString("LAST_NAME");
+            String b = jso.getString("FIRST_NAME");
+            String c = jso.getString("TEAM");
+            String d = jso.getString("YEAR_OF_BIRTH");
+            String e = jso.getString("W");
+            String f = jso.getString("SV");
+            String g = jso.getString("K");
+            String h = jso.getString("NOTES");
+            String j = jso.getString("NATION_OF_BIRTH");
+            String k = jso.getString("IP");
+            String l = jso.getString("ER");
+            String m = jso.getString("H");
+            String n = jso.getString("BB");
+            
+            Pitcher p = new Pitcher();
+            p.setLast(a);
+            p.setFirst(b);
+            p.setProteam(c);
+            p.setYear(Integer.parseInt(d));
+            p.setRW(Integer.parseInt(e));
+            p.setHRSV(Integer.parseInt(f));
+            p.setRBIK(Integer.parseInt(g));
+            p.setNote(h);
+            p.setIp(k);
+            p.setEr(l);
+            p.setH(m);
+            p.setBb(n);
+            p.setNation(j);
+            p.setPosition("P");
+            
+            Double erDouble = Double.parseDouble(l);
+            Double ipDouble = Double.parseDouble(k);
+            
+            Double eraDouble = erDouble * 9 / ipDouble;
+            
+            if(!eraDouble.isNaN()){
+            eraDouble = Math.round(eraDouble*1000)/1000.0d;
+            }
+            p.setSBERA(eraDouble);
+            
+            Double bbDouble = Double.parseDouble(n);
+            Double hDouble = Double.parseDouble(m);
+            Double whipDouble = (bbDouble + hDouble) / ipDouble;
+            if(!whipDouble.isNaN()){
+            whipDouble = Math.round(whipDouble*1000)/1000.0d;
+            }
+            p.setBAWHIP(whipDouble);
+            
+            arrP.add(p);
+        
+         }
+        
+        
+        
+        JsonArray jsonHitterArray = json.getJsonArray("Hitters");
+        for(int i = 0; i< jsonHitterArray.size(); i++){
+            JsonObject jso = jsonHitterArray.getJsonObject(i);
+            String a = jso.getString("LAST_NAME");
+            String b = jso.getString("FIRST_NAME");
+            String c = jso.getString("TEAM");
+            String d = jso.getString("YEAR_OF_BIRTH");
+            String e = jso.getString("QP");
+            String f = jso.getString("AB");
+            String g = jso.getString("R");
+            String h = jso.getString("H");
+            String j = jso.getString("HR");
+            String k = jso.getString("RBI");
+            String l = jso.getString("SB");
+            String m = jso.getString("NOTES");
+            String n = jso.getString("NATION_OF_BIRTH");
+            
+            
+            Double hDouble = Double.parseDouble(h);
+            Double abDouble = Double.parseDouble(f);
+            Double baDouble = hDouble/abDouble;
+            
+            Hitter z = new Hitter();
+            z.setLast(a);
+            z.setFirst(b);
+            z.setProteam(c);
+            z.setYear(Integer.parseInt(d));
+            z.setPosition(e);
+            z.setAb(f);
+            z.setRW(Integer.parseInt(g));
+            z.setH(h);
+            z.setHRSV(Integer.parseInt(j));
+            z.setRBIK(Integer.parseInt(k));
+            
+            z.setSBERA(Double.parseDouble(l));
+            z.setNote(m);
+            z.setNation(n);
+            
+            if(!baDouble.isNaN()){
+            baDouble = Math.round(baDouble*1000)/1000.0d;
+            }
+            z.setBAWHIP(baDouble);
+            
+            //z.fixPostion(); // adds the extra positions
+            arrH.add(z);
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     private JsonObject makePitcherJsonObject(Pitcher p){ //<- takes in a single pitcher
@@ -365,13 +487,13 @@ public class JsonDraftFileManager {
                                                     .add("FIRST_NAME", p.getFirst())
                                                     .add("IP", p.getIp())
                                                     .add("ER", p.getEr())
-                                                    .add("W", p.getRW())
-                                                    .add("SV", p.getHRSV())
+                                                    .add("W", Integer.toString(p.getRW()))
+                                                    .add("SV", Integer.toString(p.getHRSV()))
                                                     .add("H", p.getH())
                                                     .add("BB", p.getBb())
-                                                    .add("K", p.getRBIK())
+                                                    .add("K", Integer.toString(p.getRBIK()))
                                                     .add("NOTES", p.getNote())
-                                                    .add("YEAR_OF_BIRTH", p.getYear())
+                                                    .add("YEAR_OF_BIRTH", Integer.toString(p.getYear()))
                                                     .add("NATION_OF_BIRTH", p.getNation())
                                                     .build();
         return jso;
@@ -398,13 +520,13 @@ public class JsonDraftFileManager {
                                                     .add("FIRST_NAME", a.getFirst())
                                                     .add("QP", a.getPosition())
                                                     .add("AB", a.getAb())
-                                                    .add("R", a.getRW())
+                                                    .add("R", Integer.toString(a.getRW()))
                                                     .add("H", a.getH())
-                                                    .add("HR", a.getHRSV())
-                                                    .add("RBI", a.getRBIK())
-                                                    .add("SB", a.getSBERA())
+                                                    .add("HR", Integer.toString(a.getHRSV()))
+                                                    .add("RBI", Integer.toString(a.getRBIK()))
+                                                    .add("SB", Double.toString(a.getSBERA()))
                                                     .add("NOTES", a.getNote())
-                                                    .add("YEAR_OF_BIRTH", a.getYear())
+                                                    .add("YEAR_OF_BIRTH", Integer.toString(a.getYear()))
                                                     .add("NATION_OF_BIRTH", a.getNation())
                                                     .build();
         return jso;

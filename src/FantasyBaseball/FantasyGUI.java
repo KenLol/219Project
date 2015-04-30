@@ -160,6 +160,11 @@ public class FantasyGUI {
     private HBox hbox2;
     private HBox teamhbox2;
     
+    
+    private String sname; //what is currently in nameTextField
+    boolean thisisanewfile = true; // true is it has not been saved or was loaded
+    private String realname; // name the save file is saved as
+    
     /**
      * Constructor for making this GUI, note that it does not initialize the UI
      * controls. To do that, call initGUI.
@@ -304,7 +309,7 @@ public class FantasyGUI {
         
         workspaceActivated = false;
         
-        
+        initNameTeamField();
         
         
     }
@@ -415,6 +420,15 @@ public class FantasyGUI {
             //FantasyFileController.handleExitRequest(this);
             System.exit(0);
         });
+        
+        saveCourseButton.setOnAction(e -> {
+            FantasyFileController.handleSaveDraftRequest(this);
+        });
+        
+        loadCourseButton.setOnAction(e -> {
+            FantasyFileController.handleLoadDraftRequest(this);
+        });
+        
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         FantasyTeamButton.setOnAction(e -> {
@@ -641,6 +655,8 @@ public class FantasyGUI {
         
     }
     
+    
+    
     private void initsearchfield(){
         searchField.textProperty().addListener(new ChangeListener<String>() {
         @Override
@@ -757,6 +773,18 @@ public class FantasyGUI {
         });
     }
     
+    private void initNameTeamField(){
+        nameTeamField.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+             public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
+                 //System.out.println(newValue);
+                 sname = newValue;
+             }
+             
+        
+    });
+    }
+    
      public void updateToolbarControls(boolean saved) {
         // THIS TOGGLES WITH WHETHER THE CURRENT COURSE
         // HAS BEEN SAVED OR NOT
@@ -815,6 +843,8 @@ public class FantasyGUI {
         teamSelectLabel = initLabel(CSB_PropertyType.SELECT_TEAM_LABEL, CLASS_SUBHEADING_LABEL);
         teamSelectComboBox = new ComboBox();
         
+        nameTeamField.setText(sname);
+        
         teamhbox.getChildren().add(draftNameLabel);
         teamhbox.getChildren().add(nameTeamField);
         teamhbox2.getChildren().add(teamSelectLabel);
@@ -839,6 +869,7 @@ public class FantasyGUI {
         workspaceActivated = false;
         
         csbPane.setCenter(Pane1); 
+        initNameTeamField();
     }
     
     public void AvailablePlayers(){
@@ -1237,4 +1268,27 @@ public class FantasyGUI {
         return jcfm;
     }
     
+    public String getSNAME(){
+        return sname;
+    }
+    
+    public boolean getthisisanewfile(){
+        return thisisanewfile;
+    }
+    
+    public void setthisisanewfile(Boolean a){
+        thisisanewfile = a;
+    }
+    
+    public String getRealName(){
+        return realname;
+    }
+    
+    public void setRealName(String a){
+        realname = a;
+    }
+    
+    public void setNameTeamField(String name){
+        nameTeamField.setText(name);
+    }
 }

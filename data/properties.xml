@@ -76,6 +76,7 @@
         <property name="END_DATE_NOT_A_FRIDAY_ERROR_MESSAGE"        value="The End Date must be a Friday"></property>
         <property name="ILLEGAL_DATE_MESSAGE"                       value="Illegal Date Selection"></property>
         <property name="CLOSE_BUTTON_TEXT"                          value="Close"></property>
+		<property name="NAMETHEDRAFTPLEASE"							value="Please name the draft before saving"></property>
 
         <!-- VERIFICATION MESSAGES -->
         <property name="NEW_COURSE_CREATED_MESSAGE"     value="New Draft Created but not yet Saved"></property>

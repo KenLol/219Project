@@ -5,7 +5,9 @@
  */
 package FantasyBaseball;
 
+import static csb.CSB_PropertyType.NAMETHEDRAFTPLEASE;
 import static csb.CSB_PropertyType.NEW_COURSE_CREATED_MESSAGE;
+import static csb.CSB_PropertyType.SAVE_UNSAVED_WORK_MESSAGE;
 import csb.data.CourseDataManager;
 import csb.error.ErrorHandler;
 import csb.gui.CSB_GUI;
@@ -14,7 +16,13 @@ import csb.gui.CSB_GUI;
 import csb.gui.MessageDialog;
 import csb.gui.ProgressDialog;
 import csb.gui.YesNoCancelDialog;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.stage.FileChooser;
 import properties_manager.PropertiesManager;
 
 /**
@@ -23,6 +31,7 @@ import properties_manager.PropertiesManager;
  */
 public class FantasyFileController {
     private boolean saved; 
+    private boolean loaded;
     // THIS WILL PROVIDE FEEDBACK TO THE USER AFTER
     // WORK BY THIS CLASS HAS COMPLETED
     MessageDialog messageDialog;
@@ -80,7 +89,11 @@ public class FantasyFileController {
                 // THE APPROPRIATE CONTROLS
                 gui.updateToolbarControls(saved);
                 //gui.reload();
-                gui.activateWorkspace();
+                if(!loaded){
+                    loaded = true;
+                    gui.activateWorkspace();
+                }
+                
                 
 
                 // TELL THE USER THE COURSE HAS BEEN CREATED
@@ -93,7 +106,23 @@ public class FantasyFileController {
     
 
     private boolean promptToSave(FantasyGUI gui) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        /**
+        yesNoCancelDialog.show(properties.getProperty(SAVE_UNSAVED_WORK_MESSAGE));
+        
+        String selection = yesNoCancelDialog.getSelection();
+        
+        if(selection.equals(YesNoCancelDialog.YES)){
+            handleSaveDraftRequest(gui);
+            //saved = true;
+        }
+        else if (selection.equals(YesNoCancelDialog.CANCEL)){
+            return false;
+        }
+        **/
+        return true;
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
@@ -129,7 +158,93 @@ public class FantasyFileController {
     }
     
     
-    public void handleSaveDraftRequest(FantasyGUI GUI, FantasyDraft draftToSave){
+    public void handleSaveDraftRequest(FantasyGUI GUI){
+        JsonDraftFileManager  jcfm = GUI.getjcfm();
+        String sname = GUI.getSNAME();
+        if(sname == null || sname.isEmpty()){
+            messageDialog.show(properties.getProperty(NAMETHEDRAFTPLEASE));
+        }
+        else{
+            if(GUI.getthisisanewfile()){
+                try {
+                    jcfm.saveDraft(sname);
+                } catch (FileNotFoundException ex) {
+                   System.out.println("This should never be runned");
+                }
+                GUI.setthisisanewfile(false);
+                GUI.setRealName(sname);
+               // System.out.println("1step");
+            }
+            else{
+                String realname = GUI.getRealName();
+                String exists = "./data/drafts/" + realname +".json";
+                
+                File fi = new File(exists);
+                
+                
+                
+                if(sname.equals(realname)){//no name change so just overwrite
+                    System.out.println("same path");
+                    try {
+                    jcfm.saveDraft(sname);
+                } catch (FileNotFoundException ex) {
+                   System.out.println("This should never be runned");
+                }
+                }
+                else{
+                    try {
+                        //System.out.println("different paths");
+                        if(fi.exists()){
+                            //System.out.println("exists???");
+                        }
+                        fi.delete();
+                        
+                        jcfm.saveDraft(sname);
+                        
+                        GUI.setRealName(sname);
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("file broked");
+                    }
+                }
+                /**
+                if(fi.exists()){//file already exists ... this is for name changes
+                    System.out.println("Name not changed");
+                }
+                else{
+                    System.out.println("Name changed");
+                }
+                **/
+            }
+        }
+        //System.out.println(sname);
+    }
+    
+    
+    
+    
+    public void handleLoadDraftRequest(FantasyGUI GUI){
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File("./data/drafts/"));
+        File selectedFile = fc.showOpenDialog(GUI.getWindow());
+        String name = selectedFile.getName();
+        String bestname = name.substring(0, name.lastIndexOf('.'));
+        
+        //System.out.println(bestname);
+        
+        
+        if(selectedFile!= null){
+            try {
+                GUI.getjcfm().loadDraft(name);
+                GUI.setthisisanewfile(false);//not a newfile.
+                GUI.setRealName(bestname);
+                GUI.setNameTeamField(bestname);
+                
+                GUI.activateWorkspace();
+                GUI.FantasyTeam();
+           } catch (IOException ex) {
+                System.out.println("error loading file");
+            }
+        }
         
     }
 }
