@@ -30,6 +30,7 @@ public enum CSB_PropertyType {
         FANTASY_STANDINGS_ICON,
         DRAFT_SUMMARY_ICON,
         MLB_TEAMS_ICON,
+        PENCIL_ICON,
         
         
         
@@ -55,6 +56,7 @@ public enum CSB_PropertyType {
         FANTASY_STANDINGS_TOOLTIP,
         DRAFT_SUMMARY_TOOLTIP,
         MLB_TEAMS_TOOLTIP,
+        PENCIL_TOOLTIP,
         
         
 
@@ -72,6 +74,7 @@ public enum CSB_PropertyType {
         SCHEDULE_ITEMS_HEADING_LABEL,
         LECTURES_HEADING_LABEL,
         HWS_HEADING_LABEL,
+        SELECT_TEAM_LABEL,
 
         // PAGE CHECKBOX LABELS
         INDEX_CHECKBOX_LABEL,

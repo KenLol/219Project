@@ -21,6 +21,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
@@ -82,6 +83,16 @@ public class FantasyGUI {
     private Button addButton;
     private Button removeButton;
     private TextField searchField;
+    
+    private HBox teamhbox;
+    private VBox teamvbox;
+    private Label draftNameLabel;
+    private Button teamAddButton;
+    private Button teamRemoveButton;
+    private Button pencilButton;
+    private TextField nameTeamField;
+    private Label teamSelectLabel;
+    private ComboBox teamSelectComboBox;
     
     private ToggleGroup group = new ToggleGroup();
     private RadioButton rb1 = new RadioButton("ALL");
@@ -147,6 +158,7 @@ public class FantasyGUI {
     
     private GridPane letsgo;
     private HBox hbox2;
+    private HBox teamhbox2;
     
     /**
      * Constructor for making this GUI, note that it does not initialize the UI
@@ -193,12 +205,15 @@ public class FantasyGUI {
 
 
         initWorkspace();
+        
 
         // NOW SETUP THE EVENT HANDLERS
         initEventHandlers();
 
         // AND FINALLY START UP THE WINDOW (WITHOUT THE WORKSPACE)
         initWindow(windowTitle);
+        
+        
     }
     
     private void initDialogs() {
@@ -246,9 +261,33 @@ public class FantasyGUI {
         myPane = new ScrollPane();
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
+        
+        myPane.getStyleClass().add(CLASS_BORDERED_PANE);
+        
+        ////######################################################################
+        teamvbox = new VBox();
+        teamhbox = new HBox();
+        teamhbox2 = new HBox();
+        nameTeamField = new TextField();
+        teamAddButton = initChildButton(teamhbox2, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_LECTURE_TOOLTIP, false);
+        teamRemoveButton = initChildButton(teamhbox2, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_LECTURE_TOOLTIP,false);
+        pencilButton = initChildButton(teamhbox2, CSB_PropertyType.PENCIL_ICON, CSB_PropertyType.PENCIL_TOOLTIP,true);
+        draftNameLabel = initLabel(CSB_PropertyType.LECTURES_HEADING_LABEL, CLASS_SUBHEADING_LABEL);
+        teamSelectLabel = initLabel(CSB_PropertyType.SELECT_TEAM_LABEL, CLASS_SUBHEADING_LABEL);
+        teamSelectComboBox = new ComboBox();
+        teamhbox.getChildren().add(draftNameLabel);
+        teamhbox.getChildren().add(nameTeamField);
+        teamhbox2.getChildren().add(teamSelectLabel);
+        teamhbox2.getChildren().add(teamSelectComboBox);
+        
+        teamvbox.getChildren().add(teamhbox);
+        teamvbox.getChildren().add(teamhbox2);
+        
+        topWorkspacePane.getChildren().add(teamvbox);
+       //######################################################################## 
        
         
-        topWorkspacePane.getChildren().add(myPane);
+        //topWorkspacePane.getChildren().add(myPane);
         
         topWorkspacePane.getChildren().add(botToolbarPane);
         
@@ -259,9 +298,15 @@ public class FantasyGUI {
         workspaceScrollPane.setContent(workspacePane);
         workspaceScrollPane.setFitToWidth(true);
         workspaceScrollPane.setFitToHeight(true);
-
+        
+        
+        
         
         workspaceActivated = false;
+        
+        
+        
+        
     }
     
     /**
@@ -758,9 +803,30 @@ public class FantasyGUI {
         myPane = new ScrollPane();
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
-       
         
-        topWorkspacePane.getChildren().add(myPane);
+        teamvbox = new VBox();
+        teamhbox = new HBox();
+        teamhbox2 = new HBox();
+        nameTeamField = new TextField();
+        teamAddButton = initChildButton(teamhbox2, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_LECTURE_TOOLTIP, false);
+        teamRemoveButton = initChildButton(teamhbox2, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_LECTURE_TOOLTIP,false);
+        pencilButton = initChildButton(teamhbox2, CSB_PropertyType.PENCIL_ICON, CSB_PropertyType.PENCIL_TOOLTIP,true);
+        draftNameLabel = initLabel(CSB_PropertyType.LECTURES_HEADING_LABEL, CLASS_SUBHEADING_LABEL);
+        teamSelectLabel = initLabel(CSB_PropertyType.SELECT_TEAM_LABEL, CLASS_SUBHEADING_LABEL);
+        teamSelectComboBox = new ComboBox();
+        
+        teamhbox.getChildren().add(draftNameLabel);
+        teamhbox.getChildren().add(nameTeamField);
+        teamhbox2.getChildren().add(teamSelectLabel);
+        teamhbox2.getChildren().add(teamSelectComboBox);
+        
+        
+        teamvbox.getChildren().add(teamhbox);
+        teamvbox.getChildren().add(teamhbox2);
+        
+        
+        
+        topWorkspacePane.getChildren().add(teamvbox);
         topWorkspacePane.getChildren().add(botToolbarPane);
         
         
@@ -785,16 +851,7 @@ public class FantasyGUI {
         // HERE'S THE LABEL
         courseHeadingLabel = initChildLabel(topWorkspacePane, CSB_PropertyType.COURSE_INFO_LABEL, CLASS_HEADING_LABEL);
 
-        ///////////////////////////////////////////////////////////////////////////////
-        //topWorkspacePane.getChildren().add(topWorkspaceSplitPane);
-///////////////////////////////////////////////////////////////////////////////////////////////////
-        // THIS IS FOR MANAGING SCHEDULE EDITING
-        //initScheduleItemsControls();
-
-        // THIS HOLDS ALL OUR WORKSPACE COMPONENTS, SO NOW WE MUST
-        // ADD THE COMPONENTS WE'VE JUST INITIALIZED
         workspacePane = new BorderPane();
-        //workspacePane.setTop(topWorkspacePane); //cant break it
         workspacePane.setCenter(topWorkspacePane);
         workspacePane.getStyleClass().add(CLASS_BORDERED_PANE);
         
@@ -804,18 +861,9 @@ public class FantasyGUI {
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
         
-        letsgo = new GridPane();
-        
-        /*
-        addButton = initChildButton(letsgo, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_ITEM_TOOLTIP, true);
-        letsgo.add(addButton, 0, 0, 1, 1);
-        removeButton = initChildButton(letsgo, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_ITEM_TOOLTIP, true);
-        letsgo.add(removeButton, 1, 0, 1, 1);
-        searchField = initGridTextField(letsgo, SMALL_TEXT_FIELD_LENGTH, EMPTY_TEXT, true, 2, 0, 1, 1);
-        
-        myPane.setContent(letsgo);
-        
-        */
+       // letsgo = new GridPane();
+       ///////////////////////////////////////////////////<- 
+       
         vbox = new VBox();
         hbox = new HBox();
         //hbox.getStyleClass().add(CLASS_SUBJECT_PANE);
@@ -882,7 +930,7 @@ public class FantasyGUI {
         
         
         firstColumn.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
-        lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("lAST"));
+        lastColumn.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
         proteamColumn.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
         positionsColumn.setCellValueFactory(new PropertyValueFactory<String, String>("position"));
         yearOfBirthColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("year"));
@@ -929,6 +977,10 @@ public class FantasyGUI {
             a.setSbera(p.getSBERA());
             a.setBawhip(p.getBAWHIP());
             a.setNote(p.getNote());
+            
+            
+            a.setPlayer(p); // link the SuperPlayer to the player it is using.
+            
             jcfm.addobp(a);
         
         }
@@ -956,6 +1008,8 @@ public class FantasyGUI {
         
         
         
+        
+        //////////////////////////////////////////////////////////<-
         topWorkspacePane.getChildren().add(vbox);
         //topWorkspacePane.getChildren().add(letsgo);
         
@@ -1177,6 +1231,10 @@ public class FantasyGUI {
             playerTable.setItems(jcfm.getobp());
         
         }
+    }
+    
+    public JsonDraftFileManager getjcfm(){
+        return jcfm;
     }
     
 }

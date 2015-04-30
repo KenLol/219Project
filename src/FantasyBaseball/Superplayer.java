@@ -43,6 +43,9 @@ public class Superplayer {
     public static final double Defaultsbera = 0.0;
     public static final double Defaultbawhip = 0.0;
     
+    
+    Player p;
+    
     public Superplayer(){
         PROTEAM = new SimpleStringProperty(Defaultproteam);
         FIRST = new SimpleStringProperty(default_first);
@@ -59,6 +62,10 @@ public class Superplayer {
     
     public void reset(){
         setProteam(Defaultproteam);
+    }
+    
+    public void setPlayer(Player p){
+        this.p = p;
     }
 
     public String getPROTEAM(){

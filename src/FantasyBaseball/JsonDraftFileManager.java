@@ -7,6 +7,7 @@ package FantasyBaseball;
 
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +39,7 @@ public class JsonDraftFileManager {
     ArrayList<Player> all = new ArrayList<Player>();
     
     ObservableList<Superplayer> obp = FXCollections.observableArrayList();
+    String draftName = "test";
     
     
     public JsonDraftFileManager() {
@@ -64,8 +66,8 @@ public class JsonDraftFileManager {
             String n = jso.getString("BB");
             
             Pitcher p = new Pitcher();
-            p.setFirst(a);
-            p.setLast(b);
+            p.setLast(a);
+            p.setFirst(b);
             p.setProteam(c);
             p.setYear(Integer.parseInt(d));
             p.setRW(Integer.parseInt(e));
@@ -274,6 +276,12 @@ public class JsonDraftFileManager {
         }
     }
     
+    public void loadH(){
+        for(Hitter h : arrH){
+            arr.add(h);
+        }
+    }
+    
     public void emptyArr(){
         arr.clear();
     }
@@ -328,4 +336,92 @@ public class JsonDraftFileManager {
     public void removeobpplayer(Superplayer p){
         obp.remove(p);
     }
+    
+    public void saveDraft(String a) throws FileNotFoundException{
+        draftName = a;
+        draftName = "./data/drafts/" + draftName + ".json";
+        
+        OutputStream os = new FileOutputStream(draftName);
+        JsonWriter jsonWriter = Json.createWriter(os);
+        
+        JsonArray pitcherJsonArray = makePitcherJsonArray();
+        JsonArray hitterJsonArray = makeHitterJsonArray();
+        
+        JsonObject draftJsonObject = Json.createObjectBuilder()
+                                    .add("Pitchers", pitcherJsonArray)
+                                    .add("Hitters", hitterJsonArray)
+                .build();
+        
+        jsonWriter.writeObject(draftJsonObject);
+    }
+    
+    public void loadDraft(String a){
+        draftName = a;
+    }
+    
+    private JsonObject makePitcherJsonObject(Pitcher p){ //<- takes in a single pitcher
+        JsonObject jso = Json.createObjectBuilder().add("TEAM", p.getProteam())
+                                                    .add("LAST_NAME", p.getLast())
+                                                    .add("FIRST_NAME", p.getFirst())
+                                                    .add("IP", p.getIp())
+                                                    .add("ER", p.getEr())
+                                                    .add("W", p.getRW())
+                                                    .add("SV", p.getHRSV())
+                                                    .add("H", p.getH())
+                                                    .add("BB", p.getBb())
+                                                    .add("K", p.getRBIK())
+                                                    .add("NOTES", p.getNote())
+                                                    .add("YEAR_OF_BIRTH", p.getYear())
+                                                    .add("NATION_OF_BIRTH", p.getNation())
+                                                    .build();
+        return jso;
+    }
+
+    private JsonArray makePitcherJsonArray() {
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+        
+        emptyArr();
+        emptyAll();
+        loadP(); // loads only pitchers
+        for(Player p : arr){
+            Pitcher a = (Pitcher) p;
+            jsb.add(makePitcherJsonObject(a));
+        }
+        
+        JsonArray jA = jsb.build();
+        return jA;
+    }
+    
+    private JsonObject makeHitterJsonObject(Hitter a){ //<- takes in a single pitcher
+        JsonObject jso = Json.createObjectBuilder().add("TEAM", a.getProteam())
+                                                    .add("LAST_NAME", a.getLast())
+                                                    .add("FIRST_NAME", a.getFirst())
+                                                    .add("QP", a.getPosition())
+                                                    .add("AB", a.getAb())
+                                                    .add("R", a.getRW())
+                                                    .add("H", a.getH())
+                                                    .add("HR", a.getHRSV())
+                                                    .add("RBI", a.getRBIK())
+                                                    .add("SB", a.getSBERA())
+                                                    .add("NOTES", a.getNote())
+                                                    .add("YEAR_OF_BIRTH", a.getYear())
+                                                    .add("NATION_OF_BIRTH", a.getNation())
+                                                    .build();
+        return jso;
+    }
+    
+    private JsonArray makeHitterJsonArray(){
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+        
+        emptyArr();
+        emptyAll();
+        loadH();
+        for(Player p : arr){
+            Hitter a = (Hitter) p;
+            jsb.add(makeHitterJsonObject(a));
+        }
+        JsonArray jA = jsb.build();
+        return jA;
+    }
+    
 }

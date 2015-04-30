@@ -22,7 +22,7 @@ import properties_manager.PropertiesManager;
  * @author Kenneth
  */
 public class FantasyFileController {
-    private boolean saved;
+    private boolean saved; 
     // THIS WILL PROVIDE FEEDBACK TO THE USER AFTER
     // WORK BY THIS CLASS HAS COMPLETED
     MessageDialog messageDialog;
@@ -81,6 +81,7 @@ public class FantasyFileController {
                 gui.updateToolbarControls(saved);
                 //gui.reload();
                 gui.activateWorkspace();
+                
 
                 // TELL THE USER THE COURSE HAS BEEN CREATED
                 messageDialog.show(properties.getProperty(NEW_COURSE_CREATED_MESSAGE));
@@ -125,5 +126,10 @@ public class FantasyFileController {
     }
     public void handleMLBTeamsRequest(FantasyGUI GUI){
         GUI.MLBTeams();
+    }
+    
+    
+    public void handleSaveDraftRequest(FantasyGUI GUI, FantasyDraft draftToSave){
+        
     }
 }
