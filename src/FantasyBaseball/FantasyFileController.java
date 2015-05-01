@@ -20,9 +20,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
 
 /**
@@ -263,4 +266,40 @@ public class FantasyFileController {
         jcfm.removeplayer(a);
         
     }
+    
+    public void handleNewTeamRequest(FantasyGUI GUI){
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        Stage stage = GUI.getWindow();
+        
+        TeamDialog td = new TeamDialog(stage, messageDialog);
+        FantasyTeam team = td.showAddTeamItemDialog();
+        //System.out.println(team.getName());
+        //System.out.println(team.getOwner());
+        jcfm.addTeam(team);
+        GUI.FantasyTeam();
+    }
+    
+    public void handleTeamSelectRequest(FantasyGUI GUI){
+        String a = GUI.getTeamSelectComboBox();
+        //System.out.println(a);
+    }
+    
+    public void handleRemoveTeamRequest(FantasyGUI GUI){
+        String a = GUI.getTeamSelectComboBox();
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        ArrayList<FantasyTeam> gt = jcfm.getFantasyTeamList();
+        
+        Iterator<FantasyTeam> iterT = gt.iterator();
+        while(iterT.hasNext()){
+            FantasyTeam ft = iterT.next();
+            
+            if(ft.getName().equals(a)){
+                iterT.remove();
+            }
+        }
+      
+        
+        GUI.FantasyTeam();
+    }
+    
 }

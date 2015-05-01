@@ -94,6 +94,24 @@ public class FantasyGUI {
     private Label teamSelectLabel;
     private ComboBox teamSelectComboBox;
     
+    
+    private HBox startinghbox;
+    //starting lineup table
+    TableView<Superplayer> startingTable;
+    TableColumn sPosition;
+    TableColumn sFirst;
+    TableColumn sLast;
+    TableColumn sProTeam;
+    TableColumn sPositions;
+    TableColumn sRW;
+    TableColumn sHRSV;
+    TableColumn sRBIK;
+    TableColumn sSBERA;
+    TableColumn sBAWHIP;
+    TableColumn sValue;
+    TableColumn sContract;
+    TableColumn sSalary;
+    
     private ToggleGroup group = new ToggleGroup();
     private RadioButton rb1 = new RadioButton("ALL");
     private RadioButton rb2 = new RadioButton("C");
@@ -290,6 +308,14 @@ public class FantasyGUI {
         
         topWorkspacePane.getChildren().add(teamvbox);
        //######################################################################## 
+        teamAddButton.setOnAction(e -> {
+            FantasyFileController.handleNewTeamRequest(this);
+            //System.out.println("sup");
+            
+        
+        });
+        
+        //*******************************************************************8
        
         
         //topWorkspacePane.getChildren().add(myPane);
@@ -429,6 +455,8 @@ public class FantasyGUI {
             FantasyFileController.handleLoadDraftRequest(this);
         });
         
+        
+     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         FantasyTeamButton.setOnAction(e -> {
@@ -835,6 +863,7 @@ public class FantasyGUI {
         teamvbox = new VBox();
         teamhbox = new HBox();
         teamhbox2 = new HBox();
+        startinghbox = new HBox();
         nameTeamField = new TextField();
         teamAddButton = initChildButton(teamhbox2, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_LECTURE_TOOLTIP, false);
         teamRemoveButton = initChildButton(teamhbox2, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_LECTURE_TOOLTIP,false);
@@ -843,16 +872,66 @@ public class FantasyGUI {
         teamSelectLabel = initLabel(CSB_PropertyType.SELECT_TEAM_LABEL, CLASS_SUBHEADING_LABEL);
         teamSelectComboBox = new ComboBox();
         
+        ///////////////////////////////////////
+        
+        sPosition = new TableColumn("Position");
+        sFirst = new TableColumn("First");
+        sLast = new TableColumn("Last");
+        sProTeam = new TableColumn("Pro Team");
+        sPositions = new TableColumn("Positions");
+        sRW = new TableColumn("R/W");
+        sHRSV = new TableColumn("HR/SV");
+        sRBIK = new TableColumn("RBI/K");
+        sSBERA = new TableColumn("SB/ERA");
+        sBAWHIP = new TableColumn("BA/WHIP");
+        sValue = new TableColumn("Estimated Value");
+        sContract = new TableColumn("Contract");
+        sSalary = new TableColumn("Salary");
+        
+        sPosition.setCellValueFactory(new PropertyValueFactory<String, String>("Position"));
+        sFirst.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
+        sLast.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        sProTeam.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
+        sPositions.setCellValueFactory(new PropertyValueFactory<String, String>("position"));
+        sRW.setCellValueFactory(new PropertyValueFactory<Integer, String>("rw"));
+        sHRSV.setCellValueFactory(new PropertyValueFactory<Integer, String>("hrsv"));
+        sRBIK.setCellValueFactory(new PropertyValueFactory<Integer, String>("rbik"));
+        sSBERA.setCellValueFactory(new PropertyValueFactory<Double, String>("sbera"));
+        sBAWHIP.setCellValueFactory(new PropertyValueFactory<Double, String>("bawhip"));
+        sValue.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedvalue"));
+        sContract.setCellValueFactory(new PropertyValueFactory<String, String>("Contract"));
+        sSalary.setCellValueFactory(new PropertyValueFactory<String, String>("Salary"));
+        
+        startingTable = new TableView();
+        startingTable.getColumns().add(sPosition);
+        startingTable.getColumns().add(sFirst);
+        startingTable.getColumns().add(sLast);
+        startingTable.getColumns().add(sProTeam);
+        startingTable.getColumns().add(sPositions);
+        startingTable.getColumns().add(sRW);
+        startingTable.getColumns().add(sHRSV);
+        startingTable.getColumns().add(sRBIK);
+        startingTable.getColumns().add(sSBERA);
+        startingTable.getColumns().add(sBAWHIP);
+        startingTable.getColumns().add(sValue);
+        startingTable.getColumns().add(sContract);
+        startingTable.getColumns().add(sSalary);
+        
+        
+        /////////////////////////////////////////
+           
         nameTeamField.setText(sname);
         
         teamhbox.getChildren().add(draftNameLabel);
         teamhbox.getChildren().add(nameTeamField);
         teamhbox2.getChildren().add(teamSelectLabel);
         teamhbox2.getChildren().add(teamSelectComboBox);
+        startinghbox.getChildren().add(startingTable);
         
         
         teamvbox.getChildren().add(teamhbox);
         teamvbox.getChildren().add(teamhbox2);
+        teamvbox.getChildren().add(startinghbox);
         
         
         
@@ -870,7 +949,46 @@ public class FantasyGUI {
         
         csbPane.setCenter(Pane1); 
         initNameTeamField();
+        
+        teamAddButton.setOnAction(e -> {
+            FantasyFileController.handleNewTeamRequest(this);
+            //System.out.println("sup");
+            
+        });
+        
+        teamRemoveButton.setOnAction(e -> {
+           FantasyFileController.handleRemoveTeamRequest(this);
+        });
+        
+        ArrayList<FantasyTeam> qwerty = jcfm.getFantasyTeamList();
+        teamSelectComboBox.getItems().clear();
+        for(FantasyTeam f : qwerty){
+            teamSelectComboBox.getItems().add(f.getName());
+        }
+        
+        teamSelectComboBox.setOnAction(e -> {
+            FantasyFileController.handleTeamSelectRequest(this);
+        });
+        
+        
+        
+        
+        
     }
+    
+    public String getTeamSelectComboBox(){
+        
+        String a = null;
+        try{
+        a = teamSelectComboBox.getSelectionModel().getSelectedItem().toString();
+        }
+        catch(NullPointerException e){
+            
+        }
+        return a;
+    }
+    
+    
     
     public void AvailablePlayers(){
        // System.out.println("Hi");
@@ -901,8 +1019,15 @@ public class FantasyGUI {
         hbox2 = new HBox();
         searchField = new TextField();
         
-        addButton = initChildButton(hbox, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_ITEM_TOOLTIP, true);
-        removeButton = initChildButton(hbox, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_ITEM_TOOLTIP, true);
+        addButton = initChildButton(hbox, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_ITEM_TOOLTIP, false);
+        removeButton = initChildButton(hbox, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_ITEM_TOOLTIP, false);
+        
+        removeButton.setOnAction(e -> {
+            FantasyFileController.handleRemovePlayerRequest(this , playerTable.getSelectionModel().getSelectedItem());
+        });
+        
+        
+        
         searchLabel = initLabel(CSB_PropertyType.HWS_HEADING_LABEL, CLASS_SUBHEADING_LABEL);
         
         

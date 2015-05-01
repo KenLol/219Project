@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +41,9 @@ public class JsonDraftFileManager {
     
     ObservableList<Superplayer> obp = FXCollections.observableArrayList();
     String draftName = "test";
+    
+    
+    ArrayList<FantasyTeam> aft = new ArrayList<FantasyTeam>();
     
     
     public JsonDraftFileManager() {
@@ -544,6 +548,54 @@ public class JsonDraftFileManager {
         }
         JsonArray jA = jsb.build();
         return jA;
+    }
+    
+    
+    public void removeplayer(Superplayer a){
+        
+        /**
+        for(Pitcher p: arrP){
+            if(p.getFirst().equals(a.getFIRST()) && p.getLast().equals(a.getLAST())){
+                arrP.remove(p);
+            }
+        }
+        for(Hitter p: arrH){
+            if(p.getFirst().equals(a.getFIRST()) && p.getLast().equals(a.getLAST())){
+                arrH.remove(p);
+            }
+        }
+        * */
+        
+        //to avoid concurent modification error
+        
+        Iterator<Hitter> iterH = arrH.iterator();
+        while(iterH.hasNext()){
+            Hitter h = iterH.next();
+            
+            if(h.getFirst().equals(a.getFIRST()) && h.getLast().equals(a.getLAST())){
+                iterH.remove();
+            }
+            
+        }
+        
+        Iterator<Pitcher> iterP = arrP.iterator();
+        while(iterP.hasNext()){
+            Pitcher p = iterP.next();
+            
+            if(p.getFirst().equals(a.getFIRST()) && p.getLast().equals(a.getLAST())){
+                iterP.remove();
+            }
+        }
+        
+        
+    }
+    
+    public void addTeam(FantasyTeam team){
+        aft.add(team);
+    }
+    
+    public ArrayList<FantasyTeam> getFantasyTeamList(){
+        return aft;
     }
     
 }
