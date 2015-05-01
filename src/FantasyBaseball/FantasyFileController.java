@@ -93,6 +93,10 @@ public class FantasyFileController {
                     loaded = true;
                     gui.activateWorkspace();
                 }
+                gui.setNameTeamField(null);
+                gui.setRealName(null);
+                gui.setthisisanewfile(true);
+                gui.FantasyTeam();
                 
                 
 
@@ -107,19 +111,19 @@ public class FantasyFileController {
 
     private boolean promptToSave(FantasyGUI gui) {
         
-        /**
+        
         yesNoCancelDialog.show(properties.getProperty(SAVE_UNSAVED_WORK_MESSAGE));
         
         String selection = yesNoCancelDialog.getSelection();
         
         if(selection.equals(YesNoCancelDialog.YES)){
             handleSaveDraftRequest(gui);
-            //saved = true;
+           // saved = true;
         }
         else if (selection.equals(YesNoCancelDialog.CANCEL)){
             return false;
         }
-        **/
+        
         return true;
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -168,6 +172,7 @@ public class FantasyFileController {
             if(GUI.getthisisanewfile()){
                 try {
                     jcfm.saveDraft(sname);
+                    messageDialog.show("New Draft Saved");
                 } catch (FileNotFoundException ex) {
                    System.out.println("This should never be runned");
                 }
@@ -184,8 +189,10 @@ public class FantasyFileController {
                 
                 
                 if(sname.equals(realname)){//no name change so just overwrite
-                    System.out.println("same path");
+                    //System.out.println("same path");
+                    
                     try {
+                    messageDialog.show("Draft Saved Over Old Draft");
                     jcfm.saveDraft(sname);
                 } catch (FileNotFoundException ex) {
                    System.out.println("This should never be runned");
@@ -201,6 +208,7 @@ public class FantasyFileController {
                         
                         jcfm.saveDraft(sname);
                         
+                        messageDialog.show("Draft Saved To New Name");
                         GUI.setRealName(sname);
                     } catch (FileNotFoundException ex) {
                         System.out.println("file broked");
@@ -241,10 +249,18 @@ public class FantasyFileController {
                 
                 GUI.activateWorkspace();
                 GUI.FantasyTeam();
+                messageDialog.show("Draft Has Been Loaded");
            } catch (IOException ex) {
                 System.out.println("error loading file");
             }
         }
+        
+    }
+    
+    public void handleRemovePlayerRequest(FantasyGUI GUI, Superplayer a){
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        jcfm.removeobpplayer(a);
+        jcfm.removeplayer(a);
         
     }
 }
