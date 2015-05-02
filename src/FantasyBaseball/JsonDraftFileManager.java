@@ -598,4 +598,15 @@ public class JsonDraftFileManager {
         return aft;
     }
     
+    public void addPlayer(Superplayer p){
+        Player c = p.getPlayer();
+        if(p.getPosition().equals("P")){
+            arrP.add((Pitcher) c);
+            
+        }
+        else{
+            arrH.add((Hitter) c);
+        }
+    }
+    
 }

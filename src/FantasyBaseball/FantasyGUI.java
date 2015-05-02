@@ -919,6 +919,9 @@ public class FantasyGUI {
         startingTable.getColumns().add(sContract);
         startingTable.getColumns().add(sSalary);
         
+        if(currentTeam != null){
+        currentTeam.sortTeam();
+        }
         try{
             startingTable.setItems(currentTeam.getTeam());
         }
@@ -994,7 +997,13 @@ public class FantasyGUI {
         }
         **/
         
-        
+        startingTable.setOnMouseClicked(e -> {
+           if(e.getClickCount() == 2){
+               Superplayer sp = startingTable.getSelectionModel().getSelectedItem();
+               //System.out.println(sp.getFIRST());
+               FantasyFileController.handleResetPlayer(this, sp);
+           } 
+        });
         
     }
     

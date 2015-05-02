@@ -80,6 +80,10 @@ public class Superplayer {
     public void setPlayer(Player p){
         this.p = p;
     }
+    
+    public Player getPlayer(){
+        return p;
+    }
 
     public String getPROTEAM(){
         return PROTEAM.get();
