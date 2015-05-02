@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -368,4 +369,39 @@ public class FantasyFileController {
         }
     }
     
+    public void handleResetPlayer(FantasyGUI GUI, Superplayer sp){
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        ArrayList<FantasyTeam> aft = jcfm.getFantasyTeamList();
+        Stage stage = GUI.getWindow();
+        
+        FantasyTeam deadteam = new FantasyTeam();
+        deadteam.setName("Free Agent");
+        ArrayList<FantasyTeam> lol = new ArrayList<FantasyTeam>();
+        for(FantasyTeam qq : aft){
+            lol.add(qq);
+        }
+        lol.add(deadteam);
+        
+        AddPlayerDialog ad = new AddPlayerDialog(stage, messageDialog, sp, lol);
+        //sp original
+        //ad changed version
+        Superplayer splayer = ad.showAddPlayerTeamDialog();
+        
+        
+        
+        if(ad.getSelection().equals("Complete")){
+            String yay = splayer.getFt();
+            //System.out.println(yay);
+            //System.out.println(yay);
+            
+           if(yay.equals("Free Agent")){
+               GUI.getCurrentTeam().removePlayer(sp);
+               jcfm.addPlayer(sp);
+               
+               
+               
+           }
+        }
+    
+        }
 }
