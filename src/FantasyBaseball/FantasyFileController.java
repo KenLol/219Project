@@ -252,6 +252,7 @@ public class FantasyFileController {
                 GUI.setNameTeamField(bestname);
                 
                 GUI.activateWorkspace();
+                GUI.updateToolbarControls(false);
                 GUI.FantasyTeam();
                 messageDialog.show("Draft Has Been Loaded");
            } catch (IOException ex) {
@@ -370,6 +371,7 @@ public class FantasyFileController {
     }
     
     public void handleResetPlayer(FantasyGUI GUI, Superplayer sp){
+        String org = sp.getFt();
         JsonDraftFileManager jcfm = GUI.getjcfm();
         ArrayList<FantasyTeam> aft = jcfm.getFantasyTeamList();
         Stage stage = GUI.getWindow();
@@ -401,7 +403,27 @@ public class FantasyFileController {
                
                
            }
+           else{
+               if(yay != org){
+                   for(FantasyTeam ft : aft){
+                       if(ft.getName().equals(yay)){
+                           if(!splayer.getContract().equals("XXX") && !splayer.getSalary().equals("XXX") && !splayer.getTruePosition().equals("XXX")){
+                             ft.addPlayer(splayer); 
+                       }
+                   }
+                   }
+                //System.out.println(yay);//yay.add
+                //System.out.println(org);// org.delete
+                   for(FantasyTeam ftt : aft){
+                       if(ftt.getName().equals(org)){
+                           ftt.removePlayer(sp);
+                       }
+                   }
+           }
         }
     
         }
+        GUI.FantasyTeam();
+    }
+    
 }

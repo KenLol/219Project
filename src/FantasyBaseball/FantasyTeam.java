@@ -20,6 +20,8 @@ public class FantasyTeam {
     String name = "Default_Name";
     String owner = "Default_Owner";
     
+    
+    
     public FantasyTeam(){
         
     }
@@ -122,4 +124,6 @@ public class FantasyTeam {
         }
         team = sorter;
     }
+    
+    
 }
