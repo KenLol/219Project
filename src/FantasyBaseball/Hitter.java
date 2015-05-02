@@ -27,6 +27,10 @@ public class Hitter extends Player{
     private String h;               //H
     private String nation;          //NATION_OF_BIRTH
     
+    private String truePosition;
+    private String salary;
+    private String contract;
+    
     public Hitter(){
         
     }
@@ -258,5 +262,47 @@ public class Hitter extends Player{
      */
     public String getLast() {
         return last;
+    }
+
+    /**
+     * @return the truePosition
+     */
+    public String getTruePosition() {
+        return truePosition;
+    }
+
+    /**
+     * @param truePosition the truePosition to set
+     */
+    public void setTruePosition(String truePosition) {
+        this.truePosition = truePosition;
+    }
+
+    /**
+     * @return the salary
+     */
+    public String getSalary() {
+        return salary;
+    }
+
+    /**
+     * @param salary the salary to set
+     */
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * @return the contract
+     */
+    public String getContract() {
+        return contract;
+    }
+
+    /**
+     * @param contract the contract to set
+     */
+    public void setContract(String contract) {
+        this.contract = contract;
     }
 }

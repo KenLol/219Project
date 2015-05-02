@@ -128,5 +128,20 @@ public class TeamDialog extends Stage{
         return team;
     }
     
+    public FantasyTeam showEditTeamDialog(FantasyTeam teamk){
+        setTitle(heading2);
+       // this.team = team;
+        team = new FantasyTeam();
+        team.setName(teamk.getName());
+        team.setOwner(teamk.getOwner());
+        
+        loadGUIData();
+        
+        this.showAndWait();
+        
+        
+        
+        return team;
+    }
 }
 

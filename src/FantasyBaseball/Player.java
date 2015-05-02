@@ -71,4 +71,19 @@ public class Player {
     public String getNote(){
         return "error";
     }
+    
+    
+    
+    
+    public String getTruePosition(){
+        return "DEFAULT POSITION";
+    }
+    
+    public String getSalary(){
+        return "0";
+    }
+    
+    public String getContract(){
+        return "UNKNOWN";
+    }
 }

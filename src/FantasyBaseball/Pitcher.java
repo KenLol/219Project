@@ -31,6 +31,11 @@ public class Pitcher extends Player{
     private String bb;//walks       //BB
     private String h;               //H
     
+    
+    private String truePosition;
+    private String salary;
+    private String contract;
+    
     //constructor for a Pitcher
     public Pitcher(){
         
@@ -282,6 +287,48 @@ public class Pitcher extends Player{
      */
     public void setLast(String last) {
         this.last = last;
+    }
+
+    /**
+     * @return the truePosition
+     */
+    public String getTruePosition() {
+        return truePosition;
+    }
+
+    /**
+     * @param truePosition the truePosition to set
+     */
+    public void setTruePosition(String truePosition) {
+        this.truePosition = truePosition;
+    }
+
+    /**
+     * @return the salary
+     */
+    public String getSalary() {
+        return salary;
+    }
+
+    /**
+     * @param salary the salary to set
+     */
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * @return the contract
+     */
+    public String getContract() {
+        return contract;
+    }
+
+    /**
+     * @param contract the contract to set
+     */
+    public void setContract(String contract) {
+        this.contract = contract;
     }
     
  

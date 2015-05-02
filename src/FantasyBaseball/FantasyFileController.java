@@ -264,6 +264,7 @@ public class FantasyFileController {
         JsonDraftFileManager jcfm = GUI.getjcfm();
         jcfm.removeobpplayer(a);
         jcfm.removeplayer(a);
+       
         
     }
     
@@ -275,13 +276,53 @@ public class FantasyFileController {
         FantasyTeam team = td.showAddTeamItemDialog();
         //System.out.println(team.getName());
         //System.out.println(team.getOwner());
-        jcfm.addTeam(team);
+        if(td.getSelection().equals("Complete")){
+             jcfm.addTeam(team);
+        }
         GUI.FantasyTeam();
+    }
+    
+    public void handleEditTeamRequest(FantasyGUI GUI){
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        Stage stage = GUI.getWindow();
+        
+        
+        TeamDialog td = new TeamDialog(stage, messageDialog);
+        
+        FantasyTeam lol = GUI.getCurrentTeam();
+        try{
+            FantasyTeam edit = td.showEditTeamDialog(lol);
+            if(td.getSelection().equals("Complete")){
+                lol.setName(edit.getName());
+                lol.setOwner(edit.getOwner());
+        }
+        }
+        catch(NullPointerException e){
+            
+        }
+        
+        
+        
+        
+        GUI.FantasyTeam();
+        
     }
     
     public void handleTeamSelectRequest(FantasyGUI GUI){
         String a = GUI.getTeamSelectComboBox();
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        ArrayList<FantasyTeam> gt = jcfm.getFantasyTeamList();
+        FantasyTeam ftz = null;
+        for(FantasyTeam ft : gt){
+            if(ft.getName().equals(a)){
+                ftz = ft;
+            }
+        }
+        GUI.setCurrentTeam(ftz);
+       // System.out.println(ftz.getName());
         //System.out.println(a);
+        GUI.FantasyTeam();
+        
     }
     
     public void handleRemoveTeamRequest(FantasyGUI GUI){
@@ -298,8 +339,33 @@ public class FantasyFileController {
             }
         }
       
-        
+        GUI.setCurrentTeam(null);
         GUI.FantasyTeam();
+    }
+    
+    public void handleAddPlayerToTeam(FantasyGUI GUI, Superplayer sp){
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        ArrayList<FantasyTeam> aft = jcfm.getFantasyTeamList();
+        Stage stage = GUI.getWindow();
+        
+        AddPlayerDialog ad = new AddPlayerDialog(stage, messageDialog, sp, aft);
+        Superplayer splayer = ad.showAddPlayerTeamDialog();
+        if(ad.getSelection().equals("Complete")){
+            String yay = splayer.getFt();
+            //System.out.println(yay);
+            for(FantasyTeam fate : aft){
+                if(fate.getName().equals(yay)){
+                    //System.out.println(fate.getOwner());
+                    if(!splayer.getContract().equals("XXX") && !splayer.getSalary().equals("XXX") && !splayer.getTruePosition().equals("XXX")){
+                        fate.addPlayer(splayer); //adds the player to the list.
+                        jcfm.getobp().remove(sp);
+                        jcfm.removeplayer(sp);
+                        GUI.AvailablePlayers();
+                    }
+                }
+                
+            }
+        }
     }
     
 }

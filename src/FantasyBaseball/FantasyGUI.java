@@ -112,6 +112,8 @@ public class FantasyGUI {
     TableColumn sContract;
     TableColumn sSalary;
     
+    FantasyTeam currentTeam;
+    
     private ToggleGroup group = new ToggleGroup();
     private RadioButton rb1 = new RadioButton("ALL");
     private RadioButton rb2 = new RadioButton("C");
@@ -867,7 +869,7 @@ public class FantasyGUI {
         nameTeamField = new TextField();
         teamAddButton = initChildButton(teamhbox2, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_LECTURE_TOOLTIP, false);
         teamRemoveButton = initChildButton(teamhbox2, CSB_PropertyType.MINUS_ICON, CSB_PropertyType.REMOVE_LECTURE_TOOLTIP,false);
-        pencilButton = initChildButton(teamhbox2, CSB_PropertyType.PENCIL_ICON, CSB_PropertyType.PENCIL_TOOLTIP,true);
+        pencilButton = initChildButton(teamhbox2, CSB_PropertyType.PENCIL_ICON, CSB_PropertyType.PENCIL_TOOLTIP,false);
         draftNameLabel = initLabel(CSB_PropertyType.LECTURES_HEADING_LABEL, CLASS_SUBHEADING_LABEL);
         teamSelectLabel = initLabel(CSB_PropertyType.SELECT_TEAM_LABEL, CLASS_SUBHEADING_LABEL);
         teamSelectComboBox = new ComboBox();
@@ -888,7 +890,7 @@ public class FantasyGUI {
         sContract = new TableColumn("Contract");
         sSalary = new TableColumn("Salary");
         
-        sPosition.setCellValueFactory(new PropertyValueFactory<String, String>("Position"));
+        sPosition.setCellValueFactory(new PropertyValueFactory<String, String>("truePosition"));
         sFirst.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
         sLast.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
         sProTeam.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
@@ -916,6 +918,13 @@ public class FantasyGUI {
         startingTable.getColumns().add(sValue);
         startingTable.getColumns().add(sContract);
         startingTable.getColumns().add(sSalary);
+        
+        try{
+            startingTable.setItems(currentTeam.getTeam());
+        }
+        catch(NullPointerException e){
+            
+        }
         
         
         /////////////////////////////////////////
@@ -960,6 +969,10 @@ public class FantasyGUI {
            FantasyFileController.handleRemoveTeamRequest(this);
         });
         
+        pencilButton.setOnAction(e -> {
+            FantasyFileController.handleEditTeamRequest(this);
+        });
+        
         ArrayList<FantasyTeam> qwerty = jcfm.getFantasyTeamList();
         teamSelectComboBox.getItems().clear();
         for(FantasyTeam f : qwerty){
@@ -969,11 +982,28 @@ public class FantasyGUI {
         teamSelectComboBox.setOnAction(e -> {
             FantasyFileController.handleTeamSelectRequest(this);
         });
+       
+        /**
+        try{
+            if(currentTeam!=null){
+            teamSelectComboBox.setValue(currentTeam.getName());
+            }
+        }
+        catch(NullPointerException e){
+            
+        }
+        **/
         
         
         
-        
-        
+    }
+    
+    public void setCurrentTeam(FantasyTeam team){
+        currentTeam = team;
+    }
+    
+    public FantasyTeam getCurrentTeam(){
+        return currentTeam;
     }
     
     public String getTeamSelectComboBox(){
@@ -1144,7 +1174,13 @@ public class FantasyGUI {
         
        
         playerTable.setItems(jcfm.getobp());
-        //playerTable.
+        playerTable.setOnMouseClicked(e -> {
+            if(e.getClickCount() == 2){
+                Superplayer s =  playerTable.getSelectionModel().getSelectedItem();
+                //System.out.println(s.getFIRST());
+                FantasyFileController.handleAddPlayerToTeam(this, s);
+            }
+        });
         
         
        

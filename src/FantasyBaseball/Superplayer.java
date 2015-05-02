@@ -23,6 +23,7 @@ public class Superplayer {
     final StringProperty LAST;
     final StringProperty position;
     final StringProperty note;
+    
     public static final String default_first = "<First_Name>";
     public static final String default_last = "<Last_Name>";
     public static final String Defaultproteam = "<Default_Team>";
@@ -44,7 +45,16 @@ public class Superplayer {
     public static final double Defaultbawhip = 0.0;
     
     
+    final StringProperty truePosition;
+    final StringProperty contract;
+    final StringProperty salary;
+    public static final String default_true_position = "XXX";
+    public static final String default_contract = "XXX";
+    public static final String default_salary = "XXX";
+    
+    
     Player p;
+    String ft;
     
     public Superplayer(){
         PROTEAM = new SimpleStringProperty(Defaultproteam);
@@ -58,6 +68,9 @@ public class Superplayer {
         sbera = new SimpleDoubleProperty(Defaultsbera);
         bawhip = new SimpleDoubleProperty(Defaultbawhip);
         note = new SimpleStringProperty(Defaultnote);
+        truePosition = new SimpleStringProperty(default_true_position);
+        contract = new SimpleStringProperty(default_contract);
+        salary = new SimpleStringProperty(default_salary);
     }
     
     public void reset(){
@@ -176,5 +189,49 @@ public class Superplayer {
     }
     public StringProperty noteProperty(){
         return note;
+    }
+    
+    public String getTruePosition(){
+        return truePosition.get();
+    }
+    public void setTruePositon(String initPos){
+        truePosition.set(initPos);
+    }
+    public StringProperty truePositionProperty(){
+        return truePosition;
+    }
+    
+    public String getContract(){
+        return contract.get();
+    }
+    public void setContract(String initContract){
+        contract.set(initContract);
+    }
+    public StringProperty contractProperty(){
+        return contract;
+    }
+    
+    public String getSalary(){
+        return salary.get();
+    }
+    public void setSalary(String initSalary){
+        salary.set(initSalary);
+    }
+    public StringProperty salaryProperty(){
+        return salary;
+    }
+
+    /**
+     * @return the ft
+     */
+    public String getFt() {
+        return ft;
+    }
+
+    /**
+     * @param ft the ft to set
+     */
+    public void setFt(String ft) {
+        this.ft = ft;
     }
 }
