@@ -312,6 +312,7 @@ public class FantasyFileController {
     
     public void handleTeamSelectRequest(FantasyGUI GUI){
         String a = GUI.getTeamSelectComboBox();
+        //String a = GUI.getCurrentTeam().getName();
         JsonDraftFileManager jcfm = GUI.getjcfm();
         ArrayList<FantasyTeam> gt = jcfm.getFantasyTeamList();
         FantasyTeam ftz = null;
@@ -323,12 +324,14 @@ public class FantasyFileController {
         GUI.setCurrentTeam(ftz);
        // System.out.println(ftz.getName());
         //System.out.println(a);
+        //GUI.getTSCB().setValue(a);
         GUI.FantasyTeam();
         
     }
     
     public void handleRemoveTeamRequest(FantasyGUI GUI){
-        String a = GUI.getTeamSelectComboBox();
+        //String a = GUI.getTeamSelectComboBox();
+        String a = GUI.getCurrentTeam().getName();
         JsonDraftFileManager jcfm = GUI.getjcfm();
         ArrayList<FantasyTeam> gt = jcfm.getFantasyTeamList();
         
@@ -341,7 +344,7 @@ public class FantasyFileController {
             }
         }
       
-        GUI.setCurrentTeam(null);
+        //GUI.setCurrentTeam(null);
         GUI.FantasyTeam();
     }
     
