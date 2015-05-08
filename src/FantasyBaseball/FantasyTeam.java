@@ -17,6 +17,7 @@ public class FantasyTeam {
     
    // ArrayList<Player> team = new ArrayList<Player>();
     ObservableList<Superplayer> team = FXCollections.observableArrayList();
+    
     String name = "Default_Name";
     String owner = "Default_Owner";
     
@@ -125,5 +126,110 @@ public class FantasyTeam {
         team = sorter;
     }
     
+    public boolean positionOpen(String a){
+        boolean answer = false;
+        
+        int Pc = 2;
+        int P1b = 1;
+        int Pci = 1;
+        int P3b = 1;
+        int P2b = 1;
+        int Pmi = 1;
+        int Pss = 1;
+        int Pu = 1;
+        int Pof = 5;
+        int Pp = 9;
+        
+        
+        
+        for(Superplayer sp : team){
+            
+            String k = sp.getTruePosition();
+            if(k.equals("C")){
+                Pc = Pc -1;
+            }
+            if(k.equals("1B")){
+                P1b = P1b -1;
+            }
+            if(k.equals("CI")){
+                Pci = Pci -1;
+            }
+            if(k.equals("3B")){
+                P3b = P3b -1;
+            }
+            if(k.equals("2B")){
+                P2b = P2b -1;
+            }
+            if(k.equals("MI")){
+                Pmi = Pmi -1;
+            }
+            if(k.equals("SS")){
+                Pss = Pss -1;
+            }
+            if(k.equals("U")){
+                Pu = Pu -1;
+            }
+            if(k.equals("OF")){
+                Pof = Pof -1;
+            }
+            if(k.equals("P")){
+                Pp = Pp -1;
+            }
+            
+        }
+        
+        if (a.equals("C")){
+            if(Pc > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("1B")){
+            if(P1b > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("CI")){
+            if(Pci > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("3B")){
+            if(P3b > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("2B")){
+            if(P2b > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("MI")){
+            if(Pmi > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("SS")){
+            if(Pss > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("U")){
+            if(Pu > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("OF")){
+            if(Pof > 0){
+                answer = true;
+            }
+        }
+        if (a.equals("P")){
+            if(Pp > 0){
+                answer = true;
+            }
+        }
+        
+        return answer;
+    }
     
 }

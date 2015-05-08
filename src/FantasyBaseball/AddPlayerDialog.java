@@ -58,6 +58,8 @@ public class AddPlayerDialog extends Stage{
     public static final String three = "Contract:";
     public static final String four = "Salary:";
     
+    FantasyTeam currentTeam;
+    
     
     
     public AddPlayerDialog(Stage primaryStage, MessageDialog messageDialog, Superplayer sp, ArrayList<FantasyTeam> aft){
@@ -107,49 +109,81 @@ public class AddPlayerDialog extends Stage{
             fantasyComboBox.getItems().add(f.getName());
         }
         
+        positionComboBox = new ComboBox();
+        
         fantasyComboBox.setOnAction(e -> {
             String a = fantasyComboBox.getSelectionModel().getSelectedItem().toString();
             superplayer.setFt(a);
-        });
-        
-        positionComboBox = new ComboBox();
+            
+            for(FantasyTeam zz : aft){
+                if(zz.getName().equals(a)){
+                    currentTeam = zz;
+                }
+            }
+            
+            
+            
+            
+        //positionComboBox = new ComboBox();
         String ps;
         ps = superplayer.getPosition();
-        if(ps.contains("C_")){
+        positionComboBox.getItems().clear(); // wipe old team selection
+        
+        
+        //System.out.println(currentTeam.getName());
+       
+        
+        if(ps.contains("C_") && currentTeam.positionOpen("C")){
             positionComboBox.getItems().add("C");
         }
-        if(ps.contains("1B")){
+        if(ps.contains("1B") && currentTeam.positionOpen("1B")){
             positionComboBox.getItems().add("1B");
         }
-        if(ps.contains("CI")){
+        if(ps.contains("CI") && currentTeam.positionOpen("CI")){
             positionComboBox.getItems().add("CI");
         }
-        if(ps.contains("3B")){
+        if(ps.contains("3B") && currentTeam.positionOpen("3B")){
             positionComboBox.getItems().add("3B");
         }
-        if(ps.contains("2B")){
+        if(ps.contains("2B") && currentTeam.positionOpen("2B")){
             positionComboBox.getItems().add("2B");
         }
-        if(ps.contains("MI")){
+        if(ps.contains("MI") && currentTeam.positionOpen("MI")){
             positionComboBox.getItems().add("MI");
         }
-        if(ps.contains("SS")){
+        if(ps.contains("SS") && currentTeam.positionOpen("SS")){
             positionComboBox.getItems().add("SS");
         }
-        if(ps.contains("OF")){
+        if(ps.contains("OF") && currentTeam.positionOpen("OF")){
             positionComboBox.getItems().add("OF");
         }
-        if(ps.contains("U")){
+        if(ps.contains("U") && currentTeam.positionOpen("U")){
             positionComboBox.getItems().add("U");
         }
-        if(ps.contains("P")){
+        if(ps.contains("P") && currentTeam.positionOpen("P")){
             positionComboBox.getItems().add("P");
         }
         
-        positionComboBox.setOnAction(e -> {
-            String a = positionComboBox.getSelectionModel().getSelectedItem().toString();
-            superplayer.setTruePositon(a);
+        
+        
+        positionComboBox.setOnAction(x -> {
+            try{
+            String ab = positionComboBox.getSelectionModel().getSelectedItem().toString();
+            superplayer.setTruePositon(ab);
+            }
+            catch(NullPointerException c){
+                
+            }
         });
+        
+            
+            
+            
+            
+            
+            
+        });
+        
         
         
         
