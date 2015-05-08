@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -352,11 +353,14 @@ public class JsonDraftFileManager {
         
         JsonArray pitcherJsonArray = makePitcherJsonArray();
         JsonArray hitterJsonArray = makeHitterJsonArray();
+        JsonArray teamJsonArray = makeTeamJsonArray();
         
         JsonObject draftJsonObject = Json.createObjectBuilder()
                                     .add("Pitchers", pitcherJsonArray)
                                     .add("Hitters", hitterJsonArray)
+                                    .add("Teams", teamJsonArray)
                 .build();
+        
         
         jsonWriter.writeObject(draftJsonObject);
     }
@@ -475,6 +479,152 @@ public class JsonDraftFileManager {
             arrH.add(z);
         }
         
+        aft.clear();
+        JsonArray teamArray = json.getJsonArray("Teams");
+        for(int i = 0; i < teamArray.size(); i++){
+            JsonArray ja = teamArray.getJsonArray(i);
+            for(int j = 0; j < ja.size(); j++){
+                JsonObject jso = ja.getJsonObject(j);
+                //System.out.println(jso.getString("REALTEAM"));
+                
+                
+                
+                Boolean contains = false;
+                FantasyTeam ct = null;
+                String a = jso.getString("REALTEAM");
+                String b = jso.getString("REALOWNER");
+                for(FantasyTeam ft : aft){
+                    if(ft.getName().equals(jso.getString("REALTEAM"))){
+                        contains = true;
+                        ct = ft;
+                    }
+                }
+                
+                if(contains == false){
+                    FantasyTeam e = new FantasyTeam();
+                    e.setName(a);
+                    e.setOwner(b);
+                    aft.add(e);
+                    ct = e;
+                    //System.out.println(e.getName());
+                }
+                
+                //Superplayer q = new Superplayer();
+                
+                if(jso.getString("REALPOS").equals("HITTER")){
+                    Superplayer p = new Superplayer();
+                    Hitter h = new Hitter();
+                    
+                    h.setAb(jso.getString("AB"));
+                    h.setContract(jso.getString("CONTRACT"));
+                    h.setFirst(jso.getString("FIRST_NAME"));
+                    h.setH(jso.getString("H"));
+                    h.setHRSV(Integer.parseInt(jso.getString("HR")));
+                    h.setLast(jso.getString("LAST_NAME"));
+                    h.setNation(jso.getString("NATION_OF_BIRTH"));
+                    h.setNote(jso.getString("NOTES"));
+                    h.setPosition(jso.getString("QP"));
+                    h.setProteam(jso.getString("TEAM"));
+                    h.setRBIK(Integer.parseInt(jso.getString("RBI")));
+                    h.setRW(Integer.parseInt(jso.getString("R")));
+                    h.setSBERA(Double.parseDouble(jso.getString("SB")));
+                    h.setSalary(jso.getString("SALARY"));
+                    h.setTruePosition(jso.getString("REALPOSITION"));
+                    h.setYear(Integer.parseInt(jso.getString("YEAR_OF_BIRTH")));
+                    h.setBAWHIP(Double.parseDouble(h.getH()) / Double.parseDouble(h.getAb()));
+                    
+                    Double baDouble = h.getBAWHIP();
+                    if(!baDouble.isNaN()){
+                     baDouble = Math.round(baDouble*1000)/1000.0d;
+                    }
+                     h.setBAWHIP(baDouble);
+                    
+                    p.setPlayer(h);
+                    p.setBawhip(h.getBAWHIP());
+                    p.setContract(h.getContract());
+                    p.setFIRST(h.getFirst());
+                    p.setFt(ct.getName());
+                    p.setHrsv(h.getHRSV());
+                    p.setLAST(h.getLast());
+                    p.setNote(h.getNote());
+                    p.setPosition(h.getPosition());
+                    p.setProteam(h.getProteam());
+                    p.setRbik(h.getRBIK());
+                    p.setRw(h.getRW());
+                    p.setSalary(h.getSalary());
+                    p.setSbera(h.getSBERA());
+                    p.setTruePositon(h.getTruePosition());
+                    p.setYear(h.getYear());
+                    
+                    
+                    
+                    
+                    ct.addPlayer(p);
+                
+                }
+                else{
+                    Superplayer pi = new Superplayer();
+                    Pitcher p = new Pitcher();
+                    
+                   //p.setBawhip(jso.getString(""));
+                    p.setBb(jso.getString("BB"));
+                    p.setContract(jso.getString("CONTRACT"));
+                    p.setEr(jso.getString("ER"));
+                    p.setFirst(jso.getString("FIRST_NAME"));
+                    p.setH(jso.getString("H"));
+                    p.setHRSV(Integer.parseInt(jso.getString("SV")));
+                    p.setIp(jso.getString("IP"));
+                    p.setLast(jso.getString("LAST_NAME"));
+                    p.setNation(jso.getString("NATION_OF_BIRTH"));
+                    p.setNote(jso.getString("NOTES"));
+                    p.setPosition("P");
+                    p.setProteam(jso.getString("TEAM"));
+                    p.setRBIK(Integer.parseInt(jso.getString("K")));
+                    p.setRW(Integer.parseInt(jso.getString("W")));
+                  //  p.setSBERA();
+                    p.setSalary(jso.getString("SALARY"));
+                    p.setTruePosition("P");
+                    p.setYear(Integer.parseInt(jso.getString("YEAR_OF_BIRTH")));
+                    
+                    
+                    Double eraDouble = Double.parseDouble(p.getEr()) * 9 / Double.parseDouble(p.getIp());
+                    if(!eraDouble.isNaN()){
+                     eraDouble = Math.round(eraDouble*1000)/1000.0d;
+                     }
+                    p.setSBERA(eraDouble);
+                    
+                    Double whipDouble = (Double.parseDouble(p.getBb()) + Double.parseDouble(p.getH())) / Double.parseDouble(p.getIp());
+                    if(!whipDouble.isNaN()){
+                      whipDouble = Math.round(whipDouble*1000)/1000.0d;
+                    }
+                    p.setBAWHIP(whipDouble);
+                    
+                    
+                    pi.setBawhip(p.getBAWHIP());
+                    pi.setContract(p.getContract());
+                    pi.setFIRST(p.getFirst());
+                    pi.setFt(ct.getName());
+                    pi.setHrsv(p.getHRSV());
+                    pi.setLAST(p.getLast());
+                    pi.setNote(p.getNote());
+                    pi.setPlayer(p);
+                    pi.setPosition(p.getPosition());
+                    pi.setProteam(p.getProteam());
+                    pi.setRbik(p.getRBIK());
+                    pi.setRw(p.getRW());
+                    pi.setSalary(p.getSalary());
+                    pi.setSbera(p.getSBERA());
+                    pi.setTruePositon(p.getTruePosition());
+                    pi.setYear(p.getYear());
+                    
+                    ct.addPlayer(pi);
+                }
+                
+                
+                
+            }
+        }
+        
         
         
         
@@ -550,6 +700,99 @@ public class JsonDraftFileManager {
         return jA;
     }
     
+    public JsonArray makeTeamJsonArray(){
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+        
+        for(FantasyTeam ft : aft){
+            jsb.add(makeSingleTeam(ft));
+            
+        }
+        
+        
+        JsonArray jA = jsb.build();
+        return jA;
+    }
+    
+    public JsonArray makeSingleTeam(FantasyTeam ft){
+        JsonArrayBuilder jsb = Json.createArrayBuilder();
+        ObservableList<Superplayer> obsp = ft.getTeam();
+        ArrayList<Superplayer> Hitterz = new ArrayList<Superplayer>();
+        ArrayList<Superplayer> Pitcherz = new ArrayList<Superplayer>();
+        String name = ft.getName();
+        
+        for(Superplayer sp : obsp){
+            if(sp.getTruePosition().equals("P")){
+                Pitcherz.add(sp);
+                //System.out.println(sp.getFIRST());
+                //System.out.println(sp.getPlayer().getProteam());
+            }
+            else{
+                Hitterz.add(sp);
+               // System.out.println(sp.getPlayer().getProteam());
+            }
+        }
+        
+       // JsonArray jar = ;
+        //JsonObject jo = Json.createObjectBuilder().add("Hitter", jar).build();
+        
+        for(Superplayer aaa: Hitterz){
+            Hitter a = (Hitter) aaa.getPlayer();
+            JsonObject jso = Json.createObjectBuilder().add("REALTEAM", name)
+                                                    .add("REALOWNER", ft.getOwner())
+                                                    .add("REALPOS", "HITTER")
+                                                    .add("TEAM", a.getProteam())
+                                                    .add("LAST_NAME", a.getLast())
+                                                    .add("FIRST_NAME", a.getFirst())
+                                                    .add("QP", a.getPosition())
+                                                    .add("AB", a.getAb())
+                                                    .add("R", Integer.toString(a.getRW()))
+                                                    .add("H", a.getH())
+                                                    .add("HR", Integer.toString(a.getHRSV()))
+                                                    .add("RBI", Integer.toString(a.getRBIK()))
+                                                    .add("SB", Double.toString(a.getSBERA()))
+                                                    .add("NOTES", a.getNote())
+                                                    .add("YEAR_OF_BIRTH", Integer.toString(a.getYear()))
+                                                    .add("NATION_OF_BIRTH", a.getNation())
+                                                    .add("REALPOSITION", aaa.getTruePosition())
+                                                    .add("CONTRACT", aaa.getContract())
+                                                    .add("SALARY", aaa.getSalary())
+                                                    .build();
+            
+            jsb.add(jso);
+            
+        }
+        
+        for(Superplayer bbb : Pitcherz){
+            Pitcher p = (Pitcher) bbb.getPlayer();
+            
+            JsonObject jso = Json.createObjectBuilder().add("REALTEAM", name)
+                                                    .add("REALOWNER", ft.getOwner())
+                                                    .add("REALPOS", "PITCHER")
+                                                    .add("TEAM", p.getProteam())
+                                                    .add("LAST_NAME", p.getLast())
+                                                    .add("FIRST_NAME", p.getFirst())
+                                                    .add("IP", p.getIp())
+                                                    .add("ER", p.getEr())
+                                                    .add("W", Integer.toString(p.getRW()))
+                                                    .add("SV", Integer.toString(p.getHRSV()))
+                                                    .add("H", p.getH())
+                                                    .add("BB", p.getBb())
+                                                    .add("K", Integer.toString(p.getRBIK()))
+                                                    .add("NOTES", p.getNote())
+                                                    .add("YEAR_OF_BIRTH", Integer.toString(p.getYear()))
+                                                    .add("NATION_OF_BIRTH", p.getNation())
+                                                    .add("REALPOSITION", bbb.getTruePosition())
+                                                    .add("CONTRACT", bbb.getContract())
+                                                    .add("SALARY", bbb.getSalary())
+                                                    .build();
+            jsb.add(jso);
+            
+        }
+        
+        JsonArray jA = jsb.build();
+        return jA;
+    }
+    
     
     public void removeplayer(Superplayer a){
         
@@ -589,6 +832,8 @@ public class JsonDraftFileManager {
         
         
     }
+    
+    
     
     public void addTeam(FantasyTeam team){
         aft.add(team);

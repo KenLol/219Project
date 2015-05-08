@@ -100,7 +100,9 @@ public class FantasyFileController {
                 gui.setNameTeamField(null);
                 gui.setRealName(null);
                 gui.setthisisanewfile(true);
+                gui.getjcfm().getFantasyTeamList().clear();
                 gui.FantasyTeam();
+                
                 
                 
 
@@ -349,6 +351,10 @@ public class FantasyFileController {
     }
     
     public void handleAddPlayerToTeam(FantasyGUI GUI, Superplayer sp){
+        
+        //System.out.println(sp.getPlayer().getFirst());
+        
+        
         JsonDraftFileManager jcfm = GUI.getjcfm();
         ArrayList<FantasyTeam> aft = jcfm.getFantasyTeamList();
         Stage stage = GUI.getWindow();

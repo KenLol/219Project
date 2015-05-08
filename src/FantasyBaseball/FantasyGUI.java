@@ -1020,6 +1020,7 @@ public class FantasyGUI {
         String a = null;
         try{
         a = teamSelectComboBox.getSelectionModel().getSelectedItem().toString();
+        
         }
         catch(NullPointerException e){
             
@@ -1374,6 +1375,7 @@ public class FantasyGUI {
             a.setSbera(p.getSBERA());
             a.setBawhip(p.getBAWHIP());
             a.setNote(p.getNote());
+            a.setPlayer(p);
             jcfm.addobp(a);
             
             playerTable.setItems(jcfm.getobp());
@@ -1427,6 +1429,7 @@ public class FantasyGUI {
             a.setSbera(p.getSBERA());
             a.setBawhip(p.getBAWHIP());
             a.setNote(p.getNote());
+            a.setPlayer(p);
             jcfm.addobp(a);
             
             playerTable.setItems(jcfm.getobp());
@@ -1460,5 +1463,9 @@ public class FantasyGUI {
     
     public void setNameTeamField(String name){
         nameTeamField.setText(name);
+    }
+    
+    public ComboBox getTSCB(){
+        return teamSelectComboBox;
     }
 }
