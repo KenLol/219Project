@@ -86,4 +86,8 @@ public class Player {
     public String getContract(){
         return "UNKNOWN";
     }
+    
+    public String getNation(){
+        return "UNKOWN";
+    }
 }

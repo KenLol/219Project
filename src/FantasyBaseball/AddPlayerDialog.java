@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -46,6 +48,14 @@ public class AddPlayerDialog extends Stage{
     TextField salaryTextField;
     Button completeButton;
     Button cancelButton;
+    
+    Image flag;
+    ImageView iv;
+    
+    Label pos;
+    
+    Image pot;
+    ImageView ip;
     
     String selection;
     
@@ -86,6 +96,41 @@ public class AddPlayerDialog extends Stage{
         salaryLabel.getStyleClass().add(CLASS_PROMPT_LABEL);
         nameLabel = new Label(sp.getFIRST() + " " + sp.getLAST());
         nameLabel.getStyleClass().add(CLASS_HEADING_LABEL);
+        
+        String flagName = sp.getPlayer().getNation();
+        
+        //System.out.println("/data/flags/" + flagName + ".png");
+        //flag = new Image("file:"+flagName+".png");
+        
+        
+        
+     
+        try{
+         flag = new Image("/flags/" +flagName + ".png");
+                }
+        catch(IllegalArgumentException e){
+            
+        }
+        iv = new ImageView(flag);
+
+        String posString = sp.getPosition();
+        pos = new Label(posString);
+        pos.getStyleClass().add(CLASS_HEADING_LABEL);
+        
+        String last = sp.getLAST();
+        String first = sp.getFIRST();
+        
+        try{
+           // System.out.println("/players/" +last +first+ ".jpg");
+            pot = new Image("/players/" +last +first+ ".jpg");
+            
+        }
+        catch(IllegalArgumentException e){
+            pot = new Image("/players/AAA_PhotoMissing.jpg");
+            
+        }
+        ip = new ImageView(pot);
+        
         
         salaryTextField = new TextField();
         salaryTextField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -201,7 +246,10 @@ public class AddPlayerDialog extends Stage{
         
         
         gridPane.add(headingLabel, 0, 0, 2, 1);
+        gridPane.add(ip, 0, 1, 1, 3);
+        gridPane.add(iv, 1, 1, 1, 1);
         gridPane.add(nameLabel, 1, 2, 1, 1);
+        gridPane.add(pos, 1, 3, 1, 1);
         gridPane.add(fantasyLabel, 0, 4, 1 ,1);
         gridPane.add(fantasyComboBox, 1, 4, 1, 1);
         gridPane.add(positionLabel, 0, 5, 1, 1);
