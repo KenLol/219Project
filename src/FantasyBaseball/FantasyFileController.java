@@ -96,11 +96,24 @@ public class FantasyFileController {
                 if(!loaded){
                     loaded = true;
                     gui.activateWorkspace();
+                    
                 }
                 gui.setNameTeamField(null);
                 gui.setRealName(null);
                 gui.setthisisanewfile(true);
                 gui.getjcfm().getFantasyTeamList().clear();
+                
+                
+                try{
+                    gui.clearStartingTable();
+                    gui.setCurrentTeam(null);
+                    
+                }
+                catch(NullPointerException e){
+                    
+                }
+                
+                
                 gui.FantasyTeam();
                 
                 
@@ -342,11 +355,16 @@ public class FantasyFileController {
             FantasyTeam ft = iterT.next();
             
             if(ft.getName().equals(a)){
+                for(Superplayer sp : ft.getTeam()){
+                    GUI.getjcfm().addPlayer(sp);
+                    GUI.getjcfm().addobp(sp);
+                }
                 iterT.remove();
             }
         }
       
-        //GUI.setCurrentTeam(null);
+        GUI.setCurrentTeam(null);
+        GUI.clearStartingTable();
         GUI.FantasyTeam();
     }
     

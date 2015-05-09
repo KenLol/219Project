@@ -1468,4 +1468,8 @@ public class FantasyGUI {
     public ComboBox getTSCB(){
         return teamSelectComboBox;
     }
+    
+    public void clearStartingTable(){
+        startingTable.setItems(null);
+    }
 }
