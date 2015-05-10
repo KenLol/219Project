@@ -90,4 +90,6 @@ public class Player {
     public String getNation(){
         return "UNKOWN";
     }
+    
+    
 }

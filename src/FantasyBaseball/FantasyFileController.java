@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -468,6 +469,8 @@ public class FantasyFileController {
                 mlbList.add(sp);
             }
         }
+        
+        Collections.sort(mlbList);
         
         GUI.setMlbList(mlbList);
         

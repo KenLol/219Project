@@ -21,6 +21,9 @@ public class FantasyTeam {
     String name = "Default_Name";
     String owner = "Default_Owner";
     
+    int moneyleft = 260;
+    int playersNeeded = 23;
+    
     
     
     public FantasyTeam(){
@@ -231,5 +234,36 @@ public class FantasyTeam {
         
         return answer;
     }
+    
+    
+    public void updateMoney(){
+        moneyleft = 260;
+        for(Superplayer p : team){
+            int a = 0;
+            try{
+             a = Integer.parseInt(p.getSalary());
+            }
+            catch(NumberFormatException e){
+               
+            }
+            moneyleft = moneyleft - a;
+            
+        }
+    }
+    
+    public void updatePlayersNeeded(){
+        playersNeeded = 23;
+        playersNeeded = 23 - team.size();
+    }
+    
+    public int getMoney(){
+        return moneyleft;
+    }
+    
+    public int getPlayersNeeded(){
+        return playersNeeded;
+    }
+    
+    
     
 }

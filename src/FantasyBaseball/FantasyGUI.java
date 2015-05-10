@@ -195,6 +195,40 @@ public class FantasyGUI {
     TableColumn mPositions;
     ObservableList<Superplayer> mlbList = null;
     
+    private VBox vbox3;
+    TableView<SuperFantasyTeam> fantasyStandingsTable;
+    TableColumn fTeamName;
+    TableColumn fPlayersNeeded;
+    TableColumn fLeft;
+    TableColumn fPP;
+    TableColumn fR;
+    TableColumn fHR;
+    TableColumn fRBI;
+    TableColumn fSB;
+    TableColumn fBA;
+    TableColumn fW;
+    TableColumn fSV;
+    TableColumn fK;
+    TableColumn fERA;
+    TableColumn fWHIP;
+    TableColumn fTOTALPOINTS;
+    
+    private VBox vbox4;
+    private HBox hbox4;
+    Button starButton;
+    Button playButton;
+    Button pauseButton;
+    TableView<Superplayer> draftSummaryTable;
+    TableColumn dPick;
+    TableColumn dFirst;
+    TableColumn dLast;
+    TableColumn dTeam;
+    TableColumn dContract;
+    TableColumn dSalary;
+    
+    
+    
+    
     /**
      * Constructor for making this GUI, note that it does not initialize the UI
      * controls. To do that, call initGUI.
@@ -1258,9 +1292,63 @@ public class FantasyGUI {
         myPane = new ScrollPane();
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
-       
         
-        topWorkspacePane.getChildren().add(myPane);
+        ///////////////////
+        vbox3 = new VBox();
+        fTeamName = new TableColumn("Team Name");
+        fPlayersNeeded = new TableColumn("Players Needed");
+        fLeft = new TableColumn("$Left");
+        fPP = new TableColumn("$PP");
+        fR = new TableColumn("R");
+        fHR = new TableColumn("HR");
+        fRBI = new TableColumn("RBI");
+        fSB = new TableColumn("SB");
+        fBA = new TableColumn("BA");
+        fW = new TableColumn("W");
+        fSV = new TableColumn("SV");
+        fK = new TableColumn("K");
+        fERA = new TableColumn("ERA");
+        fWHIP = new TableColumn("WHIP");
+        fTOTALPOINTS = new TableColumn("Total Points");
+        
+        fTeamName.setCellValueFactory(new PropertyValueFactory<String, String>("TEAMNAME"));
+        fPlayersNeeded.setCellValueFactory(new PropertyValueFactory<Integer, String>("PLAYERSNEEDED"));
+        fLeft.setCellValueFactory(new PropertyValueFactory<Integer, String>("LEFT"));
+        fPP.setCellValueFactory(new PropertyValueFactory<Integer, String>("PP"));
+        fR.setCellValueFactory(new PropertyValueFactory<Integer, String>("R"));
+        fHR.setCellValueFactory(new PropertyValueFactory<Integer, String>("HR"));
+        fRBI.setCellValueFactory(new PropertyValueFactory<Integer, String>("RBI"));
+        fSB.setCellValueFactory(new PropertyValueFactory<Integer, String>("SB"));
+        fBA.setCellValueFactory(new PropertyValueFactory<Double, String>("BA"));
+        fW.setCellValueFactory(new PropertyValueFactory<Double, String>("W"));
+        fSV.setCellValueFactory(new PropertyValueFactory<Integer, String>("SV"));
+        fK.setCellValueFactory(new PropertyValueFactory<Integer, String>("K"));
+        fERA.setCellValueFactory(new PropertyValueFactory<Double, String>("ERA"));
+        fWHIP.setCellValueFactory(new PropertyValueFactory<Double, String>("WHIP"));
+        fTOTALPOINTS.setCellValueFactory(new PropertyValueFactory<Double, String>("TOTALPOINTS"));
+        
+        fantasyStandingsTable = new TableView();
+        fantasyStandingsTable.getColumns().add(fTeamName);
+        fantasyStandingsTable.getColumns().add(fPlayersNeeded);
+        fantasyStandingsTable.getColumns().add(fLeft);
+        fantasyStandingsTable.getColumns().add(fPP);
+        fantasyStandingsTable.getColumns().add(fR);
+        fantasyStandingsTable.getColumns().add(fHR);
+        fantasyStandingsTable.getColumns().add(fRBI);
+        fantasyStandingsTable.getColumns().add(fSB);
+        fantasyStandingsTable.getColumns().add(fBA);
+        fantasyStandingsTable.getColumns().add(fW);
+        fantasyStandingsTable.getColumns().add(fSV);
+        fantasyStandingsTable.getColumns().add(fK);
+        fantasyStandingsTable.getColumns().add(fERA);
+        fantasyStandingsTable.getColumns().add(fWHIP);
+        fantasyStandingsTable.getColumns().add(fTOTALPOINTS);
+        
+        
+        vbox3.getChildren().add(fantasyStandingsTable);
+        
+        //////////////////////
+        topWorkspacePane.getChildren().add(vbox3);
         topWorkspacePane.getChildren().add(botToolbarPane);
         
         
@@ -1290,9 +1378,52 @@ public class FantasyGUI {
         myPane = new ScrollPane();
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
+        
+        
+        /////
+        vbox4 = new VBox();
+        hbox4 = new HBox();
+        
+        starButton = initChildButton(hbox4, CSB_PropertyType.STAR_ICON, CSB_PropertyType.STAR_TOOLTIP, false);
+        playButton = initChildButton(hbox4, CSB_PropertyType.PLAY_ICON, CSB_PropertyType.PLAY_TOOLTIP, false);
+        pauseButton = initChildButton(hbox4, CSB_PropertyType.PAUSE_ICON, CSB_PropertyType.PAUSE_TOOLTIP, false);
+        
+        starButton.setPrefSize(40, 40);
+        playButton.setPrefSize(40,40);
+        pauseButton.setPrefSize(40, 40);
+       
+        dPick = new TableColumn("Pick#");
+        dFirst = new TableColumn("First");
+        dLast = new TableColumn("Last");
+        dTeam = new TableColumn("Team");
+        dContract = new TableColumn("Contract");
+        dSalary = new TableColumn("Salary($)");
+        
+        dPick.setCellValueFactory(new PropertyValueFactory<Integer, String>("pick"));
+        dFirst.setCellValueFactory(new PropertyValueFactory<String,String>("FIRST"));
+        dLast.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        dTeam.setCellValueFactory(new PropertyValueFactory<String, String>("trueTream"));
+        dContract.setCellValueFactory(new PropertyValueFactory<String, String>("contract"));
+        dSalary.setCellValueFactory(new PropertyValueFactory<String, String>("salary"));
+        
+        draftSummaryTable = new TableView();
+        draftSummaryTable.getColumns().add(dPick);
+        draftSummaryTable.getColumns().add(dFirst);
+        draftSummaryTable.getColumns().add(dLast);
+        draftSummaryTable.getColumns().add(dTeam);
+        draftSummaryTable.getColumns().add(dContract);
+        draftSummaryTable.getColumns().add(dSalary);
+        
+        vbox4.getChildren().add(hbox4);
+        
+        vbox4.getChildren().add(draftSummaryTable);
+
+
+
+        //////
        
         
-        topWorkspacePane.getChildren().add(myPane);
+        topWorkspacePane.getChildren().add(vbox4);
         topWorkspacePane.getChildren().add(botToolbarPane);
         
         

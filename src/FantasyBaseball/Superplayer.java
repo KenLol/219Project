@@ -16,7 +16,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Kenneth
  */
-public class Superplayer {
+public class Superplayer implements Comparable{
     
     final StringProperty PROTEAM;
     final StringProperty FIRST;
@@ -52,6 +52,10 @@ public class Superplayer {
     public static final String default_contract = "XXX";
     public static final String default_salary = "XXX";
     
+    final StringProperty trueTeam;
+    final IntegerProperty pick;
+    public static final int defaultpick = 0;
+    
     
     Player p;
     String ft;
@@ -71,6 +75,8 @@ public class Superplayer {
         truePosition = new SimpleStringProperty(default_true_position);
         contract = new SimpleStringProperty(default_contract);
         salary = new SimpleStringProperty(default_salary);
+        trueTeam = new SimpleStringProperty(Defaultproteam);
+        pick = new SimpleIntegerProperty(defaultpick);
     }
     
     public void reset(){
@@ -224,6 +230,20 @@ public class Superplayer {
     public StringProperty salaryProperty(){
         return salary;
     }
+    
+    public String getTrueTeam(){
+        return trueTeam.get();
+    }
+    public void setTrueTeam(String init){
+        trueTeam.set(init);
+    }
+    
+    public int getPick(){
+        return pick.get();
+    }
+    public void setPick(int init){
+        pick.set(init);
+    }
 
     /**
      * @return the ft
@@ -238,4 +258,11 @@ public class Superplayer {
     public void setFt(String ft) {
         this.ft = ft;
     }
+    
+    @Override
+    public int compareTo(Object t){
+        Superplayer other = (Superplayer)t;
+        return getLAST().compareTo(other.getLAST());
+    }
+    
 }
