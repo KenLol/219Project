@@ -389,10 +389,18 @@ public class FantasyFileController {
                 if(fate.getName().equals(yay)){
                     //System.out.println(fate.getOwner());
                     if(!splayer.getContract().equals("XXX") && !splayer.getSalary().equals("XXX") && !splayer.getTruePosition().equals("XXX")){
+                        if(fate.fullteam){
+                            fate.addTaxiPlayer(splayer);
+                            jcfm.getobp().remove(sp);
+                            jcfm.removeplayer(sp);
+                            GUI.AvailablePlayers();
+                        }
+                        else{
                         fate.addPlayer(splayer); //adds the player to the list.
                         jcfm.getobp().remove(sp);
                         jcfm.removeplayer(sp);
                         GUI.AvailablePlayers();
+                        }
                     }
                 }
                 

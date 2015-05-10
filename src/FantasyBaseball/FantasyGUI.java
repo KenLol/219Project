@@ -226,6 +226,22 @@ public class FantasyGUI {
     TableColumn dContract;
     TableColumn dSalary;
     
+    private HBox teamhbox3;
+    TableView<Superplayer> taxiTable;
+    TableColumn tPosition;
+    TableColumn tFirst;
+    TableColumn tLast;
+    TableColumn tProTeam;
+    TableColumn tPositions;
+    TableColumn tRW;
+    TableColumn tHRSV;
+    TableColumn tRBIK;
+    TableColumn tSBERA;
+    TableColumn tBAWHIP;
+    TableColumn tValue;
+    TableColumn tContract;
+    TableColumn tSalary;
+    
     
     
     
@@ -909,6 +925,7 @@ public class FantasyGUI {
         teamvbox = new VBox();
         teamhbox = new HBox();
         teamhbox2 = new HBox();
+        teamhbox3 = new HBox();
         startinghbox = new HBox();
         nameTeamField = new TextField();
         teamAddButton = initChildButton(teamhbox2, CSB_PropertyType.ADD_ICON, CSB_PropertyType.ADD_LECTURE_TOOLTIP, false);
@@ -973,6 +990,61 @@ public class FantasyGUI {
             
         }
         
+        tPosition = new TableColumn("Position");
+        tFirst = new TableColumn("First");
+        tLast = new TableColumn("Last");
+        tProTeam = new TableColumn("Pro Team");
+        tPositions = new TableColumn("Positions");
+        tRW = new TableColumn("R/W");
+        tHRSV = new TableColumn("HR/SV");
+        tRBIK = new TableColumn("RBI/K");
+        tSBERA = new TableColumn("SB/ERA");
+        tBAWHIP = new TableColumn("BA/WHIP");
+        tValue = new TableColumn("Estimated Value");
+        tContract = new TableColumn("Contract");
+        tSalary = new TableColumn("Salary");
+        
+        tPosition.setCellValueFactory(new PropertyValueFactory<String, String>("truePosition"));
+        tFirst.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
+        tLast.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        tProTeam.setCellValueFactory(new PropertyValueFactory<String, String>("proteam"));
+        tPositions.setCellValueFactory(new PropertyValueFactory<String, String>("position"));
+        tRW.setCellValueFactory(new PropertyValueFactory<Integer, String>("rw"));
+        tHRSV.setCellValueFactory(new PropertyValueFactory<Integer, String>("hrsv"));
+        tRBIK.setCellValueFactory(new PropertyValueFactory<Integer, String>("rbik"));
+        tSBERA.setCellValueFactory(new PropertyValueFactory<Double, String>("sbera"));
+        tBAWHIP.setCellValueFactory(new PropertyValueFactory<Double, String>("bawhip"));
+        tValue.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedvalue"));
+        tContract.setCellValueFactory(new PropertyValueFactory<String, String>("Contract"));
+        tSalary.setCellValueFactory(new PropertyValueFactory<String, String>("Salary"));
+       
+        taxiTable = new TableView();
+        taxiTable.getColumns().add(tPosition);
+        taxiTable.getColumns().add(tFirst);
+        taxiTable.getColumns().add(tLast);
+        taxiTable.getColumns().add(tProTeam);
+        taxiTable.getColumns().add(tPositions);
+        taxiTable.getColumns().add(tRW);
+        taxiTable.getColumns().add(tHRSV);
+        taxiTable.getColumns().add(tRBIK);
+        taxiTable.getColumns().add(tSBERA);
+        taxiTable.getColumns().add(tBAWHIP);
+        taxiTable.getColumns().add(tValue);
+        taxiTable.getColumns().add(tContract);
+        taxiTable.getColumns().add(tSalary);
+        
+        
+        try{
+            taxiTable.setItems(currentTeam.getTaxiTeam());
+        }
+        catch(NullPointerException e){
+            
+        }
+        
+        
+        
+        //////////////////////////////////////////
+        
         
         /////////////////////////////////////////
            
@@ -983,14 +1055,15 @@ public class FantasyGUI {
         teamhbox2.getChildren().add(teamSelectLabel);
         teamhbox2.getChildren().add(teamSelectComboBox);
         startinghbox.getChildren().add(startingTable);
+        teamhbox3.getChildren().add(taxiTable);
         
         
         teamvbox.getChildren().add(teamhbox);
         teamvbox.getChildren().add(teamhbox2);
         teamvbox.getChildren().add(startinghbox);
+        teamvbox.getChildren().add(teamhbox3);
         
-        
-        
+       
         topWorkspacePane.getChildren().add(teamvbox);
         topWorkspacePane.getChildren().add(botToolbarPane);
         
@@ -1345,6 +1418,38 @@ public class FantasyGUI {
         fantasyStandingsTable.getColumns().add(fTOTALPOINTS);
         
         
+        ArrayList<FantasyTeam> aft = jcfm.getFantasyTeamList();
+        jcfm.clearsft();
+        jcfm.calculatePoints();
+        for(FantasyTeam ft : aft){
+            SuperFantasyTeam sft = new SuperFantasyTeam();
+            sft.setTEAMNAME(ft.getName());
+            ft.updatePlayersNeeded();
+            sft.setPLAYERSNEEDED(ft.getPlayersNeeded());
+            ft.updateMoney();
+            sft.setLEFT(ft.getMoney());
+            try{
+            sft.setPP(Math.round(ft.getMoney()/ft.getPlayersNeeded()));
+            }
+            catch(ArithmeticException e){
+                sft.setPP(-1);
+            }
+            sft.setR(ft.getR());
+            sft.setHR(ft.getHR());
+            sft.setRBI(ft.getRBI());
+            sft.setSB(ft.getSB());
+            sft.setBA(ft.getBA());
+            sft.setW(ft.getW());
+            sft.setSV(ft.getSV());
+            sft.setK(ft.getK());
+            sft.setERA(ft.getERA());
+            sft.setWHIP(ft.getWHIP());
+            sft.setTOTALPOINTS(ft.getPoints());
+            jcfm.addsft(sft);
+        }
+        fantasyStandingsTable.setItems(jcfm.getsft());
+        
+        
         vbox3.getChildren().add(fantasyStandingsTable);
         
         //////////////////////
@@ -1413,6 +1518,8 @@ public class FantasyGUI {
         draftSummaryTable.getColumns().add(dTeam);
         draftSummaryTable.getColumns().add(dContract);
         draftSummaryTable.getColumns().add(dSalary);
+        
+        //draftSummaryTable.setItems(jcfm.getsft());
         
         vbox4.getChildren().add(hbox4);
         

@@ -210,6 +210,47 @@ public class AddPlayerDialog extends Stage{
         }
         
         
+        /////////////////
+        //taxi 
+        
+        if(currentTeam.fullteam && !currentTeam.taxifull()){
+             if(ps.contains("C_")){
+            positionComboBox.getItems().add("C");
+        }
+        if(ps.contains("1B")){
+            positionComboBox.getItems().add("1B");
+        }
+        if(ps.contains("CI")){
+            positionComboBox.getItems().add("CI");
+        }
+        if(ps.contains("3B")){
+            positionComboBox.getItems().add("3B");
+        }
+        if(ps.contains("2B")){
+            positionComboBox.getItems().add("2B");
+        }
+        if(ps.contains("MI")){
+            positionComboBox.getItems().add("MI");
+        }
+        if(ps.contains("SS")){
+            positionComboBox.getItems().add("SS");
+        }
+        if(ps.contains("OF")){
+            positionComboBox.getItems().add("OF");
+        }
+        if(ps.contains("U")){
+            positionComboBox.getItems().add("U");
+        }
+        if(ps.contains("P")){
+            positionComboBox.getItems().add("P");
+        }
+        }
+        
+        
+        
+        ////////////
+        
+        
         
         positionComboBox.setOnAction(x -> {
             try{

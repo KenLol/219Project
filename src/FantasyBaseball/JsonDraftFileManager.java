@@ -46,6 +46,8 @@ public class JsonDraftFileManager {
     
     ArrayList<FantasyTeam> aft = new ArrayList<FantasyTeam>();
     
+    ObservableList<SuperFantasyTeam> sft = FXCollections.observableArrayList();
+    
     
     public JsonDraftFileManager() {
         
@@ -344,6 +346,22 @@ public class JsonDraftFileManager {
         obp.remove(p);
     }
     
+    public void clearsft(){
+        sft.clear();
+    }
+        public void addsft(SuperFantasyTeam s){
+        sft.add(s);
+    }
+    public void removeaftteam(SuperFantasyTeam s){
+        
+        sft.remove(s);
+    }
+    public ObservableList<SuperFantasyTeam> getsft(){
+ 
+        return sft;
+    }
+            
+            
     public void saveDraft(String a) throws FileNotFoundException{
         draftName = a;
         draftName = "./data/drafts/" + draftName + ".json";
@@ -854,4 +872,128 @@ public class JsonDraftFileManager {
         }
     }
     
+    
+    public void calculatePoints(){
+        int R = 0;
+        int HR = 0;
+        int RBI = 0;
+        int SB = 0;
+        double BA = 0.0;
+        double W = 0.0;
+        int SV = 0;
+        int K = 0;
+        double ERA = 0.0;
+        double WHIP = 0.0;
+        
+        FantasyTeam fR = null;
+        FantasyTeam fHR = null;
+        FantasyTeam fRBI = null;
+        FantasyTeam fSB = null;
+        FantasyTeam fBA = null;
+        FantasyTeam fW = null;
+        FantasyTeam fSV = null;
+        FantasyTeam fK = null;
+        FantasyTeam fERA = null;
+        FantasyTeam fWHIP = null;
+        
+        int number = aft.size();
+        
+        
+        for(FantasyTeam ft: aft){
+            ft.setPoints(0);
+        }
+        
+        for(FantasyTeam ft : aft){
+            if(ft.getR() > R){
+                R = ft.getR();
+                fR = ft;
+            }
+        }
+        
+        for(FantasyTeam ft : aft){
+            if(ft.getHR() > HR){
+                HR = ft.getHR();
+                fHR = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getRBI() > RBI){
+                RBI = ft.getRBI();
+                fRBI = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getSB() > SB){
+                SB = ft.getSB();
+                fSB = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getBA() > BA){
+                BA = ft.getBA();
+                fBA = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getW() > W){
+                W = ft.getW();
+                fW = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getSV() > SV){
+                SV = ft.getSV();
+                fSV = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getK() > K){
+                K = ft.getK();
+                fK = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getERA() > ERA){
+                ERA = ft.getERA();
+                fERA = ft;
+            }
+        }
+        for(FantasyTeam ft : aft){
+            if(ft.getWHIP() > WHIP){
+                WHIP = ft.getWHIP();
+                fWHIP = ft;
+            }
+        }
+        
+        if(fR!=null){
+            fR.addPoints(number);
+        }
+        if(fHR!=null){
+            fHR.addPoints(number);
+        }
+        if(fRBI!=null){
+            fRBI.addPoints(number);
+        }
+        if(fSB!=null){
+            fSB.addPoints(number);
+        }
+        if(fBA!=null){
+            fBA.addPoints(number);
+        }
+        if(fW!=null){
+            fW.addPoints(number);
+        }
+        if(fSV!=null){
+            fSV.addPoints(number);
+        }
+        if(fK!=null){
+            fK.addPoints(number);
+        }
+        if(fERA!=null){
+            fERA.addPoints(number);
+        }
+        if(fWHIP!=null){
+            fWHIP.addPoints(number);
+        }
+    }
 }

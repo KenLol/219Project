@@ -5,6 +5,7 @@
  */
 package FantasyBaseball;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +18,26 @@ public class FantasyTeam {
     
    // ArrayList<Player> team = new ArrayList<Player>();
     ObservableList<Superplayer> team = FXCollections.observableArrayList();
+    ObservableList<Superplayer> taxiteam = FXCollections.observableArrayList();
+    boolean fullteam;
     
     String name = "Default_Name";
     String owner = "Default_Owner";
     
     int moneyleft = 260;
     int playersNeeded = 23;
-    
+    int R = 0;
+    int HR = 0;
+    int RBI = 0;
+    int SB = 0;
+    double BA = 0.0;
+    double W = 0.0;
+    int SV = 0;
+    int K = 0;
+    double ERA = 0.0;
+    double WHIP = 0.0;
+   
+    int points;
     
     
     public FantasyTeam(){
@@ -56,6 +70,27 @@ public class FantasyTeam {
     }
     public void setOwner(String s){
         owner = s;
+    }
+    
+    public void addTaxiPlayer(Superplayer p){
+        taxiteam.add(p);
+    }
+    
+    public void removeTaxiPlayer(Superplayer p){
+        taxiteam.remove(p);
+    }
+    
+    public ObservableList<Superplayer> getTaxiTeam(){
+        return taxiteam;
+    }
+    
+    public boolean taxifull(){
+        boolean a = false;
+        if(taxiteam.size() == 8){
+            a = true;
+        }
+        
+        return a;
     }
     
     public void sortTeam(){
@@ -130,6 +165,9 @@ public class FantasyTeam {
     }
     
     public boolean positionOpen(String a){
+        
+        
+        
         boolean answer = false;
         
         int Pc = 2;
@@ -232,6 +270,9 @@ public class FantasyTeam {
             }
         }
         
+        if(Pc == 0 && P1b == 0 && Pci == 0 && P3b == 0 && Pmi == 0 && Pu == 0 && Pof == 0 && Pp == 0){
+            fullteam = true;
+        }
         return answer;
     }
     
@@ -264,6 +305,179 @@ public class FantasyTeam {
         return playersNeeded;
     }
     
+    public int getR(){
+        R = 0;
+        for(Superplayer sp : team){
+            if(!sp.getPosition().equals("P")){
+                int j = sp.getRw();
+                R = R + j;
+            }
+        }
+        
+        return R;
+    }
+    
+    public int getHR(){
+        HR = 0;
+        for(Superplayer sp : team){
+            if(!sp.getPosition().equals("P")){
+                int j = sp.getHrsv();
+                HR = HR + j;
+            }
+        }
+        
+        return HR;
+    }
+    
+    public int getRBI(){
+        RBI = 0;
+        for(Superplayer sp : team){
+            if(!sp.getPosition().equals("P")){
+                int j = sp.getRbik();
+                RBI = RBI + j;
+            }
+        }
+        
+        return RBI;
+    }
+    
+    public int getSB(){
+        SB = 0;
+        for(Superplayer sp : team){
+            if(!sp.getPosition().equals("P")){
+                int j = (int) Math.round(sp.getSbera());
+                SB = SB + j;
+            }
+        }
+        return SB;
+    }
+    
+    public double getBA(){
+        BA = 0.0;
+        double aa = 0;
+        int num = 0;
+        
+        for(Superplayer sp : team){
+            if(!sp.getPosition().equals("P")){
+                double j = sp.getBawhip();
+                if(Double.isNaN(j)){
+                    j = 0;
+                    num--;
+                    //System.out.println("hit");
+                }
+                //System.out.println("" + j);
+                aa = aa + j;
+                num++;
+            }
+        }
+        BA = aa/num;
+        BA = Math.round(BA*1000)/1000.0d;
+        //DecimalFormat df = new DecimalFormat("#.###");
+        //BA = Double.valueOf(df.format(BA));
+        if(BA == Double.NaN){
+            BA = 0;
+        }
+        return BA;
+    }
     
     
+    public double getW(){
+        W = 0.0;
+        for(Superplayer sp : team){
+            if(sp.getPosition().equals("P")){
+                int j = sp.getRw();
+                W = W + j;
+            }
+        }
+        
+        return W;
+    }
+    
+    public int getSV(){
+        SV = 0;
+        for(Superplayer sp : team){
+            if(sp.getPosition().equals("P")){
+                int j = sp.getHrsv();
+                SV = SV + j;
+            }
+        }
+        return SV;
+    }
+    
+    public int getK(){
+        K = 0;
+        for(Superplayer sp : team){
+            if(sp.getPosition().equals("P")){
+                int j = sp.getRbik();
+                K = K + j;
+            }
+        }
+        return K;
+    }
+    
+    public double getERA(){
+        ERA = 0.0;
+        double aa = 0.0;
+        int num = 0;
+        for(Superplayer sp : team){
+            if(sp.getPosition().equals("P")){
+                double j = sp.getSbera();
+                
+                if(Double.isNaN(j)){
+                    j = 0;
+                    num--;
+                }
+                aa = aa + j;
+                num++;
+            }
+        }
+        ERA = aa/num;
+        //DecimalFormat df = new DecimalFormat("#.##");
+        ERA = Math.round(ERA*100)/100.0d;
+        //ERA = Double.valueOf(df.format(ERA));
+        if(ERA == Double.NaN){
+            ERA = 0;
+        }
+        return ERA;
+    }
+    
+    
+    public double getWHIP(){
+        WHIP = 0.0;
+        double aa = 0.0;
+        int num = 0;
+        for(Superplayer sp : team){
+            if(sp.getPosition().equals("P")){
+                double j = sp.getBawhip();
+                
+                if(Double.isNaN(j)){
+                    j = 0;
+                    num--;
+                }
+                aa = aa + j;
+                num++;
+            }
+        }
+        
+        WHIP = aa/num;
+        //DecimalFormat df = new DecimalFormat("#.##");
+        WHIP = Math.round(WHIP*100)/100.0d;
+        //WHIP = Double.valueOf(df.format(WHIP));
+        if(WHIP == Double.NaN){
+            WHIP = 0;
+        }
+        return WHIP;
+    }
+    
+    public void setPoints(int a){
+        points = a;
+    }
+    
+    public int getPoints(){
+        return points;
+    }
+    
+    public void addPoints(int a){
+        points = points + a;
+    }
 }
