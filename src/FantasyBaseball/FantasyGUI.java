@@ -185,6 +185,16 @@ public class FantasyGUI {
     boolean thisisanewfile = true; // true is it has not been saved or was loaded
     private String realname; // name the save file is saved as
     
+    
+    private VBox vbox5;
+    private Label selectproteam;
+    private ComboBox selectproteamComboBox;
+    TableView<Superplayer> mlbteamsTable;
+    TableColumn mFirst;
+    TableColumn mLast;
+    TableColumn mPositions;
+    ObservableList<Superplayer> mlbList = null;
+    
     /**
      * Constructor for making this GUI, note that it does not initialize the UI
      * controls. To do that, call initGUI.
@@ -1312,9 +1322,80 @@ public class FantasyGUI {
         myPane = new ScrollPane();
         myPane.setFitToHeight(true);
         myPane.setFitToWidth(true);
-       
+       ////////////////
+        vbox5 = new VBox();
+        selectproteam = initLabel(CSB_PropertyType.SELECT_PRO_TEAM_LABEL, CLASS_SUBHEADING_LABEL);
+        selectproteamComboBox = new ComboBox();
         
-        topWorkspacePane.getChildren().add(myPane);
+        mFirst = new TableColumn("First");
+        mLast = new TableColumn("Last");
+        mPositions = new TableColumn("Positions");
+        
+        mFirst.setCellValueFactory(new PropertyValueFactory<String, String>("FIRST"));
+        mLast.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
+        mPositions.setCellValueFactory(new PropertyValueFactory<String, String>("position"));
+
+        mlbteamsTable = new TableView();
+        mlbteamsTable.getColumns().add(mFirst);
+        mlbteamsTable.getColumns().add(mLast);
+        mlbteamsTable.getColumns().add(mPositions);
+        
+        jcfm.emptyAll();
+        jcfm.emptyArr();
+        jcfm.loadA();
+        
+        
+        jcfm.clearobp();
+        for(Player p : jcfm.arr){
+            Superplayer a = new Superplayer();
+            a.setFIRST(p.getFirst());
+            a.setLAST(p.getLast());
+            a.setProteam(p.getProteam());
+            a.setPosition(p.getPosition());
+            a.setYear(p.getYear());
+            a.setRw(p.getRW());
+            a.setHrsv(p.getHRSV());
+            a.setRbik(p.getRBIK());
+            a.setSbera(p.getSBERA());
+            a.setBawhip(p.getBAWHIP());
+            a.setNote(p.getNote());
+            
+            
+            a.setPlayer(p); // link the SuperPlayer to the player it is using.
+            
+            jcfm.addobp(a);
+        }
+        
+        
+        selectproteamComboBox.getItems().add("ATL");
+        selectproteamComboBox.getItems().add("AZ");
+        selectproteamComboBox.getItems().add("CHC");
+        selectproteamComboBox.getItems().add("CIN");
+        selectproteamComboBox.getItems().add("COL");
+        selectproteamComboBox.getItems().add("LAD");
+        selectproteamComboBox.getItems().add("MIA");
+        selectproteamComboBox.getItems().add("MIL");
+        selectproteamComboBox.getItems().add("NYM");
+        selectproteamComboBox.getItems().add("PHI");
+        selectproteamComboBox.getItems().add("PIT");
+        selectproteamComboBox.getItems().add("SD");
+        selectproteamComboBox.getItems().add("SF");
+        selectproteamComboBox.getItems().add("STL");
+        selectproteamComboBox.getItems().add("WAS");
+        
+        selectproteamComboBox.setOnAction(e -> {
+            String a = selectproteamComboBox.getSelectionModel().getSelectedItem().toString();
+            FantasyFileController.handleMlbSelectRequest(this, a);
+        });
+        
+        mlbteamsTable.setItems(mlbList);
+        
+        vbox5.getChildren().add(selectproteam);
+        vbox5.getChildren().add(selectproteamComboBox);
+        vbox5.getChildren().add(mlbteamsTable);
+        
+        ///////////////
+        topWorkspacePane.getChildren().add(vbox5);
         topWorkspacePane.getChildren().add(botToolbarPane);
         
         
@@ -1327,6 +1408,14 @@ public class FantasyGUI {
         workspaceActivated = false;
         
         csbPane.setCenter(Pane5); 
+    }
+    
+    public ObservableList<Superplayer> getMlbList(){
+        return mlbList;
+    }
+    
+    public void setMlbList(ObservableList<Superplayer> mlbList){
+        this.mlbList = mlbList;
     }
     
     

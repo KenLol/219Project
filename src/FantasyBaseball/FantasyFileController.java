@@ -25,6 +25,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import properties_manager.PropertiesManager;
@@ -453,4 +455,24 @@ public class FantasyFileController {
         GUI.FantasyTeam();
     }
     
+    
+    public void handleMlbSelectRequest(FantasyGUI GUI, String a){
+        
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        ObservableList<Superplayer> obp = jcfm.getobp();
+        ObservableList<Superplayer> mlbList = FXCollections.observableArrayList();
+        
+        
+        for(Superplayer sp : obp){
+            if(a.toString().equals(sp.getPROTEAM())){
+                mlbList.add(sp);
+            }
+        }
+        
+        GUI.setMlbList(mlbList);
+        
+        GUI.MLBTeams();
+    
+    
+    }
 }
