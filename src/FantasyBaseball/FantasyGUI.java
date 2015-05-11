@@ -299,6 +299,8 @@ public class FantasyGUI {
         initWindow(windowTitle);
         
         
+        
+        
     }
     
     private void initDialogs() {
@@ -1496,6 +1498,17 @@ public class FantasyGUI {
         starButton.setPrefSize(40, 40);
         playButton.setPrefSize(40,40);
         pauseButton.setPrefSize(40, 40);
+        
+        starButton.setOnAction(e ->{
+            FantasyFileController.handleSTAR(this);
+        });
+        
+        playButton.setOnAction(e ->{
+        
+        });
+        pauseButton.setOnAction(e ->{
+        
+        });
        
         dPick = new TableColumn("Pick#");
         dFirst = new TableColumn("First");
@@ -1507,7 +1520,7 @@ public class FantasyGUI {
         dPick.setCellValueFactory(new PropertyValueFactory<Integer, String>("pick"));
         dFirst.setCellValueFactory(new PropertyValueFactory<String,String>("FIRST"));
         dLast.setCellValueFactory(new PropertyValueFactory<String, String>("LAST"));
-        dTeam.setCellValueFactory(new PropertyValueFactory<String, String>("trueTream"));
+        dTeam.setCellValueFactory(new PropertyValueFactory<String, String>("trueTeam"));
         dContract.setCellValueFactory(new PropertyValueFactory<String, String>("contract"));
         dSalary.setCellValueFactory(new PropertyValueFactory<String, String>("salary"));
         
@@ -1519,7 +1532,8 @@ public class FantasyGUI {
         draftSummaryTable.getColumns().add(dContract);
         draftSummaryTable.getColumns().add(dSalary);
         
-        //draftSummaryTable.setItems(jcfm.getsft());
+        jcfm.resortDraftOrder();
+        draftSummaryTable.setItems(jcfm.getDraftOrder());
         
         vbox4.getChildren().add(hbox4);
         

@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -47,9 +49,94 @@ public class JsonDraftFileManager {
     ArrayList<FantasyTeam> aft = new ArrayList<FantasyTeam>();
     
     ObservableList<SuperFantasyTeam> sft = FXCollections.observableArrayList();
+    ObservableList<Superplayer> draftorder = FXCollections.observableArrayList();
     
     
     public JsonDraftFileManager() {
+        
+    }
+    
+    public ObservableList<Superplayer> getDraftOrder(){
+        return draftorder; //can only contain s2 players.
+    }
+    
+    public void addDraftOrder(Superplayer p){
+        draftorder.add(p);
+    }
+    public void removeDraftOrder(Superplayer p){
+        draftorder.remove(p);
+    }
+    
+    public void setDraftOrder(ObservableList<Superplayer> os){
+        draftorder = os;
+    }
+    
+    
+    
+    public void loadDraftOrder(){
+        draftorder.clear();
+        int max = 0;
+        int start = 1;
+        ObservableList<Superplayer> os = FXCollections.observableArrayList();
+        
+        for(int i = 0; i<aft.size(); i++){
+            FantasyTeam ft = aft.get(i);
+            for(int j = 0; j<ft.getTeam().size(); j++){
+                if(ft.getTeam().get(j).getPick() > 0){
+                    draftorder.add(ft.getTeam().get(j));
+                }
+               
+            }
+        }
+        
+        max = draftorder.size();
+        
+        for(start = 1; start <= max; start ++){
+        for(Superplayer sp : draftorder){
+            if(sp.getPick() == start){
+                os.add(sp);
+            }
+        }
+        }
+        
+        setDraftOrder(os);
+        
+        
+        
+        
+    }
+    public void resortDraftOrder(){
+        /**
+        for(Superplayer sp : draftorder){
+            if(!sp.getContract().equals("S2")){
+                draftorder.remove(sp);
+            }
+        }
+        */
+        
+        
+        Iterator<Superplayer> iterP = draftorder.iterator();
+        while(iterP.hasNext()){
+            Superplayer p = iterP.next();
+            
+            if(!p.getContract().equals("S2") || p.getPick() == 0)
+            {
+                p.setPick(0);
+                p.getPlayer().setPick(0);
+                iterP.remove();
+            }
+        }
+        
+       for(Superplayer sp : draftorder){
+        sp.setPick(draftorder.indexOf(sp)+1);
+        sp.getPlayer().setPick(draftorder.indexOf(sp)+1);
+       }
+        
+        
+        
+        
+        
+        
         
     }
     
@@ -373,10 +460,12 @@ public class JsonDraftFileManager {
         JsonArray hitterJsonArray = makeHitterJsonArray();
         JsonArray teamJsonArray = makeTeamJsonArray();
         
+        
         JsonObject draftJsonObject = Json.createObjectBuilder()
                                     .add("Pitchers", pitcherJsonArray)
                                     .add("Hitters", hitterJsonArray)
                                     .add("Teams", teamJsonArray)
+                                    
                 .build();
         
         
@@ -550,6 +639,7 @@ public class JsonDraftFileManager {
                     h.setTruePosition(jso.getString("REALPOSITION"));
                     h.setYear(Integer.parseInt(jso.getString("YEAR_OF_BIRTH")));
                     h.setBAWHIP(Double.parseDouble(h.getH()) / Double.parseDouble(h.getAb()));
+                    h.setPick(Integer.parseInt(jso.getString("PICK")));
                     
                     Double baDouble = h.getBAWHIP();
                     if(!baDouble.isNaN()){
@@ -573,6 +663,7 @@ public class JsonDraftFileManager {
                     p.setSbera(h.getSBERA());
                     p.setTruePositon(h.getTruePosition());
                     p.setYear(h.getYear());
+                    p.setPick(h.getPick());
                     
                     
                     
@@ -603,6 +694,7 @@ public class JsonDraftFileManager {
                     p.setSalary(jso.getString("SALARY"));
                     p.setTruePosition("P");
                     p.setYear(Integer.parseInt(jso.getString("YEAR_OF_BIRTH")));
+                    p.setPick(Integer.parseInt(jso.getString("PICK")));
                     
                     
                     Double eraDouble = Double.parseDouble(p.getEr()) * 9 / Double.parseDouble(p.getIp());
@@ -634,6 +726,7 @@ public class JsonDraftFileManager {
                     pi.setSbera(p.getSBERA());
                     pi.setTruePositon(p.getTruePosition());
                     pi.setYear(p.getYear());
+                    pi.setPick(p.getPick());
                     
                     ct.addPlayer(pi);
                 }
@@ -774,6 +867,7 @@ public class JsonDraftFileManager {
                                                     .add("REALPOSITION", aaa.getTruePosition())
                                                     .add("CONTRACT", aaa.getContract())
                                                     .add("SALARY", aaa.getSalary())
+                                                    .add("PICK", Integer.toString(aaa.getPick()))
                                                     .build();
             
             jsb.add(jso);
@@ -802,6 +896,7 @@ public class JsonDraftFileManager {
                                                     .add("REALPOSITION", bbb.getTruePosition())
                                                     .add("CONTRACT", bbb.getContract())
                                                     .add("SALARY", bbb.getSalary())
+                                                    .add("PICK", Integer.toString(bbb.getPick()))
                                                     .build();
             jsb.add(jso);
             
@@ -996,4 +1091,7 @@ public class JsonDraftFileManager {
             fWHIP.addPoints(number);
         }
     }
+    
+    
+    
 }

@@ -31,8 +31,18 @@ public class Hitter extends Player{
     private String salary;
     private String contract;
     
+    
+    
     public Hitter(){
         
+    }
+    
+    public void setPick(int a){
+        pick = a;
+    }
+    
+    public int getPick(){
+        return pick;
     }
 
     /**

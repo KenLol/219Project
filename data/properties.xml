@@ -26,6 +26,9 @@
 		<property name="DRAFT_SUMMARY_ICON"     value="DraftSummary.png"></property>
 		<property name="MLB_TEAMS_ICON"     value="MLBTeams.png"></property>
 		<property name="PENCIL_ICON"		value="Pencil.png"></property>
+		<property name="PLAY_ICON"			value="PLAY.png"></property>
+		<property name="STAR_ICON"			value="STAR.png"></property>
+		<property name="PAUSE_ICON"			value="PAUSE.png"></property>
         
         <!-- TOOLTIPS FOR BUTTONS -->
         <property name="NEW_COURSE_TOOLTIP"         value="Create a New Draft"></property>
@@ -48,7 +51,10 @@
 		<property name="FANTASY_STANDINGS_TOOLTIP"          value="Fantasy Standings"></property>
 		<property name="DRAFT_SUMMARY_TOOLTIP"          value="Draft Summary"></property>
 		<property name="MLB_TEAMS_TOOLTIP"          value="MLB Teams"></property>
-		<property name="PENCIL_TOOLTOP"				value="noideawhatthisdoes"></property>
+		<property name="PENCIL_TOOLTOP"				value="EDIT TEAM INFO"></property>
+		<property name="PLAY_TOOLTIP"				value="Start AutoDraft"></property>
+		<property name="STAR_TOOLTIP"				value="Draft Single Player"></property>
+		<property name="PAUSE_TOOLTIP"				value="Pause AutoDraft"></property>
         
         <!-- GUI LABELS -->
         <property name="COURSE_HEADING_LABEL"           value="Fantasy Teams"></property>
@@ -69,6 +75,7 @@
         <property name="LECTURES_HEADING_LABEL"         value="Draft Name:"></property>
         <property name="HWS_HEADING_LABEL"              value="Search:"></property>
 		<property name="SELECT_TEAM_LABEL"				value="Select Fantasy Team:"></property>
+		<property name="SELECT_PRO_TEAM_LABEL"          value="Select Pro Team:"></property>
         
         <!-- ERROR MESSAGES -->
         <property name="START_DATE_AFTER_END_DATE_ERROR_MESSAGE"    value="The Starting Monday cannot be chronologically after the Ending Friday"></property>

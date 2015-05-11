@@ -15,6 +15,7 @@ import javafx.beans.property.StringProperty;
 public class Player {
     //protected String first; //FIRST_NAME
     //protected String last; //LAST_NAME
+    int pick;
     
     public Player(){
        
@@ -91,5 +92,12 @@ public class Player {
         return "UNKOWN";
     }
     
+    public int getPick(){
+        return 0;
+    }
+    
+    public void setPick(int a){
+        pick = a;
+    }
     
 }

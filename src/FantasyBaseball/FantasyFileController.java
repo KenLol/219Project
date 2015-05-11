@@ -116,7 +116,9 @@ public class FantasyFileController {
                     
                 }
                 
-                
+                gui.getjcfm().getDraftOrder().clear();
+                gui.getjcfm().getsft().clear();
+                gui.getjcfm().getobp().clear();
                 gui.FantasyTeam();
                 
                 
@@ -278,6 +280,7 @@ public class FantasyFileController {
             }
         }
         
+        GUI.getjcfm().loadDraftOrder();
     }
     
     public void handleRemovePlayerRequest(FantasyGUI GUI, Superplayer a){
@@ -391,15 +394,23 @@ public class FantasyFileController {
                     if(!splayer.getContract().equals("XXX") && !splayer.getSalary().equals("XXX") && !splayer.getTruePosition().equals("XXX")){
                         if(fate.fullteam){
                             fate.addTaxiPlayer(splayer);
+                            splayer.setTrueTeam(yay);
                             jcfm.getobp().remove(sp);
                             jcfm.removeplayer(sp);
                             GUI.AvailablePlayers();
+                            jcfm.getDraftOrder().add(splayer);
+                            splayer.setPick(1);
+                            jcfm.resortDraftOrder();
                         }
                         else{
                         fate.addPlayer(splayer); //adds the player to the list.
+                        splayer.setTrueTeam(yay);
                         jcfm.getobp().remove(sp);
                         jcfm.removeplayer(sp);
                         GUI.AvailablePlayers();
+                        jcfm.getDraftOrder().add(splayer);
+                        splayer.setPick(1);
+                        jcfm.resortDraftOrder();
                         }
                     }
                 }
@@ -437,6 +448,9 @@ public class FantasyFileController {
            if(yay.equals("Free Agent")){
                GUI.getCurrentTeam().removePlayer(sp);
                jcfm.addPlayer(sp);
+               jcfm.removeDraftOrder(sp);
+               sp.setPick(0);
+               jcfm.resortDraftOrder();
                
                
                
@@ -447,6 +461,8 @@ public class FantasyFileController {
                        if(ft.getName().equals(yay)){
                            if(!splayer.getContract().equals("XXX") && !splayer.getSalary().equals("XXX") && !splayer.getTruePosition().equals("XXX")){
                              ft.addPlayer(splayer); 
+                             jcfm.getDraftOrder().remove(splayer);
+                             
                        }
                    }
                    }
@@ -455,9 +471,23 @@ public class FantasyFileController {
                    for(FantasyTeam ftt : aft){
                        if(ftt.getName().equals(org)){
                            ftt.removePlayer(sp);
+                           jcfm.getDraftOrder().remove(splayer);
                        }
                    }
            }
+               else{
+                   jcfm.getDraftOrder().remove(splayer);
+               }
+               if(splayer.getContract().equals("S2")){
+                   splayer.setTrueTeam(yay);
+                   jcfm.getDraftOrder().add(splayer);
+                   
+                   sp.setPick(1);
+                   jcfm.resortDraftOrder();
+                   
+               }
+               
+               
         }
     
         }
@@ -486,4 +516,390 @@ public class FantasyFileController {
     
     
     }
+    //add a random player to random team...
+    public void handleSTAR(FantasyGUI GUI){
+        
+        
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        ArrayList<FantasyTeam> aft = jcfm.getFantasyTeamList();
+        //jcfm.getobp();
+        
+        int teams = aft.size();
+        
+        for(int i = 0; i<teams; i++){
+            FantasyTeam ft = aft.get(i);
+            boolean dummy = ft.positionOpen("none");
+            if(!ft.fullteam){
+                
+                Superplayer sp = getPlayerFor(ft, GUI);
+                
+                //ft.addPlayer(sp);
+                
+                try{
+                //System.out.println(sp.getFIRST());
+                
+                sp.setTrueTeam(ft.getName());
+                jcfm.getobp().remove(sp);
+                jcfm.removeplayer(sp);
+                
+                ft.addPlayer(sp);
+                
+                jcfm.getDraftOrder().add(sp);
+                sp.setPick(1);
+                jcfm.resortDraftOrder();
+                
+                i = teams;
+                
+                }
+                
+                catch(NullPointerException e){
+                    System.out.println("No more players");
+                }
+                
+                
+                
+            
+                
+                
+                
+                
+                
+            }
+           if(!ft.taxifull() && ft.fullteam){
+               Superplayer sp = getPlayerFor(ft, GUI);
+               try{
+               // System.out.println(sp.getFIRST());
+                
+                sp.setTrueTeam(ft.getName());
+                jcfm.getobp().remove(sp);
+                jcfm.removeplayer(sp);
+                
+                ft.addTaxiPlayer(sp);
+                
+                jcfm.getDraftOrder().add(sp);
+                sp.setPick(1);
+                jcfm.resortDraftOrder();
+                
+                i = teams;
+                
+                }
+                
+                catch(NullPointerException e){
+                    System.out.println("No more players TAXI");
+                }
+           } 
+        }
+        
+        
+    }
+    
+    public Superplayer getPlayerFor(FantasyTeam ft, FantasyGUI GUI){
+        Superplayer zz = null;
+        JsonDraftFileManager jcfm = GUI.getjcfm();
+        jcfm.clearobp();
+        GUI.AvailablePlayers();
+        
+        GUI.DraftSummary();
+        
+        ObservableList<Superplayer> playerlist = jcfm.getobp();
+        ObservableList<Superplayer> placeholder = FXCollections.observableArrayList();
+        
+        boolean done = false;
+        if(ft.positionOpen("C") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("C_")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("C");
+        
+        
+            done = true;
+        }
+        
+        if(ft.positionOpen("1B") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("1B")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("1B");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("CI") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("CI")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("CI");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("3B") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("3B")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("3B");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("2B") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("2B")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("2B");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("MI") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("MI")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("MI");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("SS") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("SS")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("SS");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("OF") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("OF")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("OF");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("U") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("U")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("U");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.positionOpen("P") && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                if(sp.getPosition().contains("P")){
+                    //System.out.println(sp.getFIRST());
+                    placeholder.add(sp);
+                }
+            }
+            
+            //placeholder.clear();
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            zz.setTruePositon("P");
+        
+        
+            done = true;
+            
+        }
+        
+        if(ft.fullteam && !done){
+            placeholder.clear();
+            for(Superplayer sp : playerlist){
+                placeholder.add(sp);
+            }
+            
+            int a = placeholder.size();
+            
+            a++;
+            //System.out.println(a);
+            int b = (int) Math.floor(Math.random() * a);
+            //System.out.println(b);
+            zz = placeholder.get(b);
+            //System.out.println(a);
+            zz.setContract("S2");
+            zz.setSalary("1");
+            if(zz.getPosition().equals("P")){
+                zz.setTruePositon("P");
+            }
+            else{
+                zz.setTruePositon("U");
+            }
+        }
+        
+        
+        return zz;
+    }
 }
+    

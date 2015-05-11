@@ -36,9 +36,19 @@ public class Pitcher extends Player{
     private String salary;
     private String contract;
     
+   
+    
     //constructor for a Pitcher
     public Pitcher(){
         
+    }
+    
+    public void setPick(int a){
+        pick = a;
+    }
+    
+    public int getPick(){
+        return pick;
     }
 
 

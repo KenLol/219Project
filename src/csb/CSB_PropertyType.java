@@ -31,6 +31,9 @@ public enum CSB_PropertyType {
         DRAFT_SUMMARY_ICON,
         MLB_TEAMS_ICON,
         PENCIL_ICON,
+        PLAY_ICON,
+        STAR_ICON,
+        PAUSE_ICON,
         
         
         
@@ -57,6 +60,9 @@ public enum CSB_PropertyType {
         DRAFT_SUMMARY_TOOLTIP,
         MLB_TEAMS_TOOLTIP,
         PENCIL_TOOLTIP,
+        PLAY_TOOLTIP,
+        STAR_TOOLTIP,
+        PAUSE_TOOLTIP,
         
         
 
@@ -75,6 +81,7 @@ public enum CSB_PropertyType {
         LECTURES_HEADING_LABEL,
         HWS_HEADING_LABEL,
         SELECT_TEAM_LABEL,
+        SELECT_PRO_TEAM_LABEL,
 
         // PAGE CHECKBOX LABELS
         INDEX_CHECKBOX_LABEL,
