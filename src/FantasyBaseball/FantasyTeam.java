@@ -86,7 +86,7 @@ public class FantasyTeam {
     
     public boolean taxifull(){
         boolean a = false;
-        if(taxiteam.size() == 8){
+        if(taxiteam.size() >= 8){
             a = true;
         }
         

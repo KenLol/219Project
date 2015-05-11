@@ -24,12 +24,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javax.swing.SwingUtilities;
 import properties_manager.PropertiesManager;
 
 /**
@@ -50,6 +56,8 @@ public class FantasyFileController {
     ProgressDialog progressDialog;
     
     PropertiesManager properties;
+    
+    boolean running = false;
     
     
     
@@ -401,6 +409,7 @@ public class FantasyFileController {
                             jcfm.getDraftOrder().add(splayer);
                             splayer.setPick(1);
                             jcfm.resortDraftOrder();
+                            splayer.setTruePositon(splayer.getPosition());
                         }
                         else{
                         fate.addPlayer(splayer); //adds the player to the list.
@@ -585,10 +594,12 @@ public class FantasyFileController {
                 }
                 
                 catch(NullPointerException e){
-                    System.out.println("No more players TAXI");
+                    //System.out.println("No more players TAXI");
                 }
            } 
         }
+        
+        
         
         
     }
@@ -894,12 +905,43 @@ public class FantasyFileController {
                 zz.setTruePositon("P");
             }
             else{
-                zz.setTruePositon("U");
+                zz.setTruePositon(zz.getPosition());
             }
         }
         
         
         return zz;
     }
+    
+    public void handlePlay(FantasyGUI GUI, Button b){
+     if(!running){
+        running = true;
+        new Thread(new Runnable(){
+           @Override
+           public void run(){
+               try {
+                   while(running){
+               Platform.runLater(new Runnable(){
+                   @Override
+                   public void run(){
+                       b.fire();
+                   }
+               });
+               
+                   Thread.sleep(500);
+                   }
+               } catch (InterruptedException ex) {
+                   
+               }
+           }
+        }).start();
+        //b.fire();
+     }
+    }
+    
+    public void handlePause(){
+        running = false;
+    }
+    
 }
     

@@ -14,6 +14,10 @@ import csb.gui.ProgressDialog;
 import csb.gui.YesNoCancelDialog;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -49,7 +53,7 @@ import properties_manager.PropertiesManager;
  *
  * @author Kenneth
  */
-public class FantasyGUI {
+public class FantasyGUI{
     static final String PRIMARY_STYLE_SHEET = PATH_CSS + "csb_style.css";
     static final String CLASS_BORDERED_PANE = "bordered_pane";
     static final String CLASS_SUBJECT_PANE = "subject_pane";
@@ -1504,10 +1508,12 @@ public class FantasyGUI {
         });
         
         playButton.setOnAction(e ->{
-        
+            FantasyFileController.handlePlay(this, starButton);
+           
+            
         });
         pauseButton.setOnAction(e ->{
-        
+            FantasyFileController.handlePause();
         });
        
         dPick = new TableColumn("Pick#");
