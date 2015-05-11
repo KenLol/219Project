@@ -16,6 +16,7 @@ public class Player {
     //protected String first; //FIRST_NAME
     //protected String last; //LAST_NAME
     int pick;
+    double estimatedValue = 0.0;
     
     public Player(){
        
@@ -98,6 +99,14 @@ public class Player {
     
     public void setPick(int a){
         pick = a;
+    }
+    
+    public double getEstimatedValue(){
+        return estimatedValue;
+    }
+    
+    public void setEstimatedValue(double b){
+        estimatedValue = b;
     }
     
 }

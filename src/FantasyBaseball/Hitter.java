@@ -33,9 +33,12 @@ public class Hitter extends Player{
     
     
     
+    
     public Hitter(){
         
     }
+    
+    
     
     public void setPick(int a){
         pick = a;

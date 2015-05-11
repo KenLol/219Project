@@ -56,6 +56,8 @@ public class Superplayer implements Comparable{
     final IntegerProperty pick;
     public static final int defaultpick = 0;
     
+    final DoubleProperty estimatedValue;
+    public static final double defaultvalue = 0.0;
     
     Player p;
     String ft;
@@ -77,10 +79,20 @@ public class Superplayer implements Comparable{
         salary = new SimpleStringProperty(default_salary);
         trueTeam = new SimpleStringProperty(Defaultproteam);
         pick = new SimpleIntegerProperty(defaultpick);
+        estimatedValue = new SimpleDoubleProperty(defaultvalue);
     }
     
     public void reset(){
         setProteam(Defaultproteam);
+    }
+    
+    
+    public void setEstimatedValue(double init){
+        estimatedValue.set(init);
+    }
+    
+    public double getEstimatedValue(){
+        return estimatedValue.get();
     }
     
     public void setPlayer(Player p){

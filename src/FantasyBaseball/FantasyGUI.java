@@ -967,7 +967,7 @@ public class FantasyGUI{
         sRBIK.setCellValueFactory(new PropertyValueFactory<Integer, String>("rbik"));
         sSBERA.setCellValueFactory(new PropertyValueFactory<Double, String>("sbera"));
         sBAWHIP.setCellValueFactory(new PropertyValueFactory<Double, String>("bawhip"));
-        sValue.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedvalue"));
+        sValue.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedValue"));
         sContract.setCellValueFactory(new PropertyValueFactory<String, String>("Contract"));
         sSalary.setCellValueFactory(new PropertyValueFactory<String, String>("Salary"));
         
@@ -1020,7 +1020,7 @@ public class FantasyGUI{
         tRBIK.setCellValueFactory(new PropertyValueFactory<Integer, String>("rbik"));
         tSBERA.setCellValueFactory(new PropertyValueFactory<Double, String>("sbera"));
         tBAWHIP.setCellValueFactory(new PropertyValueFactory<Double, String>("bawhip"));
-        tValue.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedvalue"));
+        tValue.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedValue"));
         tContract.setCellValueFactory(new PropertyValueFactory<String, String>("Contract"));
         tSalary.setCellValueFactory(new PropertyValueFactory<String, String>("Salary"));
        
@@ -1258,7 +1258,7 @@ public class FantasyGUI{
         rbikColumn.setCellValueFactory(new PropertyValueFactory<Integer, String>("rbik"));
         sberaColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("sbera"));
         bawhipColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("bawhip"));
-        estimatedValueColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedvalue"));
+        estimatedValueColumn.setCellValueFactory(new PropertyValueFactory<Double, String>("estimatedValue"));
         notesColumn.setCellValueFactory(new PropertyValueFactory<String, String>("note"));
         
         
@@ -1296,6 +1296,7 @@ public class FantasyGUI{
             a.setSbera(p.getSBERA());
             a.setBawhip(p.getBAWHIP());
             a.setNote(p.getNote());
+            a.setEstimatedValue(estimateValue(p));
             
             
             a.setPlayer(p); // link the SuperPlayer to the player it is using.
@@ -1818,5 +1819,36 @@ public class FantasyGUI{
     
     public void clearStartingTable(){
         startingTable.setItems(null);
+    }
+
+    private double estimateValue(Player p) {
+       double b = 0.0;
+       double money = 0.0;
+       int rank = 1;
+       ArrayList<FantasyTeam> teamlist = jcfm.getFantasyTeamList();
+       for(FantasyTeam ft : teamlist){
+           ft.updateMoney();
+           money = money + ft.getMoney();
+       }
+       
+       if(p.getPosition().equals("P")){
+           rank = getRANKP((Pitcher) p);
+       }
+       else{
+           
+       }
+               
+       return b/rank;
+    }
+    
+    
+    private int getRANKP(Pitcher p){
+        int a = 1;
+        ArrayList<Pitcher> plist = jcfm.arrP;
+        for(Pitcher pz : plist){
+            
+        }
+        
+        return a;
     }
 }
